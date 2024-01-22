@@ -1,0 +1,270 @@
+body{
+    @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    color: aliceblue;
+    background-color: black;
+    margin: auto;
+    padding: 0;
+    width: 1440px;
+    height: 1034px;
+}
+
+header{
+    width: 100%;
+    padding: 15px 0;
+    justify-content: center;
+}
+
+nav{
+    width: 90%;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.logo{
+    width: 72.9px;
+    height: 74px;
+}
+
+.phone{
+    width: 30px;
+    height: 30px;
+    background-color: aliceblue;
+}
+
+
+.sam{
+    font-family: open sans hebrew condensed;
+    font-size: 40px;
+    font-weight: bold;
+}
+
+.samSpecial{
+    color: gold;
+}
+
+
+a{
+    text-decoration: none;
+    color: aliceblue;
+    margin: 8px;
+    font-weight:600;
+}
+
+.gold{
+    color: #F69708;
+}
+
+.myBusiness{
+    display: flex;
+    align-items: center;
+}
+
+.vertical-line{
+    width: 5px;
+    height: 30px;
+    background-color: gold;
+    
+}
+
+.contact{
+    display: flex;
+    align-items: center;
+}
+
+.number{
+    font-weight: 600;
+}
+
+.container{
+    width: 100%;
+    padding: 15px 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.home{
+    width: 90%;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.myDetails{
+    width: 40%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    font-size: large;
+    padding-bottom: 50px;
+}
+
+.myphoto{
+    width: 45%;
+}
+
+img{
+    background-color: rgb(253, 253, 253);
+    width: 40px;
+}
+
+.myDetailsInfo{
+    margin-bottom: 36px;
+}
+
+.myDetailsInfo .myname{
+    font-size: 110px;
+    font-weight: 600;
+    line-height: 90%;
+    letter-spacing: 0%;
+}
+
+.myDetailsInfo p{
+    font-size: 36px;
+    margin: 10px;
+}
+
+button{
+    background-color: gold;
+    padding: 8px;
+    border-radius: 15px;
+    width: 140px;
+    font-size: large;
+}
+
+.social{
+    display: flex;
+    justify-content:space-between;
+    align-items: center;
+    padding-top: 70px;
+}
+
+.aboutMe{
+    width: 90%;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 50px 0;
+}
+
+ul{
+    list-style: none;
+    line-height: 2;
+}
+
+.top-content{
+    padding: 50px;
+}
+
+hr{
+    border: none;
+    border-top: 5px solid gold;
+    width: 70px;
+    margin: 0 auto; 
+    margin-top: 5px;
+}
+
+.heading{
+    font-size: 46px;
+    line-height: 0%;
+    text-align: center;   
+}
+
+.myname2{
+    font-size: 50px;
+    font-weight: 600;
+    margin: 0;
+    line-height: 100%;
+}
+
+.service{
+    width: 90%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    padding: 50px 0;
+}
+
+.sketch{
+    width: 28%;
+    border: 10px solid black;
+    background-color: rgb(55, 55, 55);
+    padding: 30px;
+    text-align: center;
+
+}
+
+.circle{
+    border: 2px solid aliceblue;
+    height: 100px;
+    width: 100px;
+    background-color: black;
+    border-radius: 50%;
+    display: inline-block;
+    background-image: url('download.png');
+    background-repeat: no-repeat;
+    background-size: 60px;
+    background-position: center;
+}
+
+.service1{
+    display: flex;
+}
+
+.service2{
+    display: flex;
+}
+
+.skills{
+    width: 90%;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 50px 0;
+}
+
+.skills-acquired{
+    width: 48%;
+
+}
+
+.skills-grading{
+    width: 40%;
+    line-height: 0%;
+}
+
+.bar{
+    border: none;
+    border-top: 5px solid gold;
+    width: auto;
+    margin: 0 auto; 
+    margin-top: 5px;
+
+}
+
+.grading{
+    display: flex;
+    position: relative;
+    justify-content: left;
+}
+
+.percent{
+    position: absolute;
+    right: 0;
+}
+
+footer{
+    padding: 20px 0;
+    text-align: center;
+}
+    
+
