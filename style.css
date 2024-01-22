@@ -4,21 +4,21 @@ body{
     font-size: 16px;
     color: aliceblue;
     background-color: black;
-    margin: auto;
+    margin: 0 auto;
     padding: 0;
     width: 1440px;
     height: 1034px;
+    letter-spacing: 0%;
+    font-weight: bold;
 }
 
 header{
     width: 100%;
-    padding: 15px 0;
     justify-content: center;
 }
 
 nav{
-    width: 90%;
-    margin: 0 auto;
+    width: 100%;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -39,20 +39,23 @@ nav{
 
 .sam{
     font-size: 40px;
-    font-weight: bold;
-    stroke-width: 100% #fff;
+    font-weight: 900;
+    letter-spacing: 0%;   
 }
 
-.samSpecial{
-    color: gold;
+.samSpecial {
+    color: #F69708;
+    text-shadow: -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff, 1px 1px 0 #fff;
 }
 
 
 a{
+    font-weight: 900;
     text-decoration: none;
     color: aliceblue;
-    margin: 8px;
-    font-weight:600;
+    margin: 0;
+    letter-spacing: 0%;
+    padding: 10px;
 }
 
 .gold{
@@ -77,7 +80,7 @@ a{
 }
 
 .number{
-    font-weight: 600;
+    font-weight: 900;
 }
 
 .container{
@@ -89,7 +92,7 @@ a{
 }
 
 .home{
-    width: 90%;
+    width: 100%;
     margin: 0 auto;
     display: flex;
     align-items: center;
@@ -97,16 +100,20 @@ a{
 }
 
 .myDetails{
-    width: 40%;
+    width: 50%;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    font-size: large;
-    padding-bottom: 50px;
+    font-size: 36px;
+    font-weight: 100;
 }
 
 .myphoto{
-    width: 45%;
+    margin: 0;
+    margin-top: 13px;
+    width: 670px;
+    height: 725px;
+    padding: 0;
 }
 
 img{
@@ -114,35 +121,59 @@ img{
     width: 40px;
 }
 
-.myDetailsInfo{
-    margin-bottom: 36px;
-}
-
-.myDetailsInfo .myname{
+.myname{
     font-size: 110px;
     font-weight: 600;
     line-height: 90%;
     letter-spacing: 0%;
-}
-
-.myDetailsInfo p{
-    font-size: 36px;
-    margin: 10px;
+    margin-top: 23px;
+    margin-bottom: 56px;
 }
 
 button{
-    background-color: gold;
+    background-color: #F69708;
     padding: 8px;
-    border-radius: 15px;
-    width: 140px;
-    font-size: large;
+    border-radius: 30px;
+    width: 146px;
+    height: 43px;
+    font-size: 24px;
+    font-weight: bold;
+    margin-top: 36px;
 }
 
 .social{
     display: flex;
-    justify-content:space-between;
-    align-items: center;
-    padding-top: 70px;
+    width: 333px;
+    height: 67px;
+    border-radius: 30px;
+    background-color: #2D2C2C;
+    margin-top: 100px;
+}
+
+.twitter{
+    position: relative;
+    width: 132px; 
+    height: 48px; 
+    background-color: #0B0A0A;
+    border-radius: 15px;
+}
+
+.linkedin{
+    position: relative;
+    width: 163px; 
+    height: 48px; 
+    border-radius: 15px;
+    background-color: #0B0A0A;
+}
+
+.social .linkedin img{
+    width: 117px;
+    height: 29px;
+}
+
+social .twitter img{
+    width: 144px;
+    height: 29px;
 }
 
 .aboutMe{
@@ -264,6 +295,8 @@ hr{
 }
 
 footer{
+    margin-top: 120px;
+    font-size: 24px;
     padding: 20px 0;
     text-align: center;
 }
