@@ -27,6 +27,7 @@ nav{
 .logo{
     width: 72.9px;
     height: 74px;
+    margin-right: 17px;
 }
 
 .phone{
@@ -37,9 +38,9 @@ nav{
 
 
 .sam{
-    font-family: open sans hebrew condensed;
     font-size: 40px;
     font-weight: bold;
+    stroke-width: 100% #fff;
 }
 
 .samSpecial{
