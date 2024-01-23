@@ -212,20 +212,6 @@ ul{
     font-size: 20px;
 }
 
-
-
-.icons {
-    width: 90%;
-    margin: 0 auto;
-    padding: 50px 0;
-    text-align: center;
-}
-
-.icons img{
-    height: 70px;
-    margin-right: 5px;
-}
-
 .icons img:nth-child(4),
 .icons img:nth-child(5) {
     background-color: #fff;
@@ -234,24 +220,36 @@ ul{
 
 .skills-acquired {
     text-align: center;
-    font-size: 24px;
+    font-size: 27px;
     font-weight: 400;
-    width: 50%;
+    width: 45%;
+}
+
+
+.icons {
+    margin: 80px auto;
+}
+
+.icons img{
+    height: 70px;
+    margin-right: 10px;
 }
 
 .skills-acquired p{
     width: 492px;
+    margin: 80px auto;
 }
 
 .mission{
-    font-size: 24px;
+    font-size: 36px;
     font-weight: bold;
     margin-bottom: 36px;
 }
 
 .skills-grading {
-    width: 50%;
+    width: 45%;
     line-height: 0%;
+    margin: 80px auto;
 }
 
 .bar {
