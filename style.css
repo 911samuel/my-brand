@@ -276,6 +276,30 @@ ul{
     transform: translateY(-50%);
 }
 
+.blogs{
+    display: flex;
+    justify-content: space-between;
+    margin: 120px 300px;
+}
+
+.blogs img{
+    width: 380px;
+}
+
+.blogs p{
+    font-size: 20px;
+    width: 350px;
+}
+
+.more{
+    margin: 30px auto;
+}
+
+.admin p{
+    display: inline;
+    margin-right: 15px;
+}
+
 footer {
     font-size: 26px;
     padding: 20px 0;
