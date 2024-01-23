@@ -1,55 +1,64 @@
-body{
-    @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
-    font-family: 'Roboto', sans-serif;
+body {
+    @import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
+    font-family: "Roboto", sans-serif;
     font-size: 16px;
     color: aliceblue;
     background-color: black;
-    margin: 0 auto;
+    margin: 0;
     padding: 0;
-    width: 1440px;
-    height: 1034px;
+    width: 100%;
+    height: 100vh;
     letter-spacing: 0%;
     font-weight: bold;
 }
 
-header{
-    width: 100%;
-    justify-content: center;
+*,
+*:before,
+*:after {
+    box-sizing: border-box;
 }
 
-nav{
+header {
     width: 100%;
+    height: 10vh;
     display: flex;
+    justify-content: center;
     align-items: center;
-    justify-content: space-between;
 }
 
-.logo{
+nav {
+    width: 100%;
+    height: 10vh;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 5%;
+}
+
+.logo {
     width: 72.9px;
     height: 74px;
     margin-right: 17px;
 }
 
-.phone{
+.phone {
     width: 30px;
     height: 30px;
     background-color: aliceblue;
 }
 
-
-.sam{
+.sam {
     font-size: 40px;
     font-weight: 900;
-    letter-spacing: 0%;   
+    letter-spacing: 0%;
 }
 
 .samSpecial {
-    color: #F69708;
+    color: #f69708;
     text-shadow: -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff, 1px 1px 0 #fff;
 }
 
-
-a{
+a {
     font-weight: 900;
     text-decoration: none;
     color: aliceblue;
@@ -58,32 +67,31 @@ a{
     padding: 10px;
 }
 
-.gold{
-    color: #F69708;
+.gold {
+    color: #f69708;
 }
 
-.myBusiness{
+.myBusiness {
     display: flex;
     align-items: center;
 }
 
-.vertical-line{
+.vertical-line {
     width: 5px;
     height: 30px;
     background-color: gold;
-    
 }
 
-.contact{
+.contact {
     display: flex;
     align-items: center;
 }
 
-.number{
+.number {
     font-weight: 900;
 }
 
-.container{
+.container {
     width: 100%;
     padding: 15px 0;
     display: flex;
@@ -91,37 +99,31 @@ a{
     justify-content: space-between;
 }
 
-.home{
+.header {
     width: 100%;
-    margin: 0 auto;
     display: flex;
     align-items: center;
     justify-content: space-between;
+    padding: 0 5%;
 }
 
-.myDetails{
+.myDetails {
     width: 50%;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     font-size: 36px;
     font-weight: 100;
+    margin-top: 88px;
 }
 
-.myphoto{
+.myphoto {
+    width: 50%;
     margin: 0;
-    margin-top: 13px;
-    width: 670px;
-    height: 725px;
     padding: 0;
 }
 
-img{
-    background-color: rgb(253, 253, 253);
-    width: 40px;
-}
-
-.myname{
+.myname {
     font-size: 110px;
     font-weight: 600;
     line-height: 90%;
@@ -130,175 +132,155 @@ img{
     margin-bottom: 56px;
 }
 
-button{
-    background-color: #F69708;
-    padding: 8px;
-    border-radius: 30px;
-    width: 146px;
-    height: 43px;
+button {
+    width: 180px;
+    height: 45px;
+    background-color: #f69708;
+    padding: 8px 24px;
+    border-radius: 15px;
     font-size: 24px;
     font-weight: bold;
-    margin-top: 36px;
+    margin-top: 48px;
+    cursor: pointer;
 }
 
-.social{
+.social {
     display: flex;
     width: 333px;
     height: 67px;
     border-radius: 30px;
-    background-color: #2D2C2C;
+    background-color: #2d2c2c;
+    margin: 0;
     margin-top: 100px;
-}
-
-.twitter{
-    position: relative;
-    width: 132px; 
-    height: 48px; 
-    background-color: #0B0A0A;
-    border-radius: 15px;
-}
-
-.linkedin{
-    position: relative;
-    width: 163px; 
-    height: 48px; 
-    border-radius: 15px;
-    background-color: #0B0A0A;
-}
-
-.social .linkedin img{
-    width: 117px;
-    height: 29px;
-}
-
-social .twitter img{
-    width: 144px;
-    height: 29px;
-}
-
-.aboutMe{
-    width: 90%;
-    margin: 0 auto;
-    display: flex;
-    align-items: center;
     justify-content: space-between;
-    padding: 50px 0;
+    padding: 0 10px;
+}
+
+.social a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+
+.twitter,
+.linkedin {
+    position: relative;
+    width: 132px;
+    height: 48px;
+    background-color: #0b0a0a;
+    border-radius: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.twitter img,
+.linkedin img {
+    width: 100%;
+    height: auto;
+}
+
+.myDetails2{
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    font-size: 36px;
+    font-weight: 100;
+    margin-top: 88px;
+    margin-left: 83px;
+}
+.myname2{
+    font-weight: bold;
 }
 
 ul{
-    list-style: none;
-    line-height: 2;
+    list-style-type: none;
+    font-size: 20px;
+    padding-left: 40px;
+    padding-top: 46px;
 }
 
-.top-content{
-    padding: 50px;
+.dev{
+    margin-top: 50px;
+    margin-bottom: 40px;
 }
 
-hr{
-    border: none;
-    border-top: 5px solid gold;
-    width: 70px;
-    margin: 0 auto; 
-    margin-top: 5px;
+.descr{
+    font-size: 20px;
 }
 
-.heading{
-    font-size: 46px;
-    line-height: 0%;
-    text-align: center;   
-}
 
-.myname2{
-    font-size: 50px;
-    font-weight: 600;
-    margin: 0;
-    line-height: 100%;
-}
 
-.service{
+.icons {
     width: 90%;
     margin: 0 auto;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-between;
     padding: 50px 0;
-}
-
-.sketch{
-    width: 28%;
-    border: 10px solid black;
-    background-color: rgb(55, 55, 55);
-    padding: 30px;
     text-align: center;
-
 }
 
-.circle{
-    border: 2px solid aliceblue;
-    height: 100px;
-    width: 100px;
-    background-color: black;
-    border-radius: 50%;
-    display: inline-block;
-    background-image: url('download.png');
-    background-repeat: no-repeat;
-    background-size: 60px;
-    background-position: center;
+.icons img{
+    height: 70px;
+    margin-right: 5px;
 }
 
-.service1{
-    display: flex;
+.icons img:nth-child(4),
+.icons img:nth-child(5) {
+    background-color: #fff;
+    padding: 5px;
 }
 
-.service2{
-    display: flex;
+.skills-acquired {
+    text-align: center;
+    font-size: 24px;
+    font-weight: 400;
+    width: 50%;
 }
 
-.skills{
-    width: 90%;
-    margin: 0 auto;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 50px 0;
+.skills-acquired p{
+    width: 492px;
 }
 
-.skills-acquired{
-    width: 48%;
-
+.mission{
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 36px;
 }
 
-.skills-grading{
-    width: 40%;
+.skills-grading {
+    width: 50%;
     line-height: 0%;
 }
 
-.bar{
+.bar {
     border: none;
     border-top: 5px solid gold;
     width: auto;
-    margin: 0 auto; 
+    margin: 0 auto;
     margin-top: 5px;
-
 }
 
-.grading{
+.grading {
     display: flex;
     position: relative;
     justify-content: left;
+    align-items: center;
+    font-size: 36px;
+    font-weight: 400;
 }
 
-.percent{
+.percent {
     position: absolute;
     right: 0;
+    top: 10%;
+    transform: translateY(-50%);
 }
 
-footer{
-    margin-top: 120px;
-    font-size: 24px;
+footer {
+    font-size: 26px;
     padding: 20px 0;
     text-align: center;
+    margin-top: 40px;
 }
-    
-
