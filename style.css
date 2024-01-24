@@ -3,7 +3,7 @@ body {
     font-family: "Roboto", sans-serif;
     font-size: 16px;
     color: aliceblue;
-    background-color: black;
+    background-color: #071e26;
     margin: 0;
     padding: 0;
     width: 100%;
@@ -44,7 +44,8 @@ nav {
 .phone {
     width: 30px;
     height: 30px;
-    background-color: aliceblue;
+    box-shadow: 0 0 2px 1px rgba(0, 140, 186, 0.5);
+    margin: 0;
 }
 
 .sam {
@@ -144,6 +145,10 @@ button {
     cursor: pointer;
 }
 
+button:hover {
+    background-color: #45a049;
+}
+
 .social {
     display: flex;
     width: 333px;
@@ -182,7 +187,7 @@ button {
     height: auto;
 }
 
-.myDetails2{
+.myDetails2 {
     width: 50%;
     display: flex;
     flex-direction: column;
@@ -192,23 +197,24 @@ button {
     margin-top: 88px;
     margin-left: 83px;
 }
-.myname2{
+
+.myname2 {
     font-weight: bold;
 }
 
-ul{
+ul {
     list-style-type: none;
     font-size: 20px;
     padding-left: 40px;
     padding-top: 46px;
 }
 
-.dev{
+.dev {
     margin-top: 50px;
     margin-bottom: 40px;
 }
 
-.descr{
+.descr {
     font-size: 20px;
 }
 
@@ -230,17 +236,17 @@ ul{
     margin: 80px auto;
 }
 
-.icons img{
+.icons img {
     height: 70px;
     margin-right: 10px;
 }
 
-.skills-acquired p{
+.skills-acquired p {
     width: 492px;
     margin: 80px auto;
 }
 
-.mission{
+.mission {
     font-size: 36px;
     font-weight: bold;
     margin-bottom: 36px;
@@ -276,29 +282,110 @@ ul{
     transform: translateY(-50%);
 }
 
-.blogs{
+.work {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 50px;
+    margin: 100px auto;
+}
+
+.work img {
+    width: 350px;
+    height: 284px;
+}
+
+.blogs {
     display: flex;
     justify-content: space-between;
     margin: 120px 300px;
 }
 
-.blogs img{
+.blogs img {
     width: 380px;
 }
 
-.blogs p{
+.blogs p {
     font-size: 20px;
     width: 350px;
 }
 
-.more{
+.more {
     margin: 30px auto;
 }
 
-.admin p{
+.admin p {
     display: inline;
     margin-right: 15px;
 }
+
+.contactP {
+    width: 45%;
+    display: flex;
+    flex-direction: column;
+    margin: 140px 40px; 
+}
+
+.contactP h1 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+    text-align: left;
+    margin: 40 auto;
+}
+.contactP input[type="text"],
+.contactP input[type="email"],
+.contactP textarea {
+    width: 65%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-sizing: border-box;
+    font-size: 1rem;
+}
+
+.contactP textarea {
+    resize: vertical;
+}
+
+.contactP button[type="submit"] {
+    width: 65%;
+    padding: 10px;
+    background-color: #f69708;
+    color: #000;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+button[type="submit"]:hover {
+    background-color: #45a049;
+}
+
+.contactInfo{
+    width: 45%;
+    display: flex;
+    flex-direction: column;
+}
+
+.contactInfo .main{
+    font-size: 30px;
+
+}
+
+.contactInfo .sub{
+    width: 329px;
+    font-size: 16px;
+    font-weight: 100;
+}
+
+.adressInfo{
+    font-size: 16px;
+    font-weight: 100;
+    padding: 5px 0;
+    margin-bottom: 20px;
+}
+
 
 footer {
     font-size: 26px;
