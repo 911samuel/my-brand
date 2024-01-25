@@ -44,7 +44,6 @@ nav {
 .phone {
     width: 30px;
     height: 30px;
-    box-shadow: 0 0 2px 1px rgba(0, 140, 186, 0.5);
     margin: 0;
 }
 
@@ -368,6 +367,13 @@ button[type="submit"]:hover {
     flex-direction: column;
 }
 
+.contactInfo ul {
+    list-style-type: none;
+    font-size: 20px;
+    padding-left: 40px;
+    padding-top: 46px;
+}
+
 .contactInfo .main{
     font-size: 46px;
 
@@ -380,7 +386,7 @@ button[type="submit"]:hover {
 }
 
 .adressInfo{
-    font-size: 24px;
+    font-size: 16px;
     font-weight: 100;
     padding: 5px 0;
     margin-bottom: 20px;
@@ -485,6 +491,11 @@ ul li{
     margin: 20px auto;   
 }
 
+.signin .signinWith img:hover{
+    opacity: 0.6;
+    cursor: pointer;
+}
+
 .signin .create{
     display: flex;
     justify-content: space-between;
@@ -499,11 +510,32 @@ ul li{
     font-weight: 900;
 }
 
+.signin .create .createAccount:hover{
+    background-color: #45a049;
+    cursor: pointer;
+}
 
+.signin .one{
+    display: flex;
+    width: 60%;
+    margin: 20px auto;
+    justify-content: space-between;
+}
 
+.signin .login{
+    display:inline;
+    width: 60%;
+    margin: 20px auto;
+}
 
+.signin .login label{
+    text-align: left;
+}
 
-
+.signin .login label.now:hover {
+    background-color: #45a049;
+    cursor: pointer;
+}
 
 footer {
     font-size: 26px;
