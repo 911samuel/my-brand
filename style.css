@@ -202,7 +202,7 @@ button:hover {
     font-weight: bold;
 }
 
-ul {
+.myDetails2 ul {
     list-style-type: none;
     font-size: 20px;
     padding-left: 40px;
@@ -334,7 +334,7 @@ ul {
 .contactP input[type="text"],
 .contactP input[type="email"],
 .contactP textarea {
-    width: 65%;
+    width: 80%;
     padding: 10px;
     margin-bottom: 10px;
     border: 1px solid #ddd;
@@ -369,22 +369,140 @@ button[type="submit"]:hover {
 }
 
 .contactInfo .main{
-    font-size: 30px;
+    font-size: 46px;
 
 }
 
 .contactInfo .sub{
-    width: 329px;
-    font-size: 16px;
+    width: 500px;
+    font-size: 24px;
     font-weight: 100;
 }
 
 .adressInfo{
-    font-size: 16px;
+    font-size: 24px;
     font-weight: 100;
     padding: 5px 0;
     margin-bottom: 20px;
 }
+
+.resume{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    margin: 100px 0;
+}
+
+.resume .education{
+    width: 45%;
+    margin: auto;
+}
+
+.education h2, .experience h2{
+    font-size: 46px;
+}
+
+.education h3, .experience h3{
+    font-size: 30px;
+    color: #FEC544;
+}
+
+.education h4, .experience h4{
+    font-size: 24px;
+}
+.resume .experience{
+    width: 45%;
+    margin: auto;
+}
+
+.experience .support{
+    font-size: 24px;
+    font-weight: 100;
+    margin: 60px auto;
+}
+
+
+ul li{
+    margin: auto;
+}
+
+.signin{
+    width: 45%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    font-size: 36px;
+    font-weight: 100;
+    margin-top: 88px;
+    margin-left: 83px;
+
+}
+
+.signin .welcome{
+    font-size: 46px;
+    font-weight: 900;
+    text-align: center;
+}
+
+.signin input{
+    width: 60%;
+    height: 50px;
+    margin: 20px auto;
+    font-size: 24px;
+}
+
+.signin label {
+    text-align: right;
+    font-size: 20px;
+    margin: 10px auto;
+    width: 60%; 
+}
+
+.signin button{
+    width: 60%;
+    margin: 20px auto;
+}
+
+.signin .or{
+    display: flex;
+    justify-content: space-between;
+    width: 60%;
+    height: 50px;
+    align-items: center;
+    margin: 20px auto;
+    font-size: 24px;
+}
+
+.signin .or img{
+    width: 120px;
+    height: 1px;
+}
+
+.signin .signinWith{
+    display: flex;
+    justify-content: space-between;
+    width: 60%;
+    margin: 20px auto;   
+}
+
+.signin .create{
+    display: flex;
+    justify-content: space-between;
+    width: 60%;
+    height: 50px;
+    align-items: center;
+    margin: 20px auto;
+    font-size: 24px;
+}
+
+.signin .create .createAccount{
+    font-weight: 900;
+}
+
+
+
+
+
 
 
 footer {
