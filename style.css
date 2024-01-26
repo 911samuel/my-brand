@@ -553,7 +553,7 @@ ul li{
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    font-size: 36px;
+    font-size: 16px;
     font-weight: 100;
     margin-top: 88px;
 }
@@ -598,6 +598,96 @@ ul li{
     border: 1px solid #fff;
     height: fit-content;
 }
+
+.right .rightIcon {
+    display: flex;
+    justify-content: end; 
+    align-items: center;
+}
+
+.right .rightIcon img {
+    width: 50px;
+    height: 50px;
+    margin-right: 16px;
+}
+
+.rightIcon {
+    display: flex;
+    align-items: center;
+}
+
+.rightIcon button.search {
+    display: flex;
+    align-items: center;
+    background-color: #071e26;
+    padding: 5px 10px;
+    border: 1px solid #fff;
+    margin-right: 16px;
+    color: #848889;
+    font-size: 16px;
+    font-weight: 100;
+    width: auto;
+    align-self: flex-end; 
+}
+
+.rightIcon button.search img {
+    width: 24px;
+    height: 24px;
+    margin-right: 8px; 
+}
+
+.rightIcon .notification,
+.rightIcon .vertical-line,
+.rightIcon img {
+    margin-right: 16px;
+}
+
+.right .blogs{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin: 20px auto;
+}
+
+.right .blogs img{
+    width: 30px;
+    height: 30px;
+    margin-right: 16px;
+}
+
+.right .blogsTitle {
+        display: flex;
+        align-items: center; 
+        justify-content: center;
+        margin: 20px auto;
+    }
+
+.right .circle{
+    display: flex;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background-color: #DAE9FC;
+    color: blue;
+}
+
+.right .circle p{
+    position: relative;
+    text-align: center;
+
+}
+
+.right .gd{
+    display: flex;
+    justify-content: space-between;
+    font-size: 24px;
+}
+
+
+
+
+
 
 footer {
     font-size: 26px;
