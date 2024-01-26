@@ -695,3 +695,144 @@ footer {
     text-align: center;
     margin-top: 40px;
 }
+
+/* Default styles for larger screens (desktop) */
+body {
+    font-size: 16px;
+}
+
+/* Responsive styles for tablets (portrait and landscape) */
+@media only screen and (max-width: 768px) {
+    body {
+        font-size: 14px;
+    }
+
+    .header {
+        padding: 0 3%;
+    }
+
+    .container {
+        padding: 15px 3%;
+    }
+
+    .myDetails,
+    .myDetails2,
+    .myphoto {
+        width: 100%;
+        margin-left: 0;
+        margin-top: 30px;
+    }
+
+    .myname {
+        font-size: 70px;
+        margin-bottom: 30px;
+    }
+
+    .social {
+        width: 100%;
+        margin-top: 50px;
+    }
+
+    .social a {
+        padding: 0 5px;
+    }
+
+    .icons img {
+        height: 50px;
+        margin-right: 5px;
+    }
+
+    .skills-acquired,
+    .skills-acquired p,
+    .mission,
+    .skills-grading,
+    .bar,
+    .grading,
+    .work,
+    .work img,
+    .blogs,
+    .blogs img,
+    .blogs p,
+    .more,
+    .contactP,
+    .resume,
+    .education,
+    .experience,
+    .education h2,
+    .experience h2,
+    .education h3,
+    .experience h3,
+    .education h4,
+    .experience h4 {
+        width: 100%;
+        margin: 0 auto;
+    }
+}
+
+/* Responsive styles for mobile devices */
+@media only screen and (max-width: 480px) {
+    body {
+        font-size: 12px;
+    }
+
+    .header {
+        padding: 0 2%;
+    }
+
+    .container {
+        padding: 15px 2%;
+    }
+
+    .myDetails,
+    .myDetails2,
+    .myphoto {
+        width: 100%;
+        margin-left: 0;
+        margin-top: 20px;
+    }
+
+    .myname {
+        font-size: 50px;
+        margin-bottom: 20px;
+    }
+
+    .social {
+        width: 100%;
+        margin-top: 30px;
+    }
+
+    .social a {
+        padding: 0 3px;
+    }
+
+    .icons img {
+        height: 40px;
+        margin-right: 3px;
+    }
+
+    .skills-acquired,
+    .skills-acquired p,
+    .mission,
+    .skills-grading,
+    .bar,
+    .grading,
+    .work,
+    .work img,
+    .blogs,
+    .blogs img,
+    .blogs p,
+    .more,
+    .contactP,
+    .resume,
+    .education,
+    .experience,
+    .education h2,
+    .experience h2,
+    .education h3,
+    .experience h3,
+    .education h4,
+    .experience h4 {
+        width: 100%;
+        margin: 0 auto;
+    }
+}
