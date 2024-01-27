@@ -2,6 +2,7 @@
 <html lang="en">
     <head>
         <meta  charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>PORTIFOLIO</title>
         <link rel="stylesheet" href="style.css">
     </head>
@@ -12,21 +13,25 @@
                     <img src="./img/log.png" alt="logo" class="logo">
                     <p class="sam"><strong class="samSpecial">S</strong>am</p>
                 </div>
-                <div>
-                    <a href="index.html">HOME</a>
-                    <a href="about.html">ABOUT</a>
-                    <a href="skills.html">SKILLS</a>
-                    <a href="portifolio.html">MY WORK</a>
-                    <a href="blog.html">BLOG</a>
-                    <a href="#" class="gold">CONTACT</a>
-                    <a href="resume.html">RESUME</a>
-                    <a href="signin.html">SIGN IN</a>
-                    <a href="signup.html">SIGN UP</a>
-                </div>
-                <div class="vertical-line"></div>
-                <div class="contact">
-                    <img src="./img/phone.png" alt="phone" class="phone">
-                    <p class="number">+250784724228</p>
+                <button class="toggle-btn" onclick="toggleMenu()">☰</button>
+                <div class="nav">
+                    <div class="close-icon" onclick="toggleMenu()">✕</div>
+                    <div>
+                        <a href="#" class="gold">HOME</a>
+                        <a href="about.html">ABOUT</a>
+                        <a href="skills.html">SKILLS</a>
+                        <a href="portifolio.html">MY WORK</a>
+                        <a href="blog.html">BLOG</a>
+                        <a href="contact.html">CONTACT</a>
+                        <a href="resume.html">RESUME</a>
+                        <a href="signin.html">SIGN IN</a>
+                        <a href="signup.html">SIGN UP</a>
+                    </div>
+                    <div class="vertical-line"></div>
+                    <div class="contact">
+                        <img src="./img/phone.png" alt="phone" class="phone">
+                        <p class="number">+250784724228</p>
+                    </div>
                 </div>
             </nav>
         </header>
@@ -65,5 +70,8 @@
                  <footer>
             &copy; 2023. Designed by Sam. All right reserved.
         </footer>
+
+        <script src="script.js"></script>
+        
     </body>
 </html>
