@@ -76,7 +76,7 @@ a {
 
 .nav a:hover{
     cursor: pointer;
-    background-color: #45a049;
+    color: #45a049;
 }
 
 .gold {
@@ -346,6 +346,8 @@ button:hover {
 .admin p {
     display: inline;
     margin-right: 15px;
+    font-size: 14px;
+    font-weight: 100;
 }
 
 .contactP {
@@ -536,22 +538,21 @@ ul li{
     cursor: pointer;
 }
 
-.signin .create{
-    display: flex;
-    justify-content: space-between;
-    width: 60%;
-    height: 50px;
-    align-items: center;
+.create {
+    text-align: center;
     margin: 20px auto;
-    font-size: 24px;
+    font-size: 20px;
 }
 
-.signin .create .createAccount{
-    font-weight: 900;
+.create .createAccount a {
+    font-weight: 600;
+    display: inline-block; 
+    margin-left: 5px;  
+    color: #45a049; 
 }
 
-.signin .create .createAccount:hover{
-    background-color: #45a049;
+.create .createAccount a:hover {
+    text-decoration: underline; 
     cursor: pointer;
 }
 
@@ -562,20 +563,27 @@ ul li{
     justify-content: space-between;
 }
 
-.signin .login{
-    display:inline;
+.signin .login {
+    display: flex;
+    justify-content: space-between;
     width: 60%;
     margin: 20px auto;
 }
 
-.signin .login label{
-    text-align: left;
+.signin .login label {
+    margin-right: 10px;
 }
 
-.signin .login label.now:hover {
-    background-color: #45a049;
+.signin .login a {
+    text-decoration: none; 
+    color: #45a049; 
+}
+
+.signin .login a:hover {
+    text-decoration: underline; 
     cursor: pointer;
 }
+
 
 .left{
     width: 20%;
@@ -631,9 +639,15 @@ ul li{
     margin-bottom: 80px;
 }
 
+.left .upperButton .gold{
+    background-color: #DAE9FC;
+}
+
 .left .lowerButton button{
     background-color: #f69708;
 }
+
+
 
 .left .lowerButton button:hover{
     cursor: pointer;
