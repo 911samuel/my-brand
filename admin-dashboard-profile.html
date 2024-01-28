@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta  charset="UTF-8">
+        <title>PORTIFOLIO</title>
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        <header>
+            <nav>
+                <div class="myBusiness">
+                    <img src="./img/log.png" alt="logo" class="logo">
+                    <p class="sam"><strong class="samSpecial">S</strong>am</p>
+                </div>
+                <button class="toggle-btn" onclick="toggleMenu()">☰</button>
+                <div class="nav">
+                    <div class="close-icon" onclick="toggleMenu()">✕</div>
+                    <div>
+                        <a href="#" class="gold">HOME</a>
+                        <a href="about.html">ABOUT</a>
+                        <a href="skills.html">SKILLS</a>
+                        <a href="portifolio.html">MY WORK</a>
+                        <a href="blog.html">BLOG</a>
+                        <a href="contact.html">CONTACT</a>
+                        <a href="resume.html">RESUME</a>
+                        <a href="signin.html">SIGN IN</a>
+                        <a href="signup.html">SIGN UP</a>
+                    </div>
+                    <div class="vertical-line"></div>
+                    <div class="contact">
+                        <img src="./img/phone.png" alt="phone" class="phone">
+                        <p class="number">+250784724228</p>
+                    </div>
+                </div>
+            </nav>
+        </header>
+        <div class="container">
+            <section class="header">
+                <div class="left">
+                    <h1>Dashboard</h1>
+                    <p>Hi Sam, welcome back!</p>
+                    <div class="upperButton">
+                        <button>
+                            <a href="#"><img src="./img/dashboard.png" alt="dashboard">Dashboard</a>
+                        </button>
+                        <button>
+                            <a href="admin-dashboard-blogs.html"><img src="./img/blog.png" alt="blog">Blog</a>
+                        </button>
+                        <button>
+                            <a href="admin-dashboard-profile.html"><img src="./img/user.png" alt="profile">Profile</a>
+                        </button>
+                        <button>
+                            <a href="signin.html"><img src="./img/logout.png" alt="logout">Log Out</a>
+                        </button>
+                    </div>
+                    <div class="lowerButton">
+                        <button>
+                            <a href="admin-dashboard-blogs.html"><img src="./img/add.png" alt="add">New Post</a>
+                        </button>
+                    </div>
+                </div>
+                <div class="vertical"></div>
+                
+                <div class="right">
+
+                    <div class="rightIcon">
+                        <button class="search">
+                            <img src="./img/search.png" alt="search">
+                            <span>Search everything</span>
+                        </button>
+                        <img src="./img/notification.png" alt="notification" class="notification">
+                        <div class="vertical-line"></div>
+                        <img src="./img/log.png" alt="logo">
+                    </div>
+
+                    <div class="profile">
+                        <form action="" method="post">
+                            <div class="one">
+                                <input type="text" id="fname" name="fname" placeholder="First Name" required class="gap">
+                                <input type="text" id="lname" name="lname" placeholder="Last Name" required>
+                            </div>
+                            <input type="email" id="email" name="email" placeholder="Email" required>
+                            <input type="text" id="adress" name="adress" placeholder="Nyamirambo, Kigali" required>
+                            <input type="tel" id="tel" name="tel" placeholder="(+250) 78 4724 228" required>
+                            <div class="one">
+                                <input type="text" id="city" name="city" placeholder="Kigali" required class="gap">
+                                <input type="text" id="state" name="state" placeholder="Nyarugenge" required>
+                            </div>
+                            <input type="password" id="password" name="password" placeholder="password" required>
+                            <div class="comfirm">
+                                <button>Save</button>
+                                <button class="cancel">Cancel</button> 
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </section>
+        </div>
+        <footer>
+            &copy; 2023. Designed by Sam. All right reserved.
+        </footer>
+
+        <script src="script.js"></script>
+        
+    </body>
+</html>

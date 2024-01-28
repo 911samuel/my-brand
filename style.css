@@ -74,6 +74,11 @@ a {
     padding: 10px;
 }
 
+.nav a:hover{
+    cursor: pointer;
+    background-color: #45a049;
+}
+
 .gold {
     color: #f69708;
 }
@@ -139,7 +144,7 @@ a {
     justify-content: space-between;
     font-size: 36px;
     font-weight: 100;
-    margin-top: 88px;
+    margin-top: 50px;
 }
 
 .myphoto {
@@ -170,6 +175,7 @@ button {
 }
 
 button:hover {
+    cursor: pointer;
     background-color: #45a049;
 }
 
@@ -218,7 +224,7 @@ button:hover {
     justify-content: space-between;
     font-size: 36px;
     font-weight: 100;
-    margin-top: 88px;
+    margin-top: 50px;
     margin-left: 83px;
 }
 
@@ -362,9 +368,10 @@ button:hover {
     padding: 10px;
     margin-bottom: 10px;
     border: 1px solid #ddd;
-    border-radius: 5px;
+    border-radius: 15px;
     box-sizing: border-box;
     font-size: 1rem;
+    background-color: transparent;
 }
 
 .contactP textarea {
@@ -383,6 +390,7 @@ button:hover {
 }
 
 button[type="submit"]:hover {
+    cursor: pointer;
     background-color: #45a049;
 }
 
@@ -464,7 +472,7 @@ ul li{
     justify-content: space-between;
     font-size: 36px;
     font-weight: 100;
-    margin-top: 88px;
+    margin-top: 50px;
     margin-left: 83px;
 
 }
@@ -480,6 +488,9 @@ ul li{
     height: 50px;
     margin: 20px auto;
     font-size: 24px;
+    background-color: transparent;
+    border: 1px solid #ddd;
+    border-radius: 15px;
 }
 
 .signin label {
@@ -573,7 +584,7 @@ ul li{
     justify-content: space-between;
     font-size: 16px;
     font-weight: 100;
-    margin-top: 88px;
+    margin-top: 50px;
 
 }
 
@@ -584,7 +595,11 @@ ul li{
     justify-content: space-between;
     font-size: 16px;
     font-weight: 100;
-    margin-top: 88px;
+    margin-top: 50px;
+}
+
+.left h1{
+    font-size: 40px;
 }
 
 .left button{
@@ -598,6 +613,7 @@ ul li{
 }
 
 .left button:hover{
+    cursor: pointer;
     background-color: #45a049;
 }
 
@@ -620,12 +636,14 @@ ul li{
 }
 
 .left .lowerButton button:hover{
+    cursor: pointer;
     background-color: #45a049;
 }
 
 .vertical{
     border: 1px solid #fff;
-    height: fit-content;
+    height: 50vh;
+    margin-right: 46px;
 }
 
 .right .rightIcon {
@@ -638,25 +656,25 @@ ul li{
     width: 50px;
     height: 50px;
     margin-right: 16px;
+    align-items: center;
 }
 
 .rightIcon {
     display: flex;
     align-items: center;
+    justify-content: space-between;
+    align-content: center;
 }
 
 .rightIcon button.search {
-    display: flex;
-    align-items: center;
     background-color: #071e26;
-    padding: 5px 10px;
     border: 1px solid #fff;
-    margin-right: 16px;
     color: #848889;
     font-size: 16px;
     font-weight: 100;
-    width: auto;
-    align-self: flex-end; 
+    width:  fit-content;
+    padding: 10px 20px;
+    margin: auto 5px;
 }
 
 .rightIcon button.search img {
@@ -676,21 +694,39 @@ ul li{
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    margin: 20px auto;
+    margin: 20px 0;
 }
 
 .right .blogs img{
     width: 30px;
     height: 30px;
-    margin-right: 16px;
 }
 
-.right .blogsTitle {
-        display: flex;
-        align-items: center; 
-        justify-content: center;
-        margin: 20px auto;
-    }
+.blogsTitle {
+    display: flex;
+    justify-content: space-between; 
+    width: 100%;
+    margin: 30px 0;
+}
+
+.right .blogsTitle .titleB{
+    text-align: left;
+    font-size: 30px;
+    font-weight: 600;
+} 
+
+.right .blogsTitle .viewB{
+    font-size: 24px;
+    font-weight: 600;
+    margin-right: 0;
+}
+
+.right .gd{
+    display: flex;
+    justify-content: space-between; 
+    width: 100%;
+    margin: auto 5px;
+}
 
 .right .circle{
     display: flex;
@@ -704,17 +740,150 @@ ul li{
 .right .circle p{
     position: relative;
     text-align: center;
-
 }
 
-.right .gd{
-    display: flex;
-    justify-content: space-between;
+.right .gd .gdText{
+    line-height: 30%;
+    color: #848889;
+}
+
+.right .gd .gdText1{
     font-size: 24px;
 }
 
+.right .gd .gdText2{
+    font-size: 16px;
+}
+
+.right .gd .views{
+    display: flex;
+    justify-content: center; 
+    align-items: center;
+}
+
+.right .gd .gdButton{
+    display: flex;
+    justify-content: center; 
+    align-items: center;
+}
+
+.right .gd .gdButton button{
+    width: fit-content;
+    font-size: 16px;
+}
+
+.right .upload{
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    width: 100%;
+    align-items: center;
+}
+
+.right .upload .uploadTitle{
+    font-size: 30px;
+    font-weight: 600;
+    text-align: left;
+}
+
+.upload .uploadForm{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 60%;
+    align-items: center;
+    border: 1px solid #384EB7;
+    background-color: #fff;
+    margin: 20px auto;
+    padding: 50px 0;
+}
+
+.uploadForm .uploadText{
+    color:#8c95a4;
+    text-align: center;
+}
+
+.upload .labels{
+    display: flex;
+    flex-direction: column;
+    width: 60%;
+    font-size: 20px;
+    font-weight: 600;  
+}
+
+.upload .labels input{
+    margin-bottom: 20px;
+    width: 60%;
+    height: 30px;
+    font-size: 18px;
+    border: 1px solid #ddd;
+    background-color: transparent;
+    border-radius: 15px;
+}
+
+.upload .labels textarea{
+    width: 60%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-sizing: border-box;
+    font-size: 1rem;
+    background-color: transparent;
+}
+
+.upload .labels button{
+    width: 60%;
+    margin: 30px auto;
+}
+
+.right .profile form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 30px;
+}
+
+.right .profile input {
+    width: 60%;
+    height: 40px;
+    font-size: 20px;
+    margin: 20px auto;
+    border: 1px solid #ddd;
+    background-color: transparent;
+    border-radius: 15px;
+}
+
+.profile .one {
+    display: flex;
+    width: 60%;
+    justify-content: space-between;
+    margin: 0 auto;
+}
+
+.profile .one .gap {
+    margin-right: 20px;
+}
+
+.profile form .comfirm {
+    display: flex;
+    justify-content: flex-start; 
+    width: 60%;
+    margin: 0 auto;
+}
+
+.profile form .comfirm .cancel {
+    background-color: #8c95a4;
+}
+
+.profile form .comfirm .cancel:hover {
+    background-color: #45a049;
+}
+
+
+
 footer {
-    font-size: 26px;
+    font-size: 20px;
     padding: 20px 0;
     text-align: center;
     margin-top: 40px;
