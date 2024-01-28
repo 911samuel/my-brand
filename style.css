@@ -1,4 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
+
 body {
     font-family: "Roboto", sans-serif;
     font-size: 16px;
@@ -35,7 +36,7 @@ nav {
     padding: 0 5%;
 }
 
-.nav{
+.nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -74,7 +75,7 @@ a {
     padding: 10px;
 }
 
-.nav a:hover{
+.nav a:hover {
     cursor: pointer;
     color: #45a049;
 }
@@ -354,7 +355,7 @@ button:hover {
     width: 45%;
     display: flex;
     flex-direction: column;
-    margin: 140px 40px; 
+    margin: 140px 40px;
 }
 
 .contactP h1 {
@@ -363,6 +364,7 @@ button:hover {
     text-align: left;
     margin: 40 auto;
 }
+
 .contactP input[type="text"],
 .contactP input[type="email"],
 .contactP textarea {
@@ -396,7 +398,7 @@ button[type="submit"]:hover {
     background-color: #45a049;
 }
 
-.contactInfo{
+.contactInfo {
     width: 45%;
     display: flex;
     flex-direction: column;
@@ -409,65 +411,68 @@ button[type="submit"]:hover {
     padding-top: 46px;
 }
 
-.contactInfo .main{
+.contactInfo .main {
     font-size: 46px;
 
 }
 
-.contactInfo .sub{
+.contactInfo .sub {
     width: 500px;
     font-size: 24px;
     font-weight: 100;
 }
 
-.adressInfo{
+.adressInfo {
     font-size: 16px;
     font-weight: 100;
     padding: 5px 0;
     margin-bottom: 20px;
 }
 
-.resume{
+.resume {
     width: 100%;
     display: flex;
     justify-content: space-between;
     margin: 100px 0;
 }
 
-.resume .education{
+.resume .education {
     width: 45%;
     margin: auto;
 }
 
-.education h2, .experience h2{
+.education h2,
+.experience h2 {
     font-size: 46px;
 }
 
-.education h3, .experience h3{
+.education h3,
+.experience h3 {
     font-size: 30px;
     color: #FEC544;
 }
 
-.education h4, .experience h4{
+.education h4,
+.experience h4 {
     font-size: 24px;
 }
-.resume .experience{
+
+.resume .experience {
     width: 45%;
     margin: auto;
 }
 
-.experience .support{
+.experience .support {
     font-size: 24px;
     font-weight: 100;
     margin: 60px auto;
 }
 
-
-ul li{
+ul li {
     margin: auto;
 }
 
-.signin{
+.signin {
     width: 45%;
     display: flex;
     flex-direction: column;
@@ -479,13 +484,13 @@ ul li{
 
 }
 
-.signin .welcome{
+.signin .welcome {
     font-size: 46px;
     font-weight: 900;
     text-align: center;
 }
 
-.signin input{
+.signin input {
     width: 60%;
     height: 50px;
     margin: 20px auto;
@@ -499,19 +504,19 @@ ul li{
     text-align: right;
     font-size: 20px;
     margin: 10px auto;
-    width: 60%; 
+    width: 60%;
 }
 
-.signin a{
+.signin a {
     margin-left: 180px;
 }
 
-.signin button{
+.signin button {
     width: 60%;
     margin: 20px auto;
 }
 
-.signin .or{
+.signin .or {
     display: flex;
     justify-content: space-between;
     width: 60%;
@@ -521,19 +526,19 @@ ul li{
     font-size: 24px;
 }
 
-.signin .or img{
+.signin .or img {
     width: 120px;
     height: 1px;
 }
 
-.signin .signinWith{
+.signin .signinWith {
     display: flex;
     justify-content: space-between;
     width: 60%;
-    margin: 20px auto;   
+    margin: 20px auto;
 }
 
-.signin .signinWith img:hover{
+.signin .signinWith img:hover {
     opacity: 0.6;
     cursor: pointer;
 }
@@ -546,17 +551,17 @@ ul li{
 
 .create .createAccount a {
     font-weight: 600;
-    display: inline-block; 
-    margin-left: 5px;  
-    color: #45a049; 
+    display: inline-block;
+    margin-left: 5px;
+    color: #45a049;
 }
 
 .create .createAccount a:hover {
-    text-decoration: underline; 
+    text-decoration: underline;
     cursor: pointer;
 }
 
-.signin .one{
+.signin .one {
     display: flex;
     width: 60%;
     margin: 20px auto;
@@ -567,6 +572,7 @@ ul li{
     display: flex;
     justify-content: space-between;
     width: 60%;
+    font-size: 14px;
     margin: 20px auto;
 }
 
@@ -574,18 +580,18 @@ ul li{
     margin-right: 10px;
 }
 
-.signin .login a {
-    text-decoration: none; 
-    color: #45a049; 
+.signin . a {
+    text-decoration: none;
+    color: #45a049;
 }
 
 .signin .login a:hover {
-    text-decoration: underline; 
+    text-decoration: underline;
     cursor: pointer;
 }
 
 
-.left{
+.left {
     width: 20%;
     display: flex;
     flex-direction: column;
@@ -596,7 +602,7 @@ ul li{
 
 }
 
-.right{
+.right {
     width: 80%;
     display: flex;
     flex-direction: column;
@@ -606,11 +612,11 @@ ul li{
     margin-top: 50px;
 }
 
-.left h1{
+.left h1 {
     font-size: 40px;
 }
 
-.left button{
+.left button {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -620,41 +626,36 @@ ul li{
     background-color: #fff;
 }
 
-.left button:hover{
+.left button:hover {
     cursor: pointer;
     background-color: #45a049;
 }
 
-.left button a{
+.left button a {
     color: #000;
     align-content: center;
 }
 
-.left button img{
-
-    margin-right: 16px;
-}
-
-.left .upperButton{
+.left .upperButton {
     margin-bottom: 80px;
 }
 
-.left .upperButton .gold{
+.left .upperButton .gold {
     background-color: #DAE9FC;
 }
 
-.left .lowerButton button{
+.left .lowerButton button {
     background-color: #f69708;
 }
 
 
 
-.left .lowerButton button:hover{
+.left .lowerButton button:hover {
     cursor: pointer;
     background-color: #45a049;
 }
 
-.vertical{
+.vertical {
     border: 1px solid #fff;
     height: 50vh;
     margin-right: 46px;
@@ -662,7 +663,7 @@ ul li{
 
 .right .rightIcon {
     display: flex;
-    justify-content: end; 
+    justify-content: end;
     align-items: center;
 }
 
@@ -686,7 +687,7 @@ ul li{
     color: #848889;
     font-size: 16px;
     font-weight: 100;
-    width:  fit-content;
+    width: fit-content;
     padding: 10px 20px;
     margin: auto 5px;
 }
@@ -694,7 +695,7 @@ ul li{
 .rightIcon button.search img {
     width: 24px;
     height: 24px;
-    margin-right: 8px; 
+    margin-right: 8px;
 }
 
 .rightIcon .notification,
@@ -703,7 +704,7 @@ ul li{
     margin-right: 16px;
 }
 
-.right .blogs{
+.right .blogs {
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -711,38 +712,38 @@ ul li{
     margin: 20px 0;
 }
 
-.right .blogs img{
+.right .blogs img {
     width: 30px;
     height: 30px;
 }
 
 .blogsTitle {
     display: flex;
-    justify-content: space-between; 
+    justify-content: space-between;
     width: 100%;
     margin: 30px 0;
 }
 
-.right .blogsTitle .titleB{
+.right .blogsTitle .titleB {
     text-align: left;
     font-size: 30px;
     font-weight: 600;
-} 
+}
 
-.right .blogsTitle .viewB{
+.right .blogsTitle .viewB {
     font-size: 24px;
     font-weight: 600;
     margin-right: 0;
 }
 
-.right .gd{
+.right .gd {
     display: flex;
-    justify-content: space-between; 
+    justify-content: space-between;
     width: 100%;
     margin: auto 5px;
 }
 
-.right .circle{
+.right .circle {
     display: flex;
     width: 60px;
     height: 60px;
@@ -751,42 +752,42 @@ ul li{
     color: blue;
 }
 
-.right .circle p{
+.right .circle p {
     position: relative;
     text-align: center;
 }
 
-.right .gd .gdText{
+.right .gd .gdText {
     line-height: 30%;
     color: #848889;
 }
 
-.right .gd .gdText1{
+.right .gd .gdText1 {
     font-size: 24px;
 }
 
-.right .gd .gdText2{
+.right .gd .gdText2 {
     font-size: 16px;
 }
 
-.right .gd .views{
+.right .gd .views {
     display: flex;
-    justify-content: center; 
+    justify-content: center;
     align-items: center;
 }
 
-.right .gd .gdButton{
+.right .gd .gdButton {
     display: flex;
-    justify-content: center; 
+    justify-content: center;
     align-items: center;
 }
 
-.right .gd .gdButton button{
+.right .gd .gdButton button {
     width: fit-content;
     font-size: 16px;
 }
 
-.right .upload{
+.right .upload {
     display: flex;
     flex-direction: column;
     margin: auto;
@@ -794,13 +795,13 @@ ul li{
     align-items: center;
 }
 
-.right .upload .uploadTitle{
+.right .upload .uploadTitle {
     font-size: 30px;
     font-weight: 600;
     text-align: left;
 }
 
-.upload .uploadForm{
+.upload .uploadForm {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -812,20 +813,20 @@ ul li{
     padding: 50px 0;
 }
 
-.uploadForm .uploadText{
-    color:#8c95a4;
+.uploadForm .uploadText {
+    color: #8c95a4;
     text-align: center;
 }
 
-.upload .labels{
+.upload .labels {
     display: flex;
     flex-direction: column;
     width: 60%;
     font-size: 20px;
-    font-weight: 600;  
+    font-weight: 600;
 }
 
-.upload .labels input{
+.upload .labels input {
     margin-bottom: 20px;
     width: 60%;
     height: 30px;
@@ -835,7 +836,7 @@ ul li{
     border-radius: 15px;
 }
 
-.upload .labels textarea{
+.upload .labels textarea {
     width: 60%;
     padding: 10px;
     margin-bottom: 10px;
@@ -846,7 +847,7 @@ ul li{
     background-color: transparent;
 }
 
-.upload .labels button{
+.upload .labels button {
     width: 60%;
     margin: 30px auto;
 }
@@ -881,7 +882,7 @@ ul li{
 
 .profile form .comfirm {
     display: flex;
-    justify-content: flex-start; 
+    justify-content: flex-start;
     width: 60%;
     margin: 0 auto;
 }
@@ -894,13 +895,206 @@ ul li{
     background-color: #45a049;
 }
 
-
-
 footer {
     font-size: 20px;
     padding: 20px 0;
     text-align: center;
     margin-top: 40px;
+}
+
+@media only screen and (max-width: 1440px) {
+    body {
+      font-size: 16px;
+    }
+  
+    header {
+      height: 8vh;
+      padding: 0 4%;
+    }
+  
+    nav {
+      height: 8vh;
+      padding: 0 4%;
+    }
+  
+    .nav {
+      width: 80%;
+    }
+  
+    .logo {
+      width: 60px;
+      height: 60px;
+      margin-right: 15px;
+    }
+  
+    .myDetails,
+    .myDetails2,
+    .signin,
+    .left,
+    .right {
+      width: 80%;
+      margin: 8px auto;
+    }
+  
+    .education,
+    .experience {
+      width: 80%;
+      margin: 8px auto;
+    }
+  
+    footer {
+      font-size: 16px;
+      margin-top: 50px;
+    }
+  }
+  
+@media only screen and (max-width: 1024px) {
+    body {
+        font-size: 14px;
+    }
+
+    header {
+        height: 8vh;
+        padding: 0 3%;
+    }
+
+    nav {
+        height: 8vh;
+        padding: 0 3%;
+    }
+
+    .nav {
+        width: 90%;
+    }
+
+    .logo {
+        width: 50px;
+        height: 50px;
+        margin-right: 10px;
+    }
+
+    .phone {
+        width: 20px;
+        height: 20px;
+    }
+
+    .sam {
+        font-size: 30px;
+    }
+
+    .samSpecial {
+        font-size: 30px;
+    }
+
+    .myDetails,
+    .myDetails2,
+    .signin,
+    .left,
+    .right {
+        width: 100%;
+        margin: 8px auto;
+    }
+
+    .myphoto,
+    .upload .uploadForm,
+    .upload .labels,
+    .upload .labels input,
+    .upload .labels textarea {
+        width: 100%;
+    }
+
+    .close-icon {
+        display: none;
+    }
+
+    .education,
+    .experience {
+        width: 100%;
+        margin: 8px auto;
+    }
+
+    .education h2,
+    .experience h2,
+    .education h3,
+    .experience h3,
+    .education h4,
+    .experience h4 {
+        font-size: 18px;
+    }
+
+    .education h3,
+    .experience h3 {
+        color: #FEC544;
+    }
+
+    .education p,
+    .experience p {
+        font-size: 16px;
+    }
+
+    .icons img {
+        height: 25px;
+        margin-right: 4px;
+    }
+
+    .social {
+        width: 100%;
+        margin-top: 15px;
+    }
+
+    .social a {
+        padding: 0 4px;
+    }
+
+    .blogs {
+        margin: 10px 0;
+    }
+
+    .blogs img {
+        width: 10px;
+        height: 10px;
+    }
+
+    .blogsTitle {
+        flex-direction: column;
+        margin: 8px 0;
+    }
+
+    .right .blogsTitle .titleB,
+    .right .blogsTitle .viewB {
+        text-align: center;
+        margin: 6px 0;
+    }
+
+    .right .gd,
+    .right .upload {
+        margin: 8px 0;
+    }
+
+    .right .gd .gdText {
+        line-height: 100%;
+    }
+
+    .right .gd .gdButton button {
+        font-size: 14px;
+    }
+
+    .rightIcon .notification,
+    .rightIcon .vertical-line,
+    .rightIcon img {
+        margin-right: 4px;
+    }
+
+    .right .profile input,
+    .upload .labels input,
+    .upload .labels textarea {
+        width: 100%;
+    }
+
+    footer {
+        font-size: 14px;
+        margin-top: 40px;
+    }
 }
 
 @media only screen and (max-width: 768px) {
@@ -991,46 +1185,76 @@ footer {
         margin-right: 5px;
     }
 
-    .skills-acquired,
-    .skills-acquired p,
-    .mission,
-    .skills-grading,
-    .bar,
-    .grading,
-    .work,
-    .work img,
-    .blogs,
-    .blogs img,
-    .blogs p,
-    .more,
-    .contactP,
+    .signin,
     .resume,
-    .education,
-    .experience,
-    .education h2,
-    .experience h2,
-    .education h3,
-    .experience h3,
-    .education h4,
-    .experience h4 {
+    .right {
         width: 100%;
-        margin: 0 auto;
+        margin: 20px auto;
+    }
+
+    .blogs {
+        margin: 30px 0;
+    }
+
+    .blogs img {
+        width: 20px;
+        height: 20px;
+    }
+
+    .blogsTitle {
+        flex-direction: column;
+        margin: 20px 0;
+    }
+
+    .right .blogsTitle .titleB,
+    .right .blogsTitle .viewB {
+        text-align: center;
+        margin: 10px 0;
+    }
+
+    .right .gd,
+    .right .upload {
+        margin: 20px 0;
+    }
+
+    .right .gd .gdText {
+        line-height: 100%;
+    }
+
+    .right .gd .gdButton button {
+        font-size: 14px;
+    }
+
+    .right .upload .uploadForm,
+    .upload .labels {
+        width: 80%;
+    }
+
+    .rightIcon .notification,
+    .rightIcon .vertical-line,
+    .rightIcon img {
+        margin-right: 8px;
+    }
+
+    .right .profile input,
+    .upload .labels input,
+    .upload .labels textarea {
+        width: 80%;
     }
 
     footer {
-        font-size: 8px;
+        font-size: 14px;
     }
 }
 
-
-@media only screen and (max-width: 480px) {
+@media only screen and (max-width: 425px) {
     body {
-        font-size: 12px;
+        font-size: 12px; 
     }
 
     .header {
         flex-direction: column;
-        padding: 0 2%;
+        padding: 0 3%;
     }
 
     .nav {
@@ -1038,7 +1262,7 @@ footer {
     }
 
     .toggle-btn {
-        display: flex; 
+        display: flex;
     }
 
     .close-icon {
@@ -1047,10 +1271,10 @@ footer {
         position: absolute;
         top: 10px;
         right: 20px;
-        font-size: 1.5em;
+        font-size: 1.2em; 
     }
 
-    .element{
+    .element {
         display: flex;
         flex-direction: column;
     }
@@ -1059,29 +1283,29 @@ footer {
         display: flex;
         flex-direction: column;
         position: absolute;
-        top: 5vh; 
+        top: 5vh;
         right: 2vh;
         background-color: #45a049;
         z-index: 1;
         margin: 0 auto;
         align-items: center;
-        font-size: 14px;
-        width: 40%;
+        font-size: 16px; 
+        width: 80%; 
         border: none;
         cursor: pointer;
     }
-    
+
     .vertical-line,
     .contact {
-        display: block; 
+        display: block;
     }
-    
+
     .hide-element {
         display: none;
     }
 
     .container {
-        padding: 15px 2%;
+        padding: 10px 3%; 
     }
 
     .myDetails,
@@ -1089,57 +1313,386 @@ footer {
     .myphoto {
         width: 100%;
         margin-left: 0;
-        margin-top: 20px;
+        margin-top: 20px; 
     }
 
     .myname {
-        font-size: 50px;
-        margin-bottom: 20px;
+        font-size: 60px; 
+        margin-bottom: 20px; 
     }
 
     .social {
-        width: 50%;
-        margin-top: 20px;
+        width: 100%; 
+        margin-top: 30px; 
     }
 
     .social a {
-        padding: 0 3px;
+        padding: 0 5px;
     }
 
     .icons img {
-        height: 40px;
-        margin-right: 3px;
+        height: 40px; 
+        margin-right: 5px;
     }
 
-    .skills-acquired,
-    .skills-acquired p,
-    .mission,
-    .skills-grading,
-    .bar,
-    .grading,
-    .work,
-    .work img,
-    .blogs,
-    .blogs img,
-    .blogs p,
-    .more,
-    .contactP,
+    .signin,
     .resume,
-    .education,
-    .experience,
-    .education h2,
-    .experience h2,
-    .education h3,
-    .experience h3,
-    .education h4,
-    .experience h4 {
+    .right {
         width: 100%;
-        margin: 0 auto;
+        margin: 15px auto; 
     }
 
-    footer{
-        font-size: 8px;
+    .blogs {
+        margin: 20px 0;
     }
-    
+
+    .blogs img {
+        width: 15px; 
+        height: 15px; 
+    }
+
+    .blogsTitle {
+        flex-direction: column;
+        margin: 15px 0; 
+    }
+
+    .right .blogsTitle .titleB,
+    .right .blogsTitle .viewB {
+        text-align: center;
+        margin: 10px 0;
+    }
+
+    .right .gd,
+    .right .upload {
+        margin: 15px 0; 
+    }
+
+    .right .gd .gdText {
+        line-height: 100%;
+    }
+
+    .right .gd .gdButton button {
+        font-size: 12px; 
+    }
+
+    .right .upload .uploadForm,
+    .upload .labels {
+        width: 100%; 
+    }
+
+    .rightIcon .notification,
+    .rightIcon .vertical-line,
+    .rightIcon img {
+        margin-right: 5px; 
+    }
+
+    .right .profile input,
+    .upload .labels input,
+    .upload .labels textarea {
+        width: 100%; 
+    }
+
+    footer {
+        font-size: 12px; 
+    }
 }
 
+@media only screen and (max-width: 375px) {
+    body {
+        font-size: 10px; 
+    }
+
+    .header {
+        flex-direction: column;
+        padding: 0 3%;
+    }
+
+    .nav {
+        display: none;
+    }
+
+    .toggle-btn {
+        display: flex;
+    }
+
+    .close-icon {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        top: 10px;
+        right: 20px;
+        font-size: 1em; 
+    }
+
+    .element {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .nav.show-menu {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        top: 5vh;
+        right: 2vh;
+        background-color: #45a049;
+        z-index: 1;
+        margin: 0 auto;
+        align-items: center;
+        font-size: 14px; 
+        width: 80%; 
+        border: none;
+        cursor: pointer;
+    }
+
+    .vertical-line,
+    .contact {
+        display: block;
+    }
+
+    .hide-element {
+        display: none;
+    }
+
+    .container {
+        padding: 10px 3%; 
+    }
+
+    .myDetails,
+    .myDetails2,
+    .myphoto {
+        width: 100%;
+        margin-left: 0;
+        margin-top: 20px; 
+    }
+
+    .myname {
+        font-size: 50px; 
+        margin-bottom: 20px; 
+    }
+
+    .social {
+        width: 100%; 
+        margin-top: 20px; 
+    }
+
+    .social a {
+        padding: 0 5px;
+    }
+
+    .icons img {
+        height: 30px; 
+        margin-right: 5px;
+    }
+
+    .signin,
+    .resume,
+    .right {
+        width: 100%;
+        margin: 10px auto; 
+    }
+
+    .blogs {
+        margin: 15px 0;
+    }
+
+    .blogs img {
+        width: 12px; 
+        height: 12px; 
+    }
+
+    .blogsTitle {
+        flex-direction: column;
+        margin: 10px 0; 
+    }
+
+    .right .blogsTitle .titleB,
+    .right .blogsTitle .viewB {
+        text-align: center;
+        margin: 8px 0;
+    }
+
+    .right .gd,
+    .right .upload {
+        margin: 10px 0; 
+    }
+
+    .right .gd .gdText {
+        line-height: 100%;
+    }
+
+    .right .gd .gdButton button {
+        font-size: 10px; 
+    }
+
+    .right .upload .uploadForm,
+    .upload .labels {
+        width: 100%; 
+    }
+
+    .rightIcon .notification,
+    .rightIcon .vertical-line,
+    .rightIcon img {
+        margin-right: 5px; 
+    }
+
+    .right .profile input,
+    .upload .labels input,
+    .upload .labels textarea {
+        width: 100%; 
+    }
+
+    footer {
+        font-size: 10px; 
+    }
+}
+
+@media only screen and (max-width: 320px) {
+    body {
+        font-size: 9px; 
+    }
+
+    .header {
+        flex-direction: column;
+        padding: 0 3%;
+    }
+
+    .nav {
+        display: none;
+    }
+
+    .toggle-btn {
+        display: flex;
+    }
+
+    .close-icon {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        top: 10px;
+        right: 15px;
+        font-size: 0.8em; 
+    }
+
+    .element {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .nav.show-menu {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        top: 5vh;
+        right: 2vh;
+        background-color: #45a049;
+        z-index: 1;
+        margin: 0 auto;
+        align-items: center;
+        font-size: 12px; 
+        width: 80%; 
+        border: none;
+        cursor: pointer;
+    }
+
+    .vertical-line,
+    .contact {
+        display: block;
+    }
+
+    .hide-element {
+        display: none;
+    }
+
+    .container {
+        padding: 10px 3%; 
+    }
+
+    .myDetails,
+    .myDetails2,
+    .myphoto {
+        width: 100%;
+        margin-left: 0;
+        margin-top: 15px; 
+    }
+
+    .myname {
+        font-size: 45px; 
+        margin-bottom: 15px; 
+    }
+
+    .social {
+        width: 100%; 
+        margin-top: 15px; 
+    }
+
+    .social a {
+        padding: 0 4px;
+    }
+
+    .icons img {
+        height: 25px; 
+        margin-right: 4px;
+    }
+
+    .signin,
+    .resume,
+    .right {
+        width: 100%;
+        margin: 8px auto; 
+    }
+
+    .blogs {
+        margin: 10px 0;
+    }
+
+    .blogs img {
+        width: 10px; 
+        height: 10px; 
+    }
+
+    .blogsTitle {
+        flex-direction: column;
+        margin: 8px 0; 
+    }
+
+    .right .blogsTitle .titleB,
+    .right .blogsTitle .viewB {
+        text-align: center;
+        margin: 6px 0;
+    }
+
+    .right .gd,
+    .right .upload {
+        margin: 8px 0; 
+    }
+
+    .right .gd .gdText {
+        line-height: 100%;
+    }
+
+    .right .gd .gdButton button {
+        font-size: 9px; 
+    }
+
+    .right .upload .uploadForm,
+    .upload .labels {
+        width: 100%; 
+    }
+
+    .rightIcon .notification,
+    .rightIcon .vertical-line,
+    .rightIcon img {
+        margin-right: 4px; 
+    }
+
+    .right .profile input,
+    .upload .labels input,
+    .upload .labels textarea {
+        width: 100%; 
+    }
+
+    footer {
+        font-size: 9px; 
+    }
+}
