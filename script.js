@@ -1,6 +1,20 @@
 const username = document.getElementById('email');
 const  password = document.getElementById('password');
 
+function save(event) {
+    event.preventDefault();
+
+    let myEmail = document.getElementById('email').value;
+    let myPassword = document.getElementById('password').value;
+    let myFirstName = document.getElementById('fname').value;
+    let myLatsName = document.getElementById('lname').value;
+
+    localStorage.setItem("my-email", myEmail);
+    localStorage.setItem("my password", myPassword);
+    localStorage.setItem("my first name", myFirstName);
+    localStorage.setItem("my last name", myLatsName);   
+}
+
 addEventListener('submit', (event) => {
     if(username.value == "" || password.value == ""){
         alert("Please fill out all fields");
@@ -16,7 +30,10 @@ addEventListener('submit', (event) => {
           return true;
       }
       event.preventDefault();
+      save(event);
 });
+
+
 
 document.getElementById('contactForm').addEventListener('submit', (Event) =>{
     alert("Thank you for filling out the form!");
