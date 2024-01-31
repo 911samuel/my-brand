@@ -41,29 +41,31 @@
                 <img src="./img/account.png" alt="myPhoto" class="myphoto">
                 <div class="signin">
                     <p class="welcome">Create Account</p>
-                    <div class="one">
-                        <input type="text" id="fname" name="fname" placeholder="First Name" required>
-                        <input type="text" id="lname" name="lname" placeholder="Last Name" required>
-                    </div>
-                    <input type="email" id="email" name="email" placeholder="Email" required>
-                    <input type="password" id="password" name="password" placeholder="Password" required>
-
-                    <div class="login">
-                        <label for="forgot">Already have an account?<a href="signin.html">Log in</a></label>
-                    </div>                 
-                    
-                    <button type="submit">Create Account</button>
-                    <div class="or">
-                        <img src="./img/line.png" alt="left">
-                        <p>or continue with</p>
-                        <img src="./img/line.png" alt="left">
-                    </div>
-                    <div class="signinWith">
-                        <img src="./img/google.png" alt="google">
-                        <img src="./img/facebook.png" alt="facebook">
-                        <img src="./img/apple.png" alt="apple">
-                    </div>
-                </div>
+                    <form action="signin.html" id="signupForm">
+                        <div class="one">
+                            <input type="text" id="fname" name="fname" placeholder="First Name" required class="gap">
+                            <input type="text" id="lname" name="lname" placeholder="Last Name" required>
+                        </div>
+                        <input type="email" id="email" name="email" placeholder="Email" required>
+                        <input type="password" id="password" name="password" placeholder="Password" required>
+    
+                        <div class="create">
+                            <p class="createAccount">Already have an account?<a href="signin.html">Log in</a></p>
+                        </div>                 
+                        
+                        <button type="submit">Create Account</button>
+                        <div class="or">
+                            <img src="./img/line.png" alt="left">
+                            <p>or continue with</p>
+                            <img src="./img/line.png" alt="left">
+                        </div>
+                        <div class="signinWith">
+                            <img src="./img/google.png" alt="google">
+                            <img src="./img/facebook.png" alt="facebook">
+                            <img src="./img/apple.png" alt="apple">
+                        </div>
+                    </form>
+                </div>      
             </section>
         </div>
         <footer>

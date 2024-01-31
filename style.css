@@ -376,6 +376,8 @@ button:hover {
     box-sizing: border-box;
     font-size: 1rem;
     background-color: transparent;
+    color: #fff;
+    padding: 10px 20px;
 }
 
 .contactP textarea {
@@ -496,8 +498,15 @@ ul li {
     margin: 20px auto;
     font-size: 24px;
     background-color: transparent;
+    color: #fff;
+    padding: 10px 20px;
     border: 1px solid #ddd;
     border-radius: 15px;
+}
+
+.signin form{
+    display: flex;
+    flex-direction: column;
 }
 
 .signin label {
@@ -545,7 +554,7 @@ ul li {
 
 .create {
     text-align: center;
-    margin: 20px auto;
+    margin: 0 auto;
     font-size: 20px;
 }
 
@@ -580,7 +589,7 @@ ul li {
     margin-right: 10px;
 }
 
-.signin . a {
+.signin . a{
     text-decoration: none;
     color: #45a049;
 }
@@ -796,9 +805,12 @@ ul li {
 }
 
 .right .upload .uploadTitle {
+    display: flex;
+    justify-content: flex-start;
+    width: 60%;
+    margin: 0 auto;
     font-size: 30px;
     font-weight: 600;
-    text-align: left;
 }
 
 .upload .uploadForm {
@@ -829,12 +841,23 @@ ul li {
 .upload .labels input {
     margin-bottom: 20px;
     width: 60%;
-    height: 30px;
+    height: 50px;
     font-size: 18px;
     border: 1px solid #ddd;
     background-color: transparent;
+    color: #fff;
+    padding: 10px 20px;
     border-radius: 15px;
 }
+
+.upload .labels input[type="date"]::-webkit-calendar-picker-indicator {
+    filter: invert(1);
+}
+
+.upload .labels input[type="date"] {
+    color: #fff; 
+}
+
 
 .upload .labels textarea {
     width: 60%;
@@ -845,11 +868,16 @@ ul li {
     box-sizing: border-box;
     font-size: 1rem;
     background-color: transparent;
+    color: #fff;
+    padding: 10px 20px;
+
 }
 
-.upload .labels button {
+.profile form .comfirm {
+    display: flex;
+    justify-content: flex-start;
     width: 60%;
-    margin: 30px auto;
+    margin: 0 auto;
 }
 
 .right .profile form {
@@ -867,16 +895,20 @@ ul li {
     border: 1px solid #ddd;
     background-color: transparent;
     border-radius: 15px;
+    color: #fff;
+    padding: 10px 20px;
 }
 
-.profile .one {
+.profile .one,
+.signin .one {
     display: flex;
     width: 60%;
     justify-content: space-between;
     margin: 0 auto;
 }
 
-.profile .one .gap {
+.profile .one .gap,
+.signin .one .gap {
     margin-right: 20px;
 }
 

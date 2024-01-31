@@ -40,23 +40,25 @@
                 <img src="./img/account.png" alt="myPhoto" class="myphoto">
                 <div class="signin">
                     <p class="welcome">Hello !<br> welcome back</p>
-                    <input type="text" id="senderName" name="senderName" placeholder="Enter UserName or Email" required>
-                    <input type="password" id="senderName" name="senderName" placeholder="Enter Password" required>
-                    <label for="forgot">forgot password ?</label>
-                    <a href="admin-dashboard-blogs.html"><button type="submit">Sign In</button></a>
-                    <div class="or">
-                        <img src="./img/line.png" alt="left">
-                        <p>or continue with</p>
-                        <img src="./img/line.png" alt="left">
-                    </div>
-                    <div class="signinWith">
-                        <img src="./img/google.png" alt="google">
-                        <img src="./img/facebook.png" alt="facebook">
-                        <img src="./img/apple.png" alt="apple">
-                    </div>
-                    <div class="create">
-                        <p class="createAccount">don’t have an account?<a href="signup.html">create account!</a></p>
-                    </div>
+                    <form action="./admin-dashboard-blogs.html" id="signinForm">
+                        <input type="email" id="email" name="senderName" placeholder="Enter Email" required>
+                        <input type="password" id="password" name="senderName" placeholder="Enter Password" required>
+                        <label for="forgot">forgot password?</label>
+                        <a><button type="submit">Sign In</button></a>
+                        <div class="or">
+                            <img src="./img/line.png" alt="left">
+                            <p>or continue with</p>
+                            <img src="./img/line.png" alt="left">
+                        </div>
+                        <div class="signinWith">
+                            <img src="./img/google.png" alt="google">
+                            <img src="./img/facebook.png" alt="facebook">
+                            <img src="./img/apple.png" alt="apple">
+                        </div>
+                        <div class="create">
+                            <p class="createAccount">don’t have an account?<a href="signup.html">create account!</a></p>
+                        </div>
+                    </form>
                 </div>
             </section>
         </div>
