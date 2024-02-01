@@ -1,27 +1,45 @@
-let myEmail = document.getElementById('email').value;
-let myPassword = document.getElementById('password').value;
-let myFirstName = document.getElementById('fname').value;
-let myLastName = document.getElementById('lname').value;
-let senderName = document.getElementById('senderName').value;
-let senderEmail = document.getElementById('senderEmail').value;
-let subject = document.getElementById('subject').value;
-let message = document.getElementById('message').value;
-let form = document.getElementById('contactForm');
-    
 function save(event) {
     event.preventDefault();
-    localStorage.setItem("my-email", myEmail);
-    localStorage.setItem("my-password", myPassword);
-    localStorage.setItem("my-first-name", myFirstName);
-    localStorage.setItem("my-last-name", myLastName);
-    localStorage.setItem("sender-name", senderName);
-    localStorage.setItem("sender-email", senderEmail);
-    localStorage.setItem("sender-subject", subject);
-    localStorage.setItem("sender-message", message);
+    localStorage.setItem("my-email", document.getElementById('email').value);
+    localStorage.setItem("my-password", document.getElementById('password').value);
+    localStorage.setItem("my-first-name", document.getElementById('fname').value);
+    localStorage.setItem("my-last-name", document.getElementById('lname').value);
+    localStorage.setItem("sender-name", document.getElementById('senderName').value);
+    localStorage.setItem("sender-email", document.getElementById('senderEmail').value);
+    localStorage.setItem("sender-subject", document.getElementById('subject').value);
+    localStorage.setItem("sender-message", document.getElementById('message').value);
 }
 
-function login(event) {
+
+document.getElementById('signupForm').addEventListener('submit', (event) => {
+    const myEmail = document.getElementById('email').value;
+    const myPassword = document.getElementById('password').value;
+
+    if (myEmail === "" || myPassword === "") {
+        alert("Please fill out all fields");
+    } else if (myPassword.length < 8) {
+        alert("Password must be at least 8 characters long");
+    } else if (!(/[A-Z]/.test(myPassword))) {
+        alert("Password must contain at least one uppercase letter.");
+    } else if (!/[a-z]/.test(myPassword)) {
+        alert("Password must contain at least one lowercase letter.");
+    } else if (!isNaN(myPassword.charAt(0))) {
+        alert("Password cannot start with a number.");
+        return; 
+    } else {
+        save(event);
+        alert("Account created successfully!");
+        return true;
+    }
+
     event.preventDefault();
+});
+
+document.getElementById('signinForm').addEventListener('submit', function login(event) {
+    event.preventDefault();
+
+    const myEmail = document.getElementById('email').value;
+    const myPassword = document.getElementById('password').value;
 
     let loginEmail = localStorage.getItem('my-email');
     let loginPassword = localStorage.getItem('my-password');
@@ -35,29 +53,10 @@ function login(event) {
     } else {
         alert('User not found! Please create an account first.');
     }
-}
-
-addEventListener('submit', (event) => {
-    if (myEmail === "" || myPassword === "") {
-        alert("Please fill out all fields");
-    } else if (myPassword.length < 8) {
-        alert("Password must be at least 8 characters long");
-    } else if (!(/[A-Z]/.test(myPassword))) {
-        alert("Password must contain at least one uppercase letter.");
-    } else if (!/[a-z]/.test(myPassword)) {
-        alert("Password must contain at least one lowercase letter.");
-    } else if (!isNaN(myPassword.charAt(0))) {
-        alert("Password cannot start with a number.");
-    } else {
-        save(event);
-        return true;
-    }
-
-    event.preventDefault();
 });
 
-document.getElementById('contactForm').addEventListener('submit', function(event){
-    var form = document.getElementById('contactForm');
+document.getElementById('contactForm').addEventListener('submit', (event) => {
+    const form = document.getElementById('contactForm');
 
     if (form && form.checkValidity()) {
         save(event);
@@ -71,10 +70,10 @@ document.getElementById('contactForm').addEventListener('submit', function(event
 
 
 function toggleMenu() {
-    var navElement = document.querySelector('.nav');
-    var verticalLineElement = document.querySelector('.vertical-line');
-    var contactElement = document.querySelector('.contact');
-
+    const navElement = document.querySelector('.nav');
+    const verticalLineElement = document.querySelector('.vertical-line');
+    const contactElement = document.querySelector('.contact');
+    
     navElement.classList.toggle('show-menu');
     verticalLineElement.classList.toggle('hide-element');
     contactElement.classList.toggle('hide-element');
