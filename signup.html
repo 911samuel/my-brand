@@ -1,80 +1,82 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta  charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>PORTIFOLIO</title>
-        <link rel="stylesheet" href="./style.css">
-    </head>
-    <body>
-        <header>
-            <nav>
-                <div class="myBusiness">
-                    <img src="./img/log.png" alt="logo" class="logo">
-                    <p class="sam"><strong class="samSpecial">S</strong>am</p>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PORTIFOLIO</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+
+<body>
+    <header>
+        <nav>
+            <div class="myBusiness">
+                <img src="./img/log.png" alt="logo" class="logo">
+                <p class="sam"><strong class="samSpecial">S</strong>am</p>
+            </div>
+            <button class="toggle-btn" onclick="toggleMenu()">☰</button>
+            <div class="nav">
+                <div class="close-icon" onclick="toggleMenu()">✕</div>
+                <div>
+                    <a href="./index.html">HOME</a>
+                    <a href="./about.html">ABOUT</a>
+                    <a href="./skills.html">SKILLS</a>
+                    <a href="./portifolio.html">MY WORK</a>
+                    <a href="./blog.html">BLOG</a>
+                    <a href="./contact.html">CONTACT</a>
+                    <a href="./resume.html">RESUME</a>
+                    <a href="./signin.html">SIGN IN</a>
+                    <a href="#" class="gold">SIGN UP</a>
                 </div>
-                <button class="toggle-btn" onclick="toggleMenu()">☰</button>
-                <button class="toggle-btn" onclick="toggleMenu()">☰</button>
-                <div class="nav">
-                    <div class="close-icon" onclick="toggleMenu()">✕</div>
-                    <div>
-                        <a href="./index.html">HOME</a>
-                        <a href="./about.html">ABOUT</a>
-                        <a href="./skills.html">SKILLS</a>
-                        <a href="./portifolio.html">MY WORK</a>
-                        <a href="./blog.html">BLOG</a>
-                        <a href="./contact.html">CONTACT</a>
-                        <a href="./resume.html">RESUME</a>
-                        <a href="./signin.html">SIGN IN</a>
-                        <a href= "#" class="gold">SIGN UP</a>
+                <div class="vertical-line"></div>
+                <div class="contact">
+                    <a href="./tel:+250784724228">
+                        <img src="./img/phone.png" alt="phone" class="phone">
+                        <p class="number">+250784724228</p>
+                    </a>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+        <section class="header">
+            <img src="./img/account.png" alt="myPhoto" class="myphoto">
+            <div class="signin">
+                <p class="welcome">Create Account</p>
+                <form id="signupForm">
+                    <div class="one">
+                        <input type="text" id="fname" name="fname" placeholder="First Name" required class="gap">
+                        <input type="text" id="lname" name="lname" placeholder="Last Name" required>
                     </div>
-                    <div class="vertical-line"></div>
-                    <div class="contact">
-                        <a href="./tel:+250784724228">
-                            <img src="./img/phone.png" alt="phone" class="phone">
-                            <p class="number">+250784724228</p>
-                        </a>
-                    </div>  
-                </div>
-            </nav>
-        </header>
-        <div class="container">
-            <section class="header">
-                <img src="./img/account.png" alt="myPhoto" class="myphoto">
-                <div class="signin">
-                    <p class="welcome">Create Account</p>
-                    <form action="./signin.html" id="signupForm">
-                        <div class="one">
-                            <input type="text" id="fname" name="fname" placeholder="First Name" required class="gap">
-                            <input type="text" id="lname" name="lname" placeholder="Last Name" required>
-                        </div>
-                        <input type="email" id="email" name="email" placeholder="Email" required>
-                        <input type="password" id="password" name="password" placeholder="Password" required>
-    
-                        <div class="create">
-                            <p class="createAccount">Already have an account?<a href="./signin.html">Log in</a></p>
-                        </div>                 
-                        
-                        <button type="submit">Create Account</button>
-                        <div class="or">
-                            <img src="./img/line.png" alt="left">
-                            <p>or continue with</p>
-                            <img src="./img/line.png" alt="left">
-                        </div>
-                        <div class="signinWith">
-                            <img src="./img/google.png" alt="google">
-                            <img src="./img/facebook.png" alt="facebook">
-                            <img src="./img/apple.png" alt="apple">
-                        </div>
-                    </form>
-                </div>      
-            </section>
-        </div>
-        <footer>
-            &copy; 2023. Designed by Sam. All right reserved.
-        </footer>
+                    <input type="email" id="email" name="email" placeholder="Email" required>
+                    <input type="password" id="password" name="password" placeholder="Password" required>
 
-        <script src="./script.js"></script>
+                    <div class="create">
+                        <p class="createAccount">Already have an account?<a href="./signin.html">Log in</a></p>
+                    </div>
 
-    </body>
+                    <button type="submit">Create Account</button>
+                    <div class="or">
+                        <img src="./img/line.png" alt="left">
+                        <p>or continue with</p>
+                        <img src="./img/line.png" alt="left">
+                    </div>
+                    <div class="signinWith">
+                        <img src="./img/google.png" alt="google">
+                        <img src="./img/facebook.png" alt="facebook">
+                        <img src="./img/apple.png" alt="apple">
+                    </div>
+                </form>
+            </div>
+        </section>
+    </div>
+    <footer>
+        &copy; 2023. Designed by Sam. All right reserved.
+    </footer>
+
+    <script src="./script.js"></script>
+
+</body>
+
 </html>

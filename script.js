@@ -1,82 +1,86 @@
 function save(event) {
-    event.preventDefault();
-    localStorage.setItem("my-email", document.getElementById('email').value);
-    localStorage.setItem("my-password", document.getElementById('password').value);
-    localStorage.setItem("my-first-name", document.getElementById('fname').value);
-    localStorage.setItem("my-last-name", document.getElementById('lname').value);
-    localStorage.setItem("sender-name", document.getElementById('senderName').value);
-    localStorage.setItem("sender-email", document.getElementById('senderEmail').value);
-    localStorage.setItem("sender-subject", document.getElementById('subject').value);
-    localStorage.setItem("sender-message", document.getElementById('message').value);
+  event.preventDefault();
+  const formData = new FormData(event.target);
+
+  for (const [key, value] of formData.entries()) {
+    localStorage.setItem(key, value);
+  }
 }
 
-document.addEventListener('DOMContentLoaded', () => {
-    window.addEventListener('load', () => {
-        document.getElementById('signupForm').addEventListener('submit', (event) => {
-            const signupEmail = document.getElementById('signupEmail').value;
-            const signupPassword = document.getElementById('signupPassword').value;
+document.addEventListener("DOMContentLoaded", () => {
+  const signupForm = document.getElementById("signupForm");
+  const signinForm = document.getElementById("signinForm");
+  const contactForm = document.getElementById("contactForm");
+  const commonAncestor = document.body; 
 
-            if (signupEmail === "" || signupPassword === "") {
-                alert("Please fill out all fields");
-            } else if (signupPassword.length < 8) {
-                alert("Password must be at least 8 characters long");
-            } else if (!(/[A-Z]/.test(signupPassword))) {
-                alert("Password must contain at least one uppercase letter.");
-            } else if (!/[a-z]/.test(signupPassword)) {
-                alert("Password must contain at least one lowercase letter.");
-            } else if (!isNaN(signupPassword.charAt(0))) {
-                alert("Password cannot start with a number.");
-                return; 
-            } else {
-                save(event);
-                alert("Account created successfully!");
-                return true;
-            }
+  signupForm.addEventListener("submit", (event) => {
+    const signupEmail = document.getElementById("signupEmail").value;
+    const signupPassword = document.getElementById("signupPassword").value;
 
-            event.preventDefault();
-        });
+    if (signupEmail === "" || signupPassword === "") {
+      alert("Please fill out all fields");
+    } else if (signupPassword.length < 8) {
+      alert("Password must be at least 8 characters long");
+    } else if (!/[A-Z]/.test(signupPassword)) {
+      alert("Password must contain at least one uppercase letter.");
+    } else if (!/[a-z]/.test(signupPassword)) {
+      alert("Password must contain at least one lowercase letter.");
+    } else if (!isNaN(signupPassword.charAt(0))) {
+      alert("Password cannot start with a number.");
+      return;
+    } else {
+      save(event);
+      alert("Account created successfully!");
+      return true;
+    }
 
-        document.getElementById('signinForm').addEventListener('submit', function login(event) {
-            event.preventDefault();
+    event.preventDefault();
+  });
 
-            const signinEmail = document.getElementById('signinEmail').value;
-            const signinPassword = document.getElementById('signinPassword').value;
+  signinForm.addEventListener("submit", (event) => {
+    event.preventDefault();
 
-            let loginEmail = localStorage.getItem('my-email');
-            let loginPassword = localStorage.getItem('my-password');
+    const signinEmail = document.getElementById("signinEmail").value;
+    const signinPassword = document.getElementById("signinPassword").value;
 
-            if (signinEmail === loginEmail) {
-                if (signinPassword === loginPassword) {
-                    alert(`Welcome back, ${localStorage.getItem('my-first-name')}`);
-                } else {
-                    alert('Wrong Password');
-                }
-            } else {
-                alert('User not found! Please create an account first.');
-            }
-        });
+    const loginEmail = localStorage.getItem("my-email");
+    const loginPassword = localStorage.getItem("my-password");
 
-        document.getElementById('contactForm').addEventListener('submit', (event) => {
-            const form = document.getElementById('contactForm');
+    if (signinEmail === loginEmail) {
+      if (signinPassword === loginPassword) {
+        alert(`Welcome back, ${localStorage.getItem("my-first-name")}`);
+      } else {
+        alert("Wrong Password");
+      }
+    } else {
+      alert("User not found! Please create an account first.");
+    }
+  });
 
-            if (form && form.checkValidity()) {
-                save(event);
-                alert("Thank you for filling out the form!");
-            } else {
-                alert("Please fill out the form before submitting.");
-            }
+  contactForm.addEventListener("submit", (event) => {
+    if (contactForm && contactForm.checkValidity()) {
+      save(event);
+      alert("Thank you for filling out the form!");
+    } else {
+      alert("Please fill out the form before submitting.");
+    }
 
-            event.preventDefault();
-        });
-    });
+    event.preventDefault();
+  });
+
+  commonAncestor.addEventListener("click", (event) => {
+    if (event.target.id === "menu-toggle") {
+      toggleMenu();
+    }
+  });
 });
 
 function toggleMenu() {
-    const navElement = document.querySelector('.nav');
-    const verticalLineElement = document.querySelector('.vertical-line');
-    const contactElement = document.querySelector('.contact');
+  const navElement = document.querySelector(".nav");
+  const verticalLineElement = document.querySelector(".vertical-line");
+  const contactElement = document.querySelector(".contact");
 
-    navElement.classList.toggle('show-menu');
-    verticalLineElement.classList.toggle('hide-element');
-    contactElement.classList.toggle('hide-element');
+  navElement.classList.toggle("show-menu");
+  verticalLineElement.classList.toggle("hide-element");
+  contactElement.classList.toggle("hide-element");
 }
