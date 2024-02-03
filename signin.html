@@ -42,15 +42,15 @@
                 <img src="./img/account.png" alt="myPhoto" class="myphoto">
                 <div class="signin">
                     <p class="welcome">Hello !<br> welcome back</p>
-                    <form id="signinForm">
-                        <input type="email" id="email" name="senderName" placeholder="Enter Email" required>
-                        <input type="password" id="password" name="senderName" placeholder="Enter Password" required>
+                    <form id="signinForm" onsubmit="signIn(event)">
+                        <input type="email" id="email" name="senderName" placeholder="Enter Email">
+                        <input type="password" id="password" name="senderName" placeholder="Enter Password">
                         <label for="forgot">forgot password?</label>
                         <a><button type="submit">Sign In</button></a>
                         <div class="or">
                             <img src="./img/line.png" alt="left">
                             <p>or continue with</p>
-                            <img src="./img/line.png" alt="left">
+                            <img src="./img/line.png" alt="right">
                         </div>
                         <div class="signinWith">
                             <img src="./img/google.png" alt="google">
