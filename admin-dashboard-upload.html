@@ -78,23 +78,29 @@
 
                     <div class="upload">
                         <p class="uploadTitle">Upload</p>
-                        <div class="uploadForm">
-                            <img src="./img/Upload.png" alt="upload">
-                            <div class="uploadText">
-                                <p>Drag & drop files</p>
-                                <p>Supported formates: JPEG, PNG, GIF, MP4, PDF, PSD, AI, Word, PPT</p>
-                                <input type="file" id="myFile" name="filename"/>
+                        <form id="uploadForm" action="/upload" method="post" enctype="multipart/form-data">
+                            <div class="uploadForm">
+                                <img src="./img/Upload.png" alt="upload">
+                                <div class="uploadText">
+                                    <p>Drag & drop files</p>
+                                    <p>Supported formats: JPEG, PNG, GIF, MP4, PDF, PSD, AI, Word, PPT</p>
+                                    <div class="displayFile"></div>
+                                    <input type="file" id="myFile" name="file" onchange="imageUpload()"/>
+                                </div>
                             </div>
-                        </div>
-                        <div class="labels">
-                            <label for="title">Title</label>
-                            <input type="text" id="title" name="blog_title" placeholder="Enter title..."/>
-                            <label for="date">Date</label>
-                            <input type="date" id="date" name="blog_date" placeholder="dd/mm/yyyy"/>
-                            <label for="description">Description</label>
-                            <textarea rows="5" cols="30" id="description" name="blog_desc" placeholder="Write something about your blog..."></textarea>
-                            <button>Upload</button>
-                        </div>
+                            <div class="labels">
+                                <label for="title">Title</label>
+                                <input type="text" id="title" name="blog_title" placeholder="Enter title..."/>
+                                <label for="author">Author</label>
+                                <input type="text" id="author" name="blog_author" placeholder="Enter author..."/>
+                                <label for="date">Date</label>
+                                <input type="date" id="date" name="blog_date" placeholder="dd/mm/yyyy"/>
+                                <label for="description">Description</label>
+                                <textarea rows="5" cols="30" id="description" name="blog_desc" placeholder="Write something about your blog..."></textarea>
+                                <button type="button" onclick="uploadBlog()">Upload</button>
+                            </div>
+                        </form>
+                    </div>
 
                     </div>
                     

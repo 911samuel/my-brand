@@ -2,7 +2,7 @@ function showToast(message, inputId) {
   const toast = document.createElement("div");
 
   toast.textContent = message;
-  toast.classList.add("toast", "error"); 
+  toast.classList.add("toast", "error");
 
   const inputElement = document.getElementById(inputId);
   if (!inputElement) {
@@ -39,13 +39,22 @@ function signUp(event) {
   } else if (!signupLastName) {
     showToast("Last name cannot be empty", "lname");
   } else if (!isValidEmail(signupEmail)) {
-    showToast("Please enter a valid email address from Gmail or Outlook", "email");
+    showToast(
+      "Please enter a valid email address from Gmail or Outlook",
+      "email"
+    );
   } else if (signupPassword.length < 8) {
     showToast("Password must be at least 8 characters long", "password");
   } else if (!/[A-Z]/.test(signupPassword)) {
-    showToast("Password must contain at least one uppercase letter.", "password");
+    showToast(
+      "Password must contain at least one uppercase letter.",
+      "password"
+    );
   } else if (!/[a-z]/.test(signupPassword)) {
-    showToast("Password must contain at least one lowercase letter.", "password");
+    showToast(
+      "Password must contain at least one lowercase letter.",
+      "password"
+    );
   } else if (!isNaN(signupPassword.charAt(0))) {
     showToast("Password cannot start with a number.", "password");
   } else {
@@ -73,7 +82,7 @@ function signIn(event) {
   }
   setTimeout(function () {
     window.location.href = "admin-dashboard-blogs.html";
-  }, 2000); 
+  }, 2000);
 }
 function contact(event) {
   event.preventDefault();
@@ -84,6 +93,81 @@ function contact(event) {
   } else {
     showToast("Please fill out the form before submitting.");
   }
+}
+
+function imageUpload() {
+  const fileInput = document.getElementById("myFile");
+  const displayFile = document.querySelector(".displayFile");
+
+  const file = fileInput.files[0];
+
+  if (file) {
+    const reader = new FileReader();
+
+    reader.onload = function (e) {
+      const previewImage = document.createElement("img");
+      previewImage.src = e.target.result;
+
+      previewImage.style.width = "100%";
+      previewImage.style.height = "400px";
+      displayFile.innerHTML = "";
+      displayFile.appendChild(previewImage);
+    };
+
+    reader.readAsDataURL(file);
+  } else {
+    displayFile.innerHTML = "";
+  }
+}
+
+function fetchAndDisplayBlogs() {
+  fetch("http://localhost:3000/blogs")
+    .then((response) => response.json())
+    .then((data) => {
+      const blogsContainer = document.querySelector(".blogs");
+
+      data.forEach((blog) => {
+        const blogElement = createBlogElement(blog);
+        blogsContainer.appendChild(blogElement);
+      });
+    })
+    .catch((error) => {
+      console.error("Error fetching blogs:", error);
+    });
+}
+
+function createBlogElement(blog) {
+  const gdElement = document.createElement("div");
+  gdElement.classList.add("gd");
+
+  return gdElement;
+}
+
+function uploadBlog() {
+
+  const form = document.getElementById("uploadForm"); 
+  const formData = new FormData(form);
+
+  const uploadEndpoint = 'http://localhost:3000/upload';
+
+  fetch(uploadEndpoint, {
+    method: 'POST',
+    body: formData,
+  })
+    .then((response) => {
+      if (response.ok) {
+        return response.json();
+      } else {
+        throw new Error('Failed to upload blog');
+      }
+    })
+    .then((data) => {
+      fetchAndDisplayBlogs();
+    })
+    .catch((error) => {
+      console.error('Error:', error.message);
+      showToast(`Error ${error.message}`);
+    });
 }
 
 function save(form) {

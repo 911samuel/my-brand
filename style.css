@@ -607,7 +607,7 @@ ul li {
     margin-right: 10px;
 }
 
-.signin . a{
+.signin  a {
     text-decoration: none;
     color: #45a049;
 }
@@ -621,15 +621,20 @@ ul li {
 .left {
     width: 20%;
     display: flex;
+    align-items: flex-start;
     flex-direction: column;
     justify-content: space-between;
     font-size: 16px;
     font-weight: 100;
     margin-top: 50px;
-
 }
 
+.left .line{
+    display: flex;
+    flex-direction: row;
+}
 .right {
+    position: relative;
     width: 80%;
     display: flex;
     flex-direction: column;
@@ -683,6 +688,7 @@ ul li {
 }
 
 .vertical {
+    display: inline;
     border: 1px solid #fff;
     height: 50vh;
     margin-right: 46px;
@@ -831,6 +837,13 @@ ul li {
     font-weight: 600;
 }
 
+.upload #uploadForm{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
 .upload .uploadForm {
     display: flex;
     flex-direction: column;
