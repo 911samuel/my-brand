@@ -77,13 +77,14 @@ function signIn(event) {
 
   if (signinEmail === loginEmail && signinPassword === loginPassword) {
     showToast(`Welcome back, ${localStorage.getItem("lname")}`, "in");
+    setTimeout(function () {
+      window.location.href = "admin-dashboard-blogs.html";
+    }, 2000);
   } else {
     showToast("Wrong Email or Password", "password");
   }
-  setTimeout(function () {
-    window.location.href = "admin-dashboard-blogs.html";
-  }, 2000);
 }
+
 function contact(event) {
   event.preventDefault();
 
