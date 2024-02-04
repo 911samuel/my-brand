@@ -3,10 +3,9 @@ const multer = require('multer');
 const app = express();
 const port = 3000;
 
-// Set up multer storage
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, 'uploads/'); // Specify the folder where you want to store uploaded files
+    cb(null, 'uploads/'); 
   },
   filename: function (req, file, cb) {
     cb(null, Date.now() + '-' + file.originalname);
