@@ -74,6 +74,9 @@ function signIn(event) {
   } else {
     showToast("Wrong Email or Password", "password");
   }
+  setTimeout(function () {
+    window.location.href = "admin-dashboard-blogs.html";
+  }, 2000); 
 }
 function contact(event) {
   event.preventDefault();
@@ -84,9 +87,6 @@ function contact(event) {
   } else {
     showToast("Please fill out the form before submitting.");
   }
-  setTimeout(function () {
-    window.location.href = "admin-dashboard-blogs.html";
-  }, 2000); 
 }
 
 function save(form) {
