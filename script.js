@@ -66,9 +66,6 @@ function signIn(event) {
   const loginEmail = localStorage.getItem("email");
   const loginPassword = localStorage.getItem("password");
 
-  console.log("Stored Email:", loginEmail);
-  console.log("Stored Password:", loginPassword);
-
   if (signinEmail === loginEmail && signinPassword === loginPassword) {
     showToast(`Welcome back, ${localStorage.getItem("lname")}`, "in");
   } else {
