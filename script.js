@@ -1,20 +1,18 @@
-function showToast(message) {
-
+function showToast(message, inputId) {
   const toast = document.createElement("div");
 
   toast.textContent = message;
+  toast.classList.add("toast", "error"); 
 
-  toast.style.position = "fixed";
-  toast.style.top = "20px";
-  toast.style.left = "50%";
-  toast.style.transform = "translateX(-50%)";
-  toast.style.backgroundColor = "transparent";
-  toast.style.color = "red";
-  toast.style.padding = "10px 20px";
-  toast.style.borderRadius = "5px";
-  toast.style.zIndex = "1000";
-  toast.style.fontSize = "16px";
-  toast.style.boxShadow = "0 4px 6px rgba(0,0,0,0.2)";
+  const inputElement = document.getElementById(inputId);
+  if (!inputElement) {
+    console.error(`Input element with id '${inputId}' not found.`);
+    return;
+  }
+
+  toast.style.position = "absolute";
+  toast.style.top = `${inputElement.offsetTop + inputElement.offsetHeight}px`;
+  toast.style.left = `${inputElement.offsetLeft}px`;
 
   document.body.appendChild(toast);
 
@@ -30,53 +28,53 @@ function isValidEmail(email) {
 
 function signUp(event) {
   event.preventDefault();
+
   const signupFirstName = document.getElementById("fname").value;
   const signupLastName = document.getElementById("lname").value;
   const signupEmail = document.getElementById("email").value;
   const signupPassword = document.getElementById("password").value;
 
-  if(!signupFirstName){
-    showToast('First name cannot be empty');
-  } else if(!signupLastName){
-    showToast('Last name cannot be empty')
+  if (!signupFirstName) {
+    showToast("First name cannot be empty", "fname");
+  } else if (!signupLastName) {
+    showToast("Last name cannot be empty", "lname");
   } else if (!isValidEmail(signupEmail)) {
-    showToast("Please enter a valid email address from Gmail or Outlook");
+    showToast("Please enter a valid email address from Gmail or Outlook", "email");
   } else if (signupPassword.length < 8) {
-    showToast("Password must be at least 8 characters long");
+    showToast("Password must be at least 8 characters long", "password");
   } else if (!/[A-Z]/.test(signupPassword)) {
-    showToast("Password must contain at least one uppercase letter.");
+    showToast("Password must contain at least one uppercase letter.", "password");
   } else if (!/[a-z]/.test(signupPassword)) {
-    showToast("Password must contain at least one lowercase letter.");
+    showToast("Password must contain at least one lowercase letter.", "password");
   } else if (!isNaN(signupPassword.charAt(0))) {
-    showToast("Password cannot start with a number.");
-    return;
+    showToast("Password cannot start with a number.", "password");
+  } else {
+    showToast("Account created successfully!");
+    save(document.getElementById("signupForm"));
+    setTimeout(function () {
+      window.location.href = "signin.html";
+    }, 2000);
   }
-  showToast("Account created successfully!")
-  save(document.getElementById("signupForm"));
-  setTimeout(function () {
-    window.location.href = "signin.html"; 
-  }, 2000);
 }
 
 function signIn(event) {
   event.preventDefault();
+
   const signinEmail = document.getElementById("email").value;
   const signinPassword = document.getElementById("password").value;
 
   const loginEmail = localStorage.getItem("email");
   const loginPassword = localStorage.getItem("password");
 
-  if (signinEmail === loginEmail) {
-    if (signinPassword === loginPassword) {
-      showToast(`Welcome back, ${localStorage.getItem("lname")}`);
-    } else {
-      alert("Wrong Password");
-    }
-  } else {
-    showToast("User not found! Please create an account first.");
-  }
-};
+  console.log("Stored Email:", loginEmail);
+  console.log("Stored Password:", loginPassword);
 
+  if (signinEmail === loginEmail && signinPassword === loginPassword) {
+    showToast(`Welcome back, ${localStorage.getItem("lname")}`, "in");
+  } else {
+    showToast("Wrong Email or Password", "password");
+  }
+}
 function contact(event) {
   if (contactForm && contactForm.checkValidity()) {
     save(document.getElementById("contactForm"));
@@ -86,7 +84,7 @@ function contact(event) {
   }
 
   event.preventDefault();
-};
+}
 
 function save(form) {
   const formData = new FormData(form);
