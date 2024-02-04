@@ -76,14 +76,17 @@ function signIn(event) {
   }
 }
 function contact(event) {
+  event.preventDefault();
+
   if (contactForm && contactForm.checkValidity()) {
     save(document.getElementById("contactForm"));
     showToast("Thank you for filling out the form!");
   } else {
     showToast("Please fill out the form before submitting.");
   }
-
-  event.preventDefault();
+  setTimeout(function () {
+    window.location.href = "admin-dashboard-blogs.html";
+  }, 2000); 
 }
 
 function save(form) {
