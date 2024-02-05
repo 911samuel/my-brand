@@ -44,13 +44,13 @@
             <img src="./img/account.png" alt="myPhoto" class="myphoto">
             <div class="signin">
                 <p class="welcome">Create Account</p>
-                <form id="signupForm" onsubmit="signUp(event)">
+                <form id="signupForm" onsubmit="signUp(event)" autocomplete="off">
                     <div class="one">
-                        <input type="text" id="fname" name="fname" placeholder="First Name" autocomplete="off" class="gap">
-                        <input type="text" id="lname" name="lname" placeholder="Last Name" autocomplete="off">
+                        <input type="text" id="fname" name="fname" placeholder="First Name" class="gap">
+                        <input type="text" id="lname" name="lname" placeholder="Last Name">
                     </div>
-                    <input type="text" id="email" name="email" placeholder="Email" autocomplete="off">
-                    <input type="password" id="password" name="password" placeholder="Password" autocomplete="off">
+                    <input type="text" id="email" name="email" placeholder="Email">
+                    <input type="password" id="password" name="password" placeholder="Password">
 
                     <div class="create">
                         <p class="createAccount">Already have an account?<a href="./signin.html">Log in</a></p>
