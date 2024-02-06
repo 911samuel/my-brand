@@ -1,10 +1,9 @@
 function showToast(message, inputId) {
   const toast = document.createElement("div");
+  const inputElement = document.getElementById(inputId);
 
   toast.textContent = message;
   toast.classList.add("toast", "error");
-
-  const inputElement = document.getElementById(inputId);
   if (!inputElement) {
     console.error(`Input element with id '${inputId}' not found.`);
     return;
@@ -14,10 +13,10 @@ function showToast(message, inputId) {
   toast.style.top = `${inputElement.offsetTop + inputElement.offsetHeight}px`;
   toast.style.left = `${inputElement.offsetLeft}px`;
 
-  document.body.appendChild(toast);
+  inputElement.parentNode.appendChild(toast);
 
   setTimeout(function () {
-    document.body.removeChild(toast);
+    toast.parentNode.removeChild(toast);
   }, 3000);
 }
 
@@ -113,6 +112,8 @@ function imageUpload() {
       previewImage.style.height = "400px";
       displayFile.innerHTML = "";
       displayFile.appendChild(previewImage);
+
+      saveImg(previewImage.src);
     };
 
     reader.readAsDataURL(file);
@@ -121,54 +122,95 @@ function imageUpload() {
   }
 }
 
-function fetchAndDisplayBlogs() {
-  fetch("http://localhost:3000/blogs")
-    .then((response) => response.json())
-    .then((data) => {
-      const blogsContainer = document.querySelector(".blogs");
+function gd(sentence) {
+  console.log(sentence);
+  if (typeof sentence !== "string") {
+    console.error("The 'sentence' parameter must be a string.");
+    return null;
+  }
 
-      data.forEach((blog) => {
-        const blogElement = createBlogElement(blog);
-        blogsContainer.appendChild(blogElement);
-      });
-    })
-    .catch((error) => {
-      console.error("Error fetching blogs:", error);
-    });
+  let words = sentence.split(" ");
+
+  if (words.length >= 2) {
+    words[0] = words[0].charAt(0).toUpperCase();
+    words[1] = words[1].charAt(0).toUpperCase();
+    return words[0] + words[1];
+  } else {
+    console.error("The 'sentence' parameter must contain at least two words.");
+    return null;
+  }
 }
 
-function createBlogElement(blog) {
-  const gdElement = document.createElement("div");
-  gdElement.classList.add("gd");
+function uploadBlog(event) {
+  event.preventDefault();
 
-  return gdElement;
+  const myFile = document.getElementById("myFile").value;
+  const myTitle = document.getElementById("title").value;
+  const myAuthor = document.getElementById("author").value;
+  const myDate = document.getElementById("date").value;
+  const myDescription = document.getElementById("description").value;
+  const imageUrl = localStorage.getItem("imageUrl");
+
+  if (myFile === "") {
+    showToast("Please select an Image for your Blog!", "myFile");
+  } else if (myTitle.trim() === "") {
+    showToast("The title can't be empty", "title");
+  } else if (myAuthor.trim() === "") {
+    showToast("The author can't be empty", "author");
+  } else if (myDate.trim() === "") {
+    showToast("The date can't be empty", "date");
+  } else if (myDescription.trim() === "") {
+    showToast("The description can't be empty", "description");
+  } else {
+    const blogPost = {
+      title: myTitle,
+      author: myAuthor,
+      date: myDate,
+      description: myDescription,
+      imageUrl: imageUrl,
+    };
+
+    saveBlog(blogPost);
+  }
+
+  showToast("Blog uploaded successfully", "success");
+  setTimeout(function () {
+    window.location = "./admin-dashboard-blogs.html";
+  }, 3000);
 }
 
-function uploadBlog() {
+function newBlog(title, date) {
+  const newGD = document.createElement("div");
+  const gdContainer = document.getElementById('blogContent');
+  newGD.setAttribute('class', 'gd');
 
-  const form = document.getElementById("uploadForm"); 
-  const formData = new FormData(form);
+  newGD.innerHTML = `
+  <div class="circle">
+    <p>${gd(title)}</p> 
+  </div>
+  <div class="gdText">
+    <p class="gdText1">${title}</p>
+    <p class="gdText2">${date}</p> 
+  </div> // Missing closing tag for gdText div
+  <div class="views">
+    <img src="./img/view.png" alt="view" />
+    <p>0</p>
+  </div>
+  <div class="gdButton">
+    <button>Edit</button>
+    <button>Delete</button>
+  </div>
+`;
+console.log(gdContainer)
+  gdContainer.appendChild(newGD);
+}
 
-  const uploadEndpoint = 'http://localhost:3000/upload';
+function saveBlog(blogPost) {
+  localStorage.setItem("blogPost", JSON.stringify(blogPost));
+}
 
-  fetch(uploadEndpoint, {
-    method: 'POST',
-    body: formData,
-  })
-    .then((response) => {
-      if (response.ok) {
-        return response.json();
-      } else {
-        throw new Error('Failed to upload blog');
-      }
-    })
-    .then((data) => {
-      fetchAndDisplayBlogs();
-    })
-    .catch((error) => {
-      console.error('Error:', error.message);
-      showToast(`Error ${error.message}`);
-    });
+function saveImg(imageUrl) {
+  localStorage.setItem("imageUrl", imageUrl);
 }
 
 function save(form) {

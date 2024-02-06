@@ -78,7 +78,7 @@
 
                     <div class="upload">
                         <p class="uploadTitle">Upload</p>
-                        <form id="uploadForm" action="/upload" method="post" enctype="multipart/form-data">
+                        <form id="uploadForm" onsubmit="uploadBlog(event)">
                             <div class="uploadForm">
                                 <img src="./img/Upload.png" alt="upload">
                                 <div class="uploadText">
@@ -97,7 +97,7 @@
                                 <input type="date" id="date" name="blog_date" placeholder="dd/mm/yyyy"/>
                                 <label for="description">Description</label>
                                 <textarea rows="5" cols="30" id="description" name="blog_desc" placeholder="Write something about your blog..."></textarea>
-                                <button type="button" onclick="uploadBlog()">Upload</button>
+                                <button type="submit" id="success">Upload</button>
                             </div>
                         </form>
                     </div>
