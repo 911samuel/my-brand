@@ -206,3 +206,4 @@ function toggleMenu() {
     verticalLineElement === null || verticalLineElement === void 0 ? void 0 : verticalLineElement.classList.toggle("hide-element");
     contactElement === null || contactElement === void 0 ? void 0 : contactElement.classList.toggle("hide-element");
 }
+//# sourceMappingURL=script.js.map
