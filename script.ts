@@ -1,4 +1,4 @@
-function showToast(message: string, inputId?: string): void {
+function showToast(message: string, inputId: string): void {
     const toast = document.createElement("div");
     const inputElement = document.getElementById(inputId);
   
@@ -57,7 +57,7 @@ function showToast(message: string, inputId?: string): void {
     } else if (!isNaN(parseInt(signupPassword.charAt(0)))) {
       showToast("Password cannot start with a number.", "password");
     } else {
-      showToast("Account created successfully!");
+      showToast("Account created successfully!", "success");
       save(document.getElementById("signupForm") as HTMLFormElement);
       setTimeout(function () {
         window.location.href = "signin.html";
@@ -91,15 +91,15 @@ function showToast(message: string, inputId?: string): void {
   
     if (contactForm && contactForm.checkValidity()) {
       save(contactForm);
-      showToast("Thank you for filling out the form!");
+      showToast("Thank you for filling out the form!", "sent");
     } else {
-      showToast("Please fill out the form before submitting.");
+      showToast("Please fill out the form before submitting.", "error");
     }
   }
   
   function imageUpload(): void {
     const fileInput = document.getElementById("myFile") as HTMLInputElement;
-    const displayFile = document.querySelector(".displayFile");
+    const displayFile = document.querySelector(".displayFile") as  HTMLElement;
   
     const file = fileInput.files?.[0];
   
@@ -177,7 +177,7 @@ function showToast(message: string, inputId?: string): void {
   
     showToast("Blog uploaded successfully", "success");
     setTimeout(function () {
-      window.location = "./admin-dashboard-blogs.html";
+        window.location.href = "./admin-dashboard-blogs.html";
     }, 3000);
   }
   
