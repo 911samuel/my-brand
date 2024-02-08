@@ -156,11 +156,12 @@ function uploadBlog(event) {
             imageUrl: imageUrl,
         };
         saveBlog(blogPost);
-    }
     showToast("Blog uploaded successfully", "success");
+    newBlog(myTitle, myDate);
     setTimeout(function () {
         window.location.href = "./admin-dashboard-blogs.html";
     }, 3000);
+}
 }
 function newBlog(title, date) {
     const newGD = document.createElement("div");
@@ -183,7 +184,6 @@ function newBlog(title, date) {
       <button>Delete</button>
     </div>
   `;
-    console.log(gdContainer);
     gdContainer === null || gdContainer === void 0 ? void 0 : gdContainer.appendChild(newGD);
 }
 function saveBlog(blogPost) {
@@ -206,4 +206,3 @@ function toggleMenu() {
     verticalLineElement === null || verticalLineElement === void 0 ? void 0 : verticalLineElement.classList.toggle("hide-element");
     contactElement === null || contactElement === void 0 ? void 0 : contactElement.classList.toggle("hide-element");
 }
-//# sourceMappingURL=script.js.map
