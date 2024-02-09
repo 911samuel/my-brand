@@ -1,4 +1,7 @@
 "use strict";
+let accounts = [];
+let blogPosts = [];
+let contactFormSubmissions = [];
 function showToast(message, inputId) {
     var _a;
     const toast = document.createElement("div");
@@ -28,28 +31,17 @@ function signUp(event) {
     const signupLastName = document.getElementById("lname").value;
     const signupEmail = document.getElementById("email").value;
     const signupPassword = document.getElementById("password").value;
-    if (!signupFirstName) {
-        showToast("First name cannot be empty", "fname");
-    }
-    else if (!signupLastName) {
-        showToast("Last name cannot be empty", "lname");
-    }
-    else if (!isValidEmail(signupEmail)) {
-        showToast("Please enter a valid email address from Gmail or Outlook", "email");
-    }
-    else if (signupPassword.length < 8) {
-        showToast("Password must be at least 8 characters long", "password");
-    }
-    else if (!/[A-Z]/.test(signupPassword)) {
-        showToast("Password must contain at least one uppercase letter.", "password");
-    }
-    else if (!/[a-z]/.test(signupPassword)) {
-        showToast("Password must contain at least one lowercase letter.", "password");
-    }
-    else if (!isNaN(parseInt(signupPassword.charAt(0)))) {
-        showToast("Password cannot start with a number.", "password");
+    if (!signupFirstName || !signupLastName || !isValidEmail(signupEmail) || signupPassword.length < 8) {
+        showToast("Please fill all fields correctly", "error");
     }
     else {
+        const accountData = {
+            firstName: signupFirstName,
+            lastName: signupLastName,
+            email: signupEmail,
+            password: signupPassword
+        };
+        accounts.push(accountData);
         showToast("Account created successfully!", "success");
         save(document.getElementById("signupForm"));
         setTimeout(function () {
@@ -77,34 +69,11 @@ function contact(event) {
     event.preventDefault();
     const contactForm = document.getElementById("contactForm");
     if (contactForm && contactForm.checkValidity()) {
-        save(contactForm);
+        saveContactFormSubmission(new FormData(contactForm));
         showToast("Thank you for filling out the form!", "sent");
     }
     else {
         showToast("Please fill out the form before submitting.", "error");
-    }
-}
-function imageUpload() {
-    var _a;
-    const fileInput = document.getElementById("myFile");
-    const displayFile = document.querySelector(".displayFile");
-    const file = (_a = fileInput.files) === null || _a === void 0 ? void 0 : _a[0];
-    if (file) {
-        const reader = new FileReader();
-        reader.onload = function (e) {
-            var _a;
-            const previewImage = document.createElement("img");
-            previewImage.src = (_a = e.target) === null || _a === void 0 ? void 0 : _a.result;
-            previewImage.style.width = "100%";
-            previewImage.style.height = "400px";
-            displayFile.innerHTML = "";
-            displayFile.appendChild(previewImage);
-            saveImg(previewImage.src);
-        };
-        reader.readAsDataURL(file);
-    }
-    else {
-        displayFile.innerHTML = "";
     }
 }
 function gd(sentence) {
@@ -120,85 +89,110 @@ function gd(sentence) {
         return words[0] + words[1];
     }
     else {
-        console.error("The 'sentence' parameter must contain at least two words.");
-        return null;
+        words[0] = words[0].charAt(0).toUpperCase() + words[0].slice(1);
+        return words[0];
     }
 }
 function uploadBlog(event) {
+    var _a;
     event.preventDefault();
-    const myFile = document.getElementById("myFile").value;
+    const fileInput = document.getElementById("myFile");
+    const displayFile = document.querySelector(".displayFile");
     const myTitle = document.getElementById("title").value;
     const myAuthor = document.getElementById("author").value;
     const myDate = document.getElementById("date").value;
     const myDescription = document.getElementById("description").value;
-    const imageUrl = localStorage.getItem("imageUrl");
-    if (myFile === "") {
+    const file = (_a = fileInput.files) === null || _a === void 0 ? void 0 : _a[0];
+    if (!file) {
         showToast("Please select an Image for your Blog!", "myFile");
+        return;
     }
-    else if (myTitle.trim() === "") {
+    if (myTitle.trim() === "") {
         showToast("The title can't be empty", "title");
+        return;
     }
-    else if (myAuthor.trim() === "") {
+    if (myAuthor.trim() === "") {
         showToast("The author can't be empty", "author");
+        return;
     }
-    else if (myDate.trim() === "") {
+    if (myDate.trim() === "") {
         showToast("The date can't be empty", "date");
+        return;
     }
-    else if (myDescription.trim() === "") {
+    if (myDescription.trim() === "") {
         showToast("The description can't be empty", "description");
+        return;
     }
-    else {
+    const reader = new FileReader();
+    reader.onload = function (e) {
+        var _a;
+        const previewImage = document.createElement("img");
+        previewImage.src = (_a = e.target) === null || _a === void 0 ? void 0 : _a.result;
+        previewImage.style.width = "100%";
+        previewImage.style.height = "400px";
+        displayFile.innerHTML = "";
+        displayFile.appendChild(previewImage);
         const blogPost = {
             title: myTitle,
             author: myAuthor,
             date: myDate,
             description: myDescription,
-            imageUrl: imageUrl,
+            imageUrl: previewImage.src,
         };
         saveBlog(blogPost);
-    }
+    };
+    reader.readAsDataURL(file);
     showToast("Blog uploaded successfully", "success");
     setTimeout(function () {
         window.location.href = "./admin-dashboard-blogs.html";
     }, 3000);
 }
+function createBlogPost(blogPost) {
+    const newGD = document.createElement("div");
+    newGD.setAttribute("class", "gd");
+    newGD.innerHTML = `
+      <div class="circle">
+          <p>${gd(blogPost.title)}</p>  
+      </div>
+      <div class="gdText">
+          <p class="gdText1">${blogPost.title}</p>
+          <p class="gdText2">${blogPost.date}</p>  
+      </div>  
+      <div class="views">
+          <img src="./img/view.png" alt="view" />
+          <p>0</p>
+      </div>
+      <div class="gdButton">
+          <button>Edit</button>
+          <button>Delete</button>
+      </div>
+    `;
+    return newGD;
+}
 function newBlog() {
     const savedBlogPostString = localStorage.getItem("blogPost");
     if (savedBlogPostString !== null) {
         const savedBlogPost = JSON.parse(savedBlogPostString);
-        const { title, date } = savedBlogPost;
-        const newGD = document.createElement("div");
-        const gdContainer = document.getElementById('blogContent');
-        newGD.setAttribute('class', 'gd');
-        newGD.innerHTML = `
-        <div class="circle">
-            <p>${gd(title)}</p> 
-        </div>
-        <div class="gdText">
-            <p class="gdText1">${title}</p>
-            <p class="gdText2">${date}</p> 
-        </div> 
-        <div class="views">
-            <img src="./img/view.png" alt="view" />
-            <p>0</p>
-        </div>
-        <div class="gdButton">
-            <button>Edit</button>
-            <button>Delete</button>
-        </div>
-        `;
-        console.log(gdContainer);
-        gdContainer === null || gdContainer === void 0 ? void 0 : gdContainer.appendChild(newGD);
+        const gdContainer = document.getElementById("blogContent");
+        const newBlogPost = createBlogPost(savedBlogPost);
+        gdContainer === null || gdContainer === void 0 ? void 0 : gdContainer.appendChild(newBlogPost);
     }
     else {
         console.error("No blog post found in local storage.");
     }
 }
 function saveBlog(blogPost) {
-    localStorage.setItem("blogPost", JSON.stringify(blogPost));
+    blogPosts.push(blogPost);
 }
 function saveImg(imageUrl) {
     localStorage.setItem("imageUrl", imageUrl);
+}
+function saveContactFormSubmission(formData) {
+    let submissionData = {};
+    for (const [key, value] of formData.entries()) {
+        submissionData[key] = value;
+    }
+    contactFormSubmissions.push(submissionData);
 }
 function save(form) {
     const formData = new FormData(form);

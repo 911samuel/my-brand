@@ -88,75 +88,22 @@
             <div class="vertical-line"></div>
             <img src="./img/log.png" alt="logo" />
           </div>
-
-          <form
-            id="uploadForm"
-          >
-            <div class="blogs" id="blogContent" onchange="newBlog()">
-              <div class="blogsTitle">
-                <p class="titleB">Blogs</p>
-                <p class="viewB"><img src="./img/filter.png" alt="" />Views</p>
-              </div>
-              <div class="gd">
-                <div class="circle">
-                  <p>GD</p>
-                </div>
-                <div class="gdText">
-                  <p class="gdText1">Graphic Design</p>
-                  <p class="gdText2">17 jan 2024</p>
-                </div>
-                <div class="views">
-                  <img src="./img/view.png" alt="view" />
-                  <p>213,456</p>
-                </div>
-                <div class="gdButton">
-                  <button>Edit</button>
-                  <button>Delete</button>
-                </div>
-              </div>
-
-              <div class="gd">
-                <div class="circle">
-                  <p>Go.D</p>
-                </div>
-                <div class="gdText">
-                  <p class="gdText1">Good Design</p>
-                  <p class="gdText2">17 jan 2024</p>
-                </div>
-                <div class="views">
-                  <img src="./img/view.png" alt="view" />
-                  <p>196,354</p>
-                </div>
-                <div class="gdButton">
-                  <button>Edit</button>
-                  <button>Delete</button>
-                </div>
-              </div>
-
-              <div class="gd">
-                <div class="circle">
-                  <p>DM</p>
-                </div>
-                <div class="gdText">
-                  <p class="gdText1">Designer Mistakes</p>
-                  <p class="gdText2">17 jan 2024</p>
-                </div>
-                <div class="views">
-                  <img src="./img/view.png" alt="view" />
-                  <p>183,758</p>
-                </div>
-                <div class="gdButton">
-                  <button>Edit</button>
-                  <button>Delete</button>
-                </div>
-              </div>
+          <div class="blogs">
+            <div class="blogsTitle">
+              <p class="titleB">Blogs</p>
+              <p class="viewB"><img src="./img/filter.png" alt="" />Views</p>
             </div>
-          </form>
+            <div id="blogContent"></div>
+          </div>
         </div>
       </section>
     </div>
     <footer>&copy; 2023. Designed by Sam. All right reserved.</footer>
 
-    <script src="dist/script/script.js"></script>
+    <script src="dist/script/script.js">
+      window.onload = function() {
+      newBlog();
+      };
+    </script>
   </body>
 </html>
