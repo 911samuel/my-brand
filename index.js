@@ -31,6 +31,8 @@ function signUp(event) {
   const signupLastName = document.getElementById("lname").value;
   const signupEmail = document.getElementById("email").value;
   const signupPassword = document.getElementById("password").value;
+  
+  // Check if all fields are filled correctly
   if (
     !signupFirstName ||
     !signupLastName ||
@@ -39,38 +41,57 @@ function signUp(event) {
   ) {
     showToast("Please fill all fields correctly", "error");
   } else {
+    // Create an object with account data
     const accountData = {
       firstName: signupFirstName,
       lastName: signupLastName,
       email: signupEmail,
       password: signupPassword,
     };
-    accounts.push(accountData);
+
+    // Retrieve existing accounts from local storage
+    let storedAccounts = JSON.parse(localStorage.getItem("accounts") || "[]");
+
+    // Add the new account to the array
+    storedAccounts.push(accountData);
+
+    // Save the updated accounts array back to local storage
+    localStorage.setItem("accounts", JSON.stringify(storedAccounts));
+
     showToast("Account created successfully!", "success");
-    save(document.getElementById("signupForm"));
+
+    // Redirect the user after successful signup
     setTimeout(function () {
       window.location.href = "signin.html";
     }, 2000);
   }
 }
 
+
 function signIn(event) {
   event.preventDefault();
   const signinEmail = document.getElementById("email").value;
   const signinPassword = document.getElementById("password").value;
-  const loggedInAccount = accounts.find(
-    (account) =>
-      account.email === signinEmail && account.password === signinPassword
-  );
-  if (loggedInAccount) {
+
+  // Retrieve stored accounts from local storage
+  const storedAccounts = JSON.parse(localStorage.getItem("accounts") || "[]");
+
+  // Find the account with the entered email
+  const loggedInAccount = storedAccounts.find((account) => account.email === signinEmail);
+
+  // Check if the account exists and the password matches
+  if (loggedInAccount && loggedInAccount.password === signinPassword) {
+    // Authentication successful
     showToast(`Welcome back, ${loggedInAccount.lastName}`, "in");
     setTimeout(function () {
       window.location.href = "admin-dashboard-blogs.html";
     }, 2000);
   } else {
+    // Authentication failed
     showToast("Wrong Email or Password", "password");
   }
 }
+
 
 function contact(event) {
   event.preventDefault();
@@ -200,7 +221,9 @@ function renderBlogPosts() {
 }
 
 document.addEventListener("DOMContentLoaded", function () {
-  renderBlogPosts();
+  if (window.location.pathname.includes("admin-dashboard-blogs.html")) {
+    renderBlogPosts();
+  }
 });
 
 function deleteBlog(index) {
