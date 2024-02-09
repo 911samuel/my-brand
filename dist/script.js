@@ -6,12 +6,12 @@ function showToast(message, inputId) {
     var _a;
     const toast = document.createElement("div");
     const inputElement = document.getElementById(inputId);
-    toast.textContent = message;
-    toast.classList.add("toast", "error");
     if (!inputElement) {
         console.error(`Input element with id '${inputId}' not found.`);
         return;
     }
+    toast.textContent = message;
+    toast.classList.add("toast", "error");
     toast.style.position = "absolute";
     toast.style.top = `${inputElement.offsetTop + inputElement.offsetHeight}px`;
     toast.style.left = `${inputElement.offsetLeft}px`;
@@ -53,10 +53,9 @@ function signIn(event) {
     event.preventDefault();
     const signinEmail = document.getElementById("email").value;
     const signinPassword = document.getElementById("password").value;
-    const loginEmail = localStorage.getItem("email");
-    const loginPassword = localStorage.getItem("password");
-    if (signinEmail === loginEmail && signinPassword === loginPassword) {
-        showToast(`Welcome back, ${localStorage.getItem("lname")}`, "in");
+    const loggedInAccount = accounts.find(account => account.email === signinEmail && account.password === signinPassword);
+    if (loggedInAccount) {
+        showToast(`Welcome back, ${loggedInAccount.lastName}`, "in");
         setTimeout(function () {
             window.location.href = "admin-dashboard-blogs.html";
         }, 2000);
@@ -82,17 +81,15 @@ function gd(sentence) {
         console.error("The 'sentence' parameter must be a string.");
         return null;
     }
-    let words = sentence.split(" ");
+    const words = sentence.split(" ");
     if (words.length >= 2) {
-        words[0] = words[0].charAt(0).toUpperCase();
-        words[1] = words[1].charAt(0).toUpperCase();
-        return words[0] + words[1];
+        return words[0][0].toUpperCase() + words[1][0].toUpperCase();
     }
     else {
-        words[0] = words[0].charAt(0).toUpperCase() + words[0].slice(1);
-        return words[0];
+        return words[0].charAt(0).toUpperCase() + words[0].slice(1);
     }
 }
+let nextIndex = 1;
 function uploadBlog(event) {
     var _a;
     event.preventDefault();
@@ -105,51 +102,57 @@ function uploadBlog(event) {
     const file = (_a = fileInput.files) === null || _a === void 0 ? void 0 : _a[0];
     if (!file) {
         showToast("Please select an Image for your Blog!", "myFile");
-        return;
     }
-    if (myTitle.trim() === "") {
+    else if (!myTitle.trim()) {
         showToast("The title can't be empty", "title");
         return;
     }
-    if (myAuthor.trim() === "") {
+    else if (!myAuthor.trim()) {
         showToast("The author can't be empty", "author");
         return;
     }
-    if (myDate.trim() === "") {
+    else if (!myDate.trim()) {
         showToast("The date can't be empty", "date");
         return;
     }
-    if (myDescription.trim() === "") {
+    else if (!myDescription.trim()) {
         showToast("The description can't be empty", "description");
         return;
     }
-    const reader = new FileReader();
-    reader.onload = function (e) {
-        var _a;
-        const previewImage = document.createElement("img");
-        previewImage.src = (_a = e.target) === null || _a === void 0 ? void 0 : _a.result;
-        previewImage.style.width = "100%";
-        previewImage.style.height = "400px";
-        displayFile.innerHTML = "";
-        displayFile.appendChild(previewImage);
-        const blogPost = {
-            title: myTitle,
-            author: myAuthor,
-            date: myDate,
-            description: myDescription,
-            imageUrl: previewImage.src,
+    else {
+        const reader = new FileReader();
+        reader.onload = function (e) {
+            var _a;
+            const previewImage = document.createElement("img");
+            previewImage.src = (_a = e.target) === null || _a === void 0 ? void 0 : _a.result;
+            previewImage.style.width = "100%";
+            previewImage.style.height = "400px";
+            displayFile.innerHTML = "";
+            displayFile.appendChild(previewImage);
+            const blogPost = {
+                title: myTitle,
+                author: myAuthor,
+                date: myDate,
+                description: myDescription,
+                imageUrl: previewImage.src,
+                index: nextIndex,
+            };
+            saveBlogPost(blogPost);
+            showToast("Blog uploaded successfully", "success");
+            setTimeout(function () {
+                window.location.href = "./admin-dashboard-blogs.html";
+            }, 3000);
+            nextIndex++;
         };
-        saveBlog(blogPost);
-    };
-    reader.readAsDataURL(file);
-    showToast("Blog uploaded successfully", "success");
-    setTimeout(function () {
-        window.location.href = "./admin-dashboard-blogs.html";
-    }, 3000);
+        reader.onerror = function () {
+            showToast("Failed to upload the blog. Please try again.", "success");
+        };
+        reader.readAsDataURL(file);
+    }
 }
 function createBlogPost(blogPost) {
     const newGD = document.createElement("div");
-    newGD.setAttribute("class", "gd");
+    newGD.classList.add("gd");
     newGD.innerHTML = `
       <div class="circle">
           <p>${gd(blogPost.title)}</p>  
@@ -171,41 +174,50 @@ function createBlogPost(blogPost) {
 }
 function newBlog() {
     const savedBlogPostString = localStorage.getItem("blogPost");
-    if (savedBlogPostString !== null) {
+    if (savedBlogPostString) {
         const savedBlogPost = JSON.parse(savedBlogPostString);
         const gdContainer = document.getElementById("blogContent");
-        const newBlogPost = createBlogPost(savedBlogPost);
-        gdContainer === null || gdContainer === void 0 ? void 0 : gdContainer.appendChild(newBlogPost);
+        if (gdContainer) {
+            const newBlogPost = createBlogPost(savedBlogPost);
+            gdContainer.appendChild(newBlogPost);
+        }
+        else {
+            console.error("Blog content container not found.");
+        }
     }
     else {
         console.error("No blog post found in local storage.");
     }
 }
-function saveBlog(blogPost) {
+function saveBlogPost(blogPost) {
+    let blogPosts = JSON.parse(localStorage.getItem('blogPosts') || '[]');
     blogPosts.push(blogPost);
-}
-function saveImg(imageUrl) {
-    localStorage.setItem("imageUrl", imageUrl);
+    localStorage.setItem('blogPosts', JSON.stringify(blogPosts));
 }
 function saveContactFormSubmission(formData) {
     let submissionData = {};
     for (const [key, value] of formData.entries()) {
-        submissionData[key] = value;
+        submissionData[key] = String(value);
     }
     contactFormSubmissions.push(submissionData);
 }
 function save(form) {
     const formData = new FormData(form);
     for (const [key, value] of formData.entries()) {
-        localStorage.setItem(key, value);
+        localStorage.setItem(key, String(value));
     }
 }
 function toggleMenu() {
     const navElement = document.querySelector(".nav");
     const verticalLineElement = document.querySelector(".vertical-line");
     const contactElement = document.querySelector(".contact");
-    navElement === null || navElement === void 0 ? void 0 : navElement.classList.toggle("show-menu");
-    verticalLineElement === null || verticalLineElement === void 0 ? void 0 : verticalLineElement.classList.toggle("hide-element");
-    contactElement === null || contactElement === void 0 ? void 0 : contactElement.classList.toggle("hide-element");
+    if (navElement && verticalLineElement && contactElement) {
+        navElement.classList.toggle("show-menu");
+        verticalLineElement.classList.toggle("hide-element");
+        contactElement.classList.toggle("hide-element");
+    }
+    else {
+        console.error("Menu elements not found.");
+    }
 }
 //# sourceMappingURL=script.js.map

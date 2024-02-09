@@ -1,18 +1,38 @@
+interface Account {
+  firstName: string;
+  lastName: string;
+  email: string;
+  password: string;
+}
 
-let accounts: any[] = [];
-let blogPosts: any[] = [];
-let contactFormSubmissions: any[] = [];
+interface BlogPost {
+  title: string;
+  author: string;
+  date: string;
+  description: string;
+  imageUrl: string;
+  index: number;
+}
+
+interface ContactFormData {
+  [key: string]: string;
+}
+
+let accounts: Account[] = [];
+let blogPosts: BlogPost[] = [];
+let contactFormSubmissions: ContactFormData[] = [];
 
 function showToast(message: string, inputId: string): void {
   const toast = document.createElement("div");
   const inputElement = document.getElementById(inputId);
 
-  toast.textContent = message;
-  toast.classList.add("toast", "error");
   if (!inputElement) {
     console.error(`Input element with id '${inputId}' not found.`);
     return;
   }
+
+  toast.textContent = message;
+  toast.classList.add("toast", "error");
 
   toast.style.position = "absolute";
   toast.style.top = `${inputElement.offsetTop + inputElement.offsetHeight}px`;
@@ -41,7 +61,7 @@ function signUp(event: Event): void {
   if (!signupFirstName || !signupLastName || !isValidEmail(signupEmail) || signupPassword.length < 8) {
     showToast("Please fill all fields correctly", "error");
   } else {
-    const accountData = {
+    const accountData: Account = {
       firstName: signupFirstName,
       lastName: signupLastName,
       email: signupEmail,
@@ -62,11 +82,10 @@ function signIn(event: Event): void {
   const signinEmail = (document.getElementById("email") as HTMLInputElement).value;
   const signinPassword = (document.getElementById("password") as HTMLInputElement).value;
 
-  const loginEmail = localStorage.getItem("email");
-  const loginPassword = localStorage.getItem("password");
+  const loggedInAccount = accounts.find(account => account.email === signinEmail && account.password === signinPassword);
 
-  if (signinEmail === loginEmail && signinPassword === loginPassword) {
-    showToast(`Welcome back, ${localStorage.getItem("lname")}`, "in");
+  if (loggedInAccount) {
+    showToast(`Welcome back, ${loggedInAccount.lastName}`, "in");
     setTimeout(function () {
       window.location.href = "admin-dashboard-blogs.html";
     }, 2000);
@@ -95,17 +114,16 @@ function gd(sentence: string): string | null {
     return null;
   }
 
-  let words = sentence.split(" ");
+  const words = sentence.split(" ");
 
   if (words.length >= 2) {
-    words[0] = words[0].charAt(0).toUpperCase();
-    words[1] = words[1].charAt(0).toUpperCase();
-    return words[0] + words[1];
+    return words[0][0].toUpperCase() + words[1][0].toUpperCase();
   } else {
-    words[0] = words[0].charAt(0).toUpperCase( ) + words[0].slice(1);
-    return words[0];
+    return words[0].charAt(0).toUpperCase() + words[0].slice(1);
   }
 }
+
+let nextIndex = 1; 
 
 function uploadBlog(event: Event): void {
   event.preventDefault();
@@ -121,68 +139,61 @@ function uploadBlog(event: Event): void {
 
   if (!file) {
     showToast("Please select an Image for your Blog!", "myFile");
-    return;
-  }
-
-  if (myTitle.trim() === "") {
+  } else if (!myTitle.trim()) {
     showToast("The title can't be empty", "title");
     return;
-  }
-
-  if (myAuthor.trim() === "") {
+  } else if (!myAuthor.trim()) {
     showToast("The author can't be empty", "author");
     return;
-  }
-
-  if (myDate.trim() === "") {
+  } else if (!myDate.trim()) {
     showToast("The date can't be empty", "date");
     return;
-  }
-
-  if (myDescription.trim() === "") {
+  } else if (!myDescription.trim()) {
     showToast("The description can't be empty", "description");
     return;
-  }
+  } else {
+    const reader = new FileReader();
 
-  const reader = new FileReader();
+    reader.onload = function (e) {
+      const previewImage = document.createElement("img");
+      previewImage.src = e.target?.result as string;
 
-  reader.onload = function (e) {
-    const previewImage = document.createElement("img");
-    previewImage.src = e.target?.result as string;
+      previewImage.style.width = "100%";
+      previewImage.style.height = "400px";
+      displayFile.innerHTML = "";
+      displayFile.appendChild(previewImage);
 
-    previewImage.style.width = "100%";
-    previewImage.style.height = "400px";
-    displayFile.innerHTML = "";
-    displayFile.appendChild(previewImage);
+      const blogPost: BlogPost = {
+        title: myTitle,
+        author: myAuthor,
+        date: myDate,
+        description: myDescription,
+        imageUrl: previewImage.src,
+        index: nextIndex, 
+      };
 
-    const blogPost = {
-      title: myTitle,
-      author: myAuthor,
-      date: myDate,
-      description: myDescription,
-      imageUrl: previewImage.src,
+      saveBlogPost(blogPost);
+
+      showToast("Blog uploaded successfully", "success");
+      setTimeout(function () {
+        window.location.href = "./admin-dashboard-blogs.html";
+      }, 3000);
+
+      nextIndex++;
     };
 
-    saveBlog(blogPost);
-  };
+    reader.onerror = function () {
+      showToast("Failed to upload the blog. Please try again.", "success");
+    };
 
-  reader.readAsDataURL(file);
-
-  showToast("Blog uploaded successfully", "success");
-  setTimeout(function () {
-    window.location.href = "./admin-dashboard-blogs.html";
-  }, 3000);
+    reader.readAsDataURL(file);
+  }
 }
 
-function createBlogPost(blogPost: {
-  title: string;
-  author: string;
-  date: string;
-  description: string;
-  imageUrl: string | null;
-}): HTMLDivElement {
+
+function createBlogPost(blogPost: BlogPost): HTMLDivElement {
   const newGD = document.createElement("div");
-  newGD.setAttribute("class", "gd");
+  newGD.classList.add("gd");
   newGD.innerHTML = `
       <div class="circle">
           <p>${gd(blogPost.title)}</p>  
@@ -205,34 +216,31 @@ function createBlogPost(blogPost: {
 
 function newBlog() {
   const savedBlogPostString = localStorage.getItem("blogPost");
-  if (savedBlogPostString !== null) {
-    const savedBlogPost = JSON.parse(savedBlogPostString);
+  if (savedBlogPostString) {
+    const savedBlogPost: BlogPost = JSON.parse(savedBlogPostString);
     const gdContainer = document.getElementById("blogContent");
-    const newBlogPost = createBlogPost(savedBlogPost);
-    gdContainer?.appendChild(newBlogPost);
+    if (gdContainer) {
+      const newBlogPost = createBlogPost(savedBlogPost);
+      gdContainer.appendChild(newBlogPost);
+    } else {
+      console.error("Blog content container not found.");
+    }
   } else {
     console.error("No blog post found in local storage.");
   }
 }
 
-function saveBlog(blogPost: {
-  title: string;
-  author: string;
-  date: string;
-  description: string;
-  imageUrl: string | null;
-}): void {
+function saveBlogPost(blogPost: BlogPost): void {
+  let blogPosts: BlogPost[] = JSON.parse(localStorage.getItem('blogPosts') || '[]');
   blogPosts.push(blogPost);
+  localStorage.setItem('blogPosts', JSON.stringify(blogPosts));
 }
 
-function saveImg(imageUrl: string): void {
-  localStorage.setItem("imageUrl", imageUrl);
-}
 
 function saveContactFormSubmission(formData: FormData): void {
-  let submissionData: any = {};
+  let submissionData: ContactFormData = {};
   for (const [key, value] of formData.entries()) {
-    submissionData[key] = value;
+    submissionData[key] = String(value);
   }
   contactFormSubmissions.push(submissionData);
 }
@@ -241,7 +249,7 @@ function save(form: HTMLFormElement): void {
   const formData = new FormData(form);
 
   for (const [key, value] of formData.entries()) {
-    localStorage.setItem(key, value as string);
+    localStorage.setItem(key, String(value));
   }
 }
 
@@ -250,7 +258,11 @@ function toggleMenu(): void {
   const verticalLineElement = document.querySelector(".vertical-line");
   const contactElement = document.querySelector(".contact");
 
-  navElement?.classList.toggle("show-menu");
-  verticalLineElement?.classList.toggle("hide-element");
-  contactElement?.classList.toggle("hide-element");
+  if (navElement && verticalLineElement && contactElement) {
+    navElement.classList.toggle("show-menu");
+    verticalLineElement.classList.toggle("hide-element");
+    contactElement.classList.toggle("hide-element");
+  } else {
+    console.error("Menu elements not found.");
+  }
 }
