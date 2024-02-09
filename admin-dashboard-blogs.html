@@ -89,17 +89,39 @@
             <img src="./img/log.png" alt="logo" />
           </div>
           <div class="blogs">
-            <div class="blogsTitle">
-              <p class="titleB">Blogs</p>
+            <div class="blogsHeader">
+              <div class="blogsTitle">
+                <p class="titleB">Blogs</p>
+              </div>
               <p class="viewB"><img src="./img/filter.png" alt="" />Views</p>
             </div>
-            <div id="blogContent"></div>
+
+            <div class="delete">
+              <BUtton onclick="deleteAllBlogs()">Delete All</BUtton>
+            </div>
+
+            <div id="confirmationModal" class="modal">
+              <div class="modal-content">
+                <p>Are you sure you want to delete this blog post?</p>
+                <button id="confirmDelete">Yes</button>
+                <button id="cancelDelete">Cancel</button>
+              </div>
+            </div>
+            
+            <div id="blogContent">
+              <!-- BLOG CONTENT GOES HERE -->
+            </div>
           </div>
         </div>
       </section>
     </div>
     <footer>&copy; 2023. Designed by Sam. All right reserved.</footer>
 
-    <script src="dist/script/script.js"></script>
+    <script src="index.js">
+      document.addEventListener("DOMContentLoaded", function () {
+      renderBlogPosts();
+    });
+    </script>
+
   </body>
 </html>
