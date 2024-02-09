@@ -162,29 +162,37 @@ function uploadBlog(event) {
         window.location.href = "./admin-dashboard-blogs.html";
     }, 3000);
 }
-function newBlog(title, date) {
-    const newGD = document.createElement("div");
-    const gdContainer = document.getElementById('blogContent');
-    newGD.setAttribute('class', 'gd');
-    newGD.innerHTML = `
-    <div class="circle">
-      <p>${gd(title)}</p> 
-    </div>
-    <div class="gdText">
-      <p class="gdText1">${title}</p>
-      <p class="gdText2">${date}</p> 
-    </div> 
-    <div class="views">
-      <img src="./img/view.png" alt="view" />
-      <p>0</p>
-    </div>
-    <div class="gdButton">
-      <button>Edit</button>
-      <button>Delete</button>
-    </div>
-  `;
-    console.log(gdContainer);
-    gdContainer === null || gdContainer === void 0 ? void 0 : gdContainer.appendChild(newGD);
+function newBlog() {
+    const savedBlogPostString = localStorage.getItem("blogPost");
+    if (savedBlogPostString !== null) {
+        const savedBlogPost = JSON.parse(savedBlogPostString);
+        const { title, date } = savedBlogPost;
+        const newGD = document.createElement("div");
+        const gdContainer = document.getElementById('blogContent');
+        newGD.setAttribute('class', 'gd');
+        newGD.innerHTML = `
+        <div class="circle">
+            <p>${gd(title)}</p> 
+        </div>
+        <div class="gdText">
+            <p class="gdText1">${title}</p>
+            <p class="gdText2">${date}</p> 
+        </div> 
+        <div class="views">
+            <img src="./img/view.png" alt="view" />
+            <p>0</p>
+        </div>
+        <div class="gdButton">
+            <button>Edit</button>
+            <button>Delete</button>
+        </div>
+        `;
+        console.log(gdContainer);
+        gdContainer === null || gdContainer === void 0 ? void 0 : gdContainer.appendChild(newGD);
+    }
+    else {
+        console.error("No blog post found in local storage.");
+    }
 }
 function saveBlog(blogPost) {
     localStorage.setItem("blogPost", JSON.stringify(blogPost));
