@@ -293,6 +293,58 @@ function save(form) {
   }
 }
 
+document.addEventListener("DOMContentLoaded", function () {
+  if (window.location.pathname.includes("blog.html")) {
+    renderBlogUpdatePosts();
+  }
+});
+
+function renderBlogUpdatePosts() {
+  const blogsContainer = document.querySelector(".blogs");
+  if (!blogsContainer) {
+    console.error("Blogs container not found.");
+    return;
+  }
+
+  const blogPosts = JSON.parse(localStorage.getItem("blogPosts") || "[]");
+
+  blogsContainer.innerHTML = "";
+
+  blogPosts.forEach(blogPost => {
+    const blogElement = createBlogElement(blogPost);
+    blogsContainer.appendChild(blogElement);
+  });
+}
+
+function createBlogElement(blogPost) {
+  const blogDiv = document.createElement("div");
+  blogDiv.classList.add("blog1");
+
+  const blogImage = document.createElement("img");
+  blogImage.src = blogPost.imageUrl;
+  blogImage.alt = "blog image";
+
+  const adminInfo = document.createElement("div");
+  adminInfo.classList.add("admin");
+  const adminBy = document.createElement("p");
+  adminBy.textContent = `By: ${blogPost.author}`;
+  const blogDate = document.createElement("p");
+  blogDate.textContent = blogPost.date;
+
+  const blogTitle = document.createElement("p");
+  blogTitle.textContent = blogPost.title;
+
+  adminInfo.appendChild(adminBy);
+  adminInfo.appendChild(blogDate);
+
+  blogDiv.appendChild(blogImage);
+  blogDiv.appendChild(adminInfo);
+  blogDiv.appendChild(blogTitle);
+
+  return blogDiv;
+}
+
+
 function toggleMenu() {
   const navElement = document.querySelector(".nav");
   const verticalLineElement = document.querySelector(".vertical-line");
