@@ -242,35 +242,49 @@ function updateBlog(event) {
   
   const queryString = window.location.search;
   const urlParams = new URLSearchParams(queryString);
-  const editIndex = urlParams.get("index");
 
   const updatedTitle = document.getElementById("title").value;
   const updatedAuthor = document.getElementById("author").value;
   const updatedDate = document.getElementById("date").value;
   const updatedDescription = document.getElementById("description").value;
-  const updatedImage = document.getElementById("myFile").src;
+  
+  const fileInput = document.getElementById("myFile");
+  const file = fileInput.files[0];
 
-  const blogPosts = JSON.parse(localStorage.getItem("blogPosts") || "[]");
-  const indexToUpdate = blogPosts.findIndex(post => post.index === parseInt(editIndex));
-  if (indexToUpdate !== -1) {
-    blogPosts[indexToUpdate] = {
-      title: updatedTitle,
-      author: updatedAuthor,
-      date: updatedDate,
-      description: updatedDescription,
-      imageUrl: updatedImage,
-      index: parseInt(editIndex)
-    };
-    localStorage.setItem("blogPosts", JSON.stringify(blogPosts));
-    showToast("Blog updated successfully", "success");
-  } else {
-    showToast(`Blog post with index ${editIndex} not found.`, "error");
+  if (!file) {
+    showToast("Please select an Image for your Blog!", "myFile");
+    return;
   }
 
-  setTimeout(() => {
-    window.location.href = "./admin-dashboard-blogs.html";
-  }, 3000);
+  const reader = new FileReader();
+  reader.onload = function (e) {
+    const updatedImage = e.target.result;
+
+    const blogPosts = JSON.parse(localStorage.getItem("blogPosts") || "[]");
+    const indexToUpdate = blogPosts.findIndex(post => post.index === parseInt(editIndex));
+    if (indexToUpdate !== -1) {
+      blogPosts[indexToUpdate] = {
+        index: parseInt(editIndex),
+        title: updatedTitle,
+        author: updatedAuthor,
+        date: updatedDate,
+        description: updatedDescription,
+        imageUrl: updatedImage
+      };
+      localStorage.setItem("blogPosts", JSON.stringify(blogPosts));
+      showToast("Blog updated successfully", "success");
+    } else {
+      showToast(`Blog post with index ${editIndex} not found.`, "error");
+    }
+
+    setTimeout(() => {
+      window.location.href = "./admin-dashboard-blogs.html";
+    }, 3000);
+  };
+
+  reader.readAsDataURL(file);
 }
+
 
 function saveBlogPost(blogPost) {
   let blogPosts = JSON.parse(localStorage.getItem("blogPosts") || "[]");
