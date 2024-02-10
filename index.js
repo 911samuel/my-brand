@@ -15,7 +15,7 @@ function showToast(message, inputId) {
   toast.style.top = `${inputElement.offsetTop + inputElement.offsetHeight}px`;
   toast.style.left = `${inputElement.offsetLeft}px`;
   inputElement.parentNode?.appendChild(toast);
-  setTimeout(function () {
+  setTimeout(() => {
     toast.parentNode?.removeChild(toast);
   }, 3000);
 }
@@ -31,67 +31,37 @@ function signUp(event) {
   const signupLastName = document.getElementById("lname").value;
   const signupEmail = document.getElementById("email").value;
   const signupPassword = document.getElementById("password").value;
-  
-  // Check if all fields are filled correctly
-  if (
-    !signupFirstName ||
-    !signupLastName ||
-    !isValidEmail(signupEmail) ||
-    signupPassword.length < 8
-  ) {
+
+  if (!signupFirstName || !signupLastName || !isValidEmail(signupEmail) || signupPassword.length < 8) {
     showToast("Please fill all fields correctly", "error");
   } else {
-    // Create an object with account data
-    const accountData = {
-      firstName: signupFirstName,
-      lastName: signupLastName,
-      email: signupEmail,
-      password: signupPassword,
-    };
-
-    // Retrieve existing accounts from local storage
+    const accountData = { firstName: signupFirstName, lastName: signupLastName, email: signupEmail, password: signupPassword };
     let storedAccounts = JSON.parse(localStorage.getItem("accounts") || "[]");
-
-    // Add the new account to the array
     storedAccounts.push(accountData);
-
-    // Save the updated accounts array back to local storage
     localStorage.setItem("accounts", JSON.stringify(storedAccounts));
-
     showToast("Account created successfully!", "success");
-
-    // Redirect the user after successful signup
-    setTimeout(function () {
+    setTimeout(() => {
       window.location.href = "signin.html";
     }, 2000);
   }
 }
 
-
 function signIn(event) {
   event.preventDefault();
   const signinEmail = document.getElementById("email").value;
   const signinPassword = document.getElementById("password").value;
-
-  // Retrieve stored accounts from local storage
   const storedAccounts = JSON.parse(localStorage.getItem("accounts") || "[]");
+  const loggedInAccount = storedAccounts.find(account => account.email === signinEmail);
 
-  // Find the account with the entered email
-  const loggedInAccount = storedAccounts.find((account) => account.email === signinEmail);
-
-  // Check if the account exists and the password matches
   if (loggedInAccount && loggedInAccount.password === signinPassword) {
-    // Authentication successful
     showToast(`Welcome back, ${loggedInAccount.lastName}`, "in");
-    setTimeout(function () {
+    setTimeout(() => {
       window.location.href = "admin-dashboard-blogs.html";
     }, 2000);
   } else {
-    // Authentication failed
     showToast("Wrong Email or Password", "password");
   }
 }
-
 
 function contact(event) {
   event.preventDefault();
@@ -105,7 +75,6 @@ function contact(event) {
 }
 
 function gd(sentence) {
-  console.log(sentence);
   if (typeof sentence !== "string") {
     console.error("The 'sentence' parameter must be a string.");
     return null;
@@ -129,20 +98,11 @@ function uploadBlog(event) {
   const myDate = document.getElementById("date").value;
   const myDescription = document.getElementById("description").value;
   const file = fileInput.files?.[0];
+
   if (!file) {
     showToast("Please select an Image for your Blog!", "myFile");
-  } else if (!myTitle.trim()) {
-    showToast("The title can't be empty", "title");
-    return;
-  } else if (!myAuthor.trim()) {
-    showToast("The author can't be empty", "author");
-    return;
-  } else if (!myDate.trim()) {
-    showToast("The date can't be empty", "date");
-    return;
-  } else if (!myDescription.trim()) {
-    showToast("The description can't be empty", "description");
-    return;
+  } else if (!myTitle.trim() || !myAuthor.trim() || !myDate.trim() || !myDescription.trim()) {
+    showToast("All fields are required", "error");
   } else {
     const reader = new FileReader();
     reader.onload = function (e) {
@@ -151,18 +111,13 @@ function uploadBlog(event) {
       previewImage.style.width = "100%";
       previewImage.style.height = "400px";
       displayFile.innerHTML = "";
-      displayFile.appendChild(previewImage);
-      const blogPost = {
-        title: myTitle,
-        author: myAuthor,
-        date: myDate,
-        description: myDescription,
-        imageUrl: previewImage.src,
-        index: nextIndex,
-      };
+      displayFile.onchange = () => {
+        displayFile.appendChild(previewImage)
+      }; 
+      const blogPost = { title: myTitle, author: myAuthor, date: myDate, description: myDescription, imageUrl: previewImage.src, index: nextIndex };
       saveBlogPost(blogPost);
       showToast("Blog uploaded successfully", "success");
-      setTimeout(function () {
+      setTimeout(() => {
         window.location.href = "./admin-dashboard-blogs.html";
       }, 3000);
       nextIndex++;
@@ -214,7 +169,7 @@ function renderBlogPosts() {
   }
 
   const savedBlogPosts = JSON.parse(savedBlogPostsString);
-  savedBlogPosts.forEach((blogPost) => {
+  savedBlogPosts.forEach(blogPost => {
     const newBlogPostElement = createBlogPost(blogPost);
     gdContainer.appendChild(newBlogPostElement);
   });
@@ -227,98 +182,94 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 function deleteBlog(index) {
-    const confirmationModal = document.getElementById("confirmationModal");
-    const confirmDeleteBtn = document.getElementById("confirmDelete");
-    const cancelDeleteBtn = document.getElementById("cancelDelete");
- 
-    confirmationModal.style.display = "block";
-  
-    confirmDeleteBtn.onclick = function() {
-      let blogPosts = JSON.parse(localStorage.getItem("blogPosts") || "[]");
-      const indexToDelete = blogPosts.findIndex((post) => post.index === index);
-      
-      if (indexToDelete !== -1) {
-        blogPosts.splice(indexToDelete, 1);
-        localStorage.setItem("blogPosts", JSON.stringify(blogPosts));
-        renderBlogPosts();
-        showToast("Blog deleted successfully", "success");
-      }
-      confirmationModal.style.display = "none";
-    };
-  
-    cancelDeleteBtn.onclick = function() {
-      confirmationModal.style.display = "none";
-    };
+  const confirmationModal = document.getElementById("confirmationModal");
+  const confirmDeleteBtn = document.getElementById("confirmDelete");
+  const cancelDeleteBtn = document.getElementById("cancelDelete");
+
+  confirmationModal.style.display = "block";
+
+  confirmDeleteBtn.onclick = function () {
+    let blogPosts = JSON.parse(localStorage.getItem("blogPosts") || "[]");
+    const indexToDelete = blogPosts.findIndex(post => post.index === index);
+
+    if (indexToDelete !== -1) {
+      blogPosts.splice(indexToDelete, 1);
+      localStorage.setItem("blogPosts", JSON.stringify(blogPosts));
+      renderBlogPosts();
+      showToast("Blog deleted successfully", "success");
+    }
+    confirmationModal.style.display = "none";
+  };
+
+  cancelDeleteBtn.onclick = function () {
+    confirmationModal.style.display = "none";
+  };
 }
 
 function deleteAllBlogs() {
-    const confirmationModal = document.getElementById("confirmationModal");
-    const confirmDeleteBtn = document.getElementById("confirmDelete");
-    const cancelDeleteBtn = document.getElementById("cancelDelete");
- 
-    confirmationModal.style.display = "block";
-  
-    confirmDeleteBtn.onclick = function() {
-      localStorage.removeItem("blogPosts");
-      blogPosts = []; // Clear the blogPosts array
-      renderBlogPosts(); // Update the UI to reflect the changes
-      showToast("All blogs deleted successfully", "success");
-      confirmationModal.style.display = "none";
-    };
-  
-    cancelDeleteBtn.onclick = function() {
-      confirmationModal.style.display = "none";
-    };
+  const confirmationModal = document.getElementById("confirmationModal");
+  const confirmDeleteBtn = document.getElementById("confirmDelete");
+  const cancelDeleteBtn = document.getElementById("cancelDelete");
+
+  confirmationModal.style.display = "block";
+
+  confirmDeleteBtn.onclick = function () {
+    localStorage.removeItem("blogPosts");
+    blogPosts = [];
+    renderBlogPosts(); 
+    showToast("All blogs deleted successfully", "success");
+    confirmationModal.style.display = "none";
+  };
+
+  cancelDeleteBtn.onclick = function () {
+    confirmationModal.style.display = "none";
+  };
 }
 
-
-  
-
 function editBlog(index) {
+  const blogPosts = JSON.parse(localStorage.getItem("blogPosts") || "[]");
+  const blogPost = blogPosts.find(post => post.index === parseInt(index));
 
+  if (blogPost) {
+    window.location.href = `updateBlog.html?index=${index}`;
+  } else {
+    console.error(`Blog post with index ${index} not found.`);
+  }
+}
+
+function updateBlog(event) {
+  event.preventDefault();
+  
   const queryString = window.location.search;
   const urlParams = new URLSearchParams(queryString);
   const editIndex = urlParams.get("index");
 
-  const blogPosts = JSON.parse(localStorage.getItem("blogPosts") || "[]");
-  const blogPost = blogPosts.find((post) => post.index === parseInt(editIndex));
+  const updatedTitle = document.getElementById("title").value;
+  const updatedAuthor = document.getElementById("author").value;
+  const updatedDate = document.getElementById("date").value;
+  const updatedDescription = document.getElementById("description").value;
+  const updatedImage = document.getElementById("myFile").src;
 
-  if (blogPost) {
-    document.getElementById("title").value = blogPost.title;
-    document.getElementById("author").value = blogPost.author;
-    document.getElementById("date").value = blogPost.date;
-    document.getElementById("description").value = blogPost.description;
-    document.getElementById("existingImage").src = blogPost.imageUrl;
-    document.getElementById("uploadButton").textContent = "Update";
+  const blogPosts = JSON.parse(localStorage.getItem("blogPosts") || "[]");
+  const indexToUpdate = blogPosts.findIndex(post => post.index === parseInt(editIndex));
+  if (indexToUpdate !== -1) {
+    blogPosts[indexToUpdate] = {
+      title: updatedTitle,
+      author: updatedAuthor,
+      date: updatedDate,
+      description: updatedDescription,
+      imageUrl: updatedImage,
+      index: parseInt(editIndex)
+    };
+    localStorage.setItem("blogPosts", JSON.stringify(blogPosts));
+    showToast("Blog updated successfully", "success");
   } else {
-    console.error(`Blog post with index ${editIndex} not found.`);
+    showToast(`Blog post with index ${editIndex} not found.`, "error");
   }
 
-  document
-    .getElementById("uploadForm")
-    .addEventListener("submit", function (event) {
-      event.preventDefault();
-
-      const updatedBlogPost = {
-        title: document.getElementById("title").value,
-        author: document.getElementById("author").value,
-        date: document.getElementById("date").value,
-        description: document.getElementById("description").value,
-        imageUrl: document.getElementById("existingImage").src,
-        index: parseInt(editIndex),
-      };
-
-      const indexToUpdate = blogPosts.findIndex(
-        (post) => post.index === parseInt(editIndex)
-      );
-      if (indexToUpdate !== -1) {
-        blogPosts[indexToUpdate] = updatedBlogPost;
-        localStorage.setItem("blogPosts", JSON.stringify(blogPosts));
-        window.location.href = "admin-dashboard-blogs.html";
-      } else {
-        console.error(`Blog post with index ${editIndex} not found.`);
-      }
-    });
+  setTimeout(() => {
+    window.location.href = "./admin-dashboard-blogs.html";
+  }, 3000);
 }
 
 function saveBlogPost(blogPost) {

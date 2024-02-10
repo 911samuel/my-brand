@@ -891,6 +891,15 @@ ul li {
     align-items: center;
     width: 100%;
 }
+
+#updateForm{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
 .upload .uploadForm {
     display: flex;
     flex-direction: column;
