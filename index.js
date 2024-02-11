@@ -5,7 +5,7 @@ let nextIndex = 1;
 let blogIndex = 0;
 let views = 0;
 
-function showToast(message, inputId) {
+function showToast(message, messageType, inputId) {
   const toast = document.createElement("div");
   const inputElement = document.getElementById(inputId);
   if (!inputElement) {
@@ -13,7 +13,18 @@ function showToast(message, inputId) {
     return;
   }
   toast.textContent = message;
-  toast.classList.add("toast", "error");
+
+  switch (messageType) {
+    case "success":
+      toast.classList.add("toast", "success");
+      break;
+    case "error":
+      toast.classList.add("toast", "error");
+      break;
+    default:
+      toast.classList.add("toast");
+  }
+
   toast.style.position = "absolute";
   toast.style.top = `${inputElement.offsetTop + inputElement.offsetHeight}px`;
   toast.style.left = `${inputElement.offsetLeft}px`;
@@ -41,7 +52,7 @@ function signUp(event) {
     !isValidEmail(signupEmail) ||
     signupPassword.length < 8
   ) {
-    showToast("Please fill all fields correctly", "error");
+    showToast("All fields are required", "error", "success");
   } else {
     const accountData = {
       firstName: signupFirstName,
@@ -52,7 +63,7 @@ function signUp(event) {
     let storedAccounts = JSON.parse(localStorage.getItem("accounts") || "[]");
     storedAccounts.push(accountData);
     localStorage.setItem("accounts", JSON.stringify(storedAccounts));
-    showToast("Account created successfully!", "success");
+    showToast("Account created successfully!", "success", "success");
     setTimeout(() => {
       window.location.href = "signin.html";
     }, 2000);
@@ -69,12 +80,12 @@ function signIn(event) {
   );
 
   if (loggedInAccount && loggedInAccount.password === signinPassword) {
-    showToast(`Welcome back, ${loggedInAccount.lastName}`, "in");
+    showToast(`Welcome back, ${loggedInAccount.lastName}`, "success", "success");
     setTimeout(() => {
       window.location.href = "admin-dashboard-blogs.html";
     }, 2000);
   } else {
-    showToast("Wrong Email or Password", "password");
+    showToast("Wrong Email or Password", "error", "password");
   }
 }
 
@@ -83,9 +94,9 @@ function contact(event) {
   const contactForm = document.getElementById("contactForm");
   if (contactForm && contactForm.checkValidity()) {
     saveContactFormSubmission(new FormData(contactForm));
-    showToast("Thank you for filling out the form!", "sent");
+    showToast("Thank you for filling out the form!", "success", "success");
   } else {
-    showToast("Please fill out the form before submitting.", "error");
+    showToast("Please fill out the form before submitting.", "error", "success");
   }
 }
 
@@ -113,7 +124,7 @@ function uploadBlog(event) {
   const file = fileInput.files?.[0];
 
   if (!file) {
-    showToast("Please select an Image for your Blog!", "myFile");
+    showToast("Please select an Image for your Blog!", "error", "myFile");
   } else if (!myTitle.trim() || !myAuthor.trim() || !myDate.trim() || !myDescription.trim()) {
     showToast("All fields are required", "error");
   } else {
@@ -139,14 +150,14 @@ function uploadBlog(event) {
         views: views,
       };
       saveBlogPost(blogPost);
-      showToast("Blog uploaded successfully", "success");
+      showToast("Blog uploaded successfully", "success", "success");
       setTimeout(() => {
         window.location.href = "./admin-dashboard-blogs.html";
       }, 3000);
       renderBlogPosts();
     };
     reader.onerror = function () {
-      showToast("Failed to upload the blog. Please try again.", "success");
+      showToast("Failed to upload the blog. Please try again.", "error", "success");
     };
     reader.readAsDataURL(file);
   }
@@ -274,7 +285,7 @@ function updateBlog(event) {
   const file = fileInput.files[0];
 
   if (!file) {
-    showToast("Please select an Image for your Blog!", "myFile");
+    showToast("Please select an Image for your Blog!", "error", "myFile");
     return;
   }
 
@@ -297,9 +308,9 @@ function updateBlog(event) {
         views: views,
       };
       localStorage.setItem("blogPosts", JSON.stringify(blogPosts));
-      showToast("Blog updated successfully", "success");
+      showToast("Blog uploaded successfully", "success", "success");
     } else {
-      showToast(`Blog post with index ${editIndex} not found.`, "error");
+      showToast("Failed to upload the blog. Please try again.", "error", "success");
     }
 
     setTimeout(() => {
