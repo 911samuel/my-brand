@@ -3,6 +3,7 @@ let blogPosts = [];
 let contactFormSubmissions = [];
 let nextIndex = 1;
 let blogIndex = 0;
+let views = 0;
 
 function showToast(message, inputId) {
   const toast = document.createElement("div");
@@ -135,6 +136,7 @@ function uploadBlog(event) {
         description: myDescription,
         imageUrl: previewImage.src,
         index: lastIndex + 1, 
+        views: views,
       };
       saveBlogPost(blogPost);
       showToast("Blog uploaded successfully", "success");
@@ -163,7 +165,7 @@ function createBlogPost(blogPost) {
       </div>  
       <div class="views">
           <img src="./img/view.png" alt="view" />
-          <p>0</p>
+          <p>${blogPost.views}</p>  
       </div>
       <div class="gdButton">
         <button onclick="editBlog(${blogPost.index})">Edit</button>
@@ -292,6 +294,7 @@ function updateBlog(event) {
         date: updatedDate,
         description: updatedDescription,
         imageUrl: updatedImage,
+        views: views,
       };
       localStorage.setItem("blogPosts", JSON.stringify(blogPosts));
       showToast("Blog updated successfully", "success");
@@ -387,9 +390,8 @@ function createBlogElement(blogPost) {
   readMoreButton.textContent = "Read More";
   readMoreButton.classList.add("read-more");
   readMoreButton.addEventListener("click", () => {
-    const description = document.createElement( "p" );
-    description.innerHTML= blogPost.description;
-    blogDiv.appendChild(description);
+    increaseViews(blogPost.index)
+    window.location.href = `singlepost.html?index=${blogPost.index}`;
   });
 
   adminInfo.appendChild(adminBy);
@@ -402,6 +404,47 @@ function createBlogElement(blogPost) {
 
   return blogDiv;
 }
+
+function increaseViews(index) {
+  let blogPosts = JSON.parse(localStorage.getItem("blogPosts") || "[]");
+  const blogIndex = blogPosts.findIndex(post => post.index === index);
+  if (blogIndex !== -1) {
+    blogPosts[blogIndex].views = (blogPosts[blogIndex].views || 0) + 1;
+    localStorage.setItem("blogPosts", JSON.stringify(blogPosts));
+  }
+}
+
+function showPosts() {
+  console.log("showing posts...");
+  const urlParams = new URLSearchParams(window.location.search);
+  const postId = urlParams.get('index');
+
+  const blogPosts = JSON.parse(localStorage.getItem("blogPosts") || "[]");
+
+  const blogPost = blogPosts.find(post => post.index === parseInt(postId));
+
+  if (blogPost) {
+    const postImage = document.getElementById("post-image");
+    const postAuthor = document.getElementById("post-author");
+    const postDate = document.getElementById("post-date");
+    const postTitle = document.getElementById("post-title");
+    const postDescription = document.getElementById("post-description");
+
+    postImage.src = blogPost.imageUrl;
+    postAuthor.textContent = `By: ${blogPost.author}`;
+    postDate.textContent = blogPost.date;
+    postTitle.textContent = blogPost.title;
+    postDescription.textContent = blogPost.description;
+  } else {
+    console.error(`Blog post with index ${postId} not found.`);
+  }
+}
+
+document.addEventListener( 'DOMContentLoaded', function () {
+  if(window.location.href.includes("singlepost.html")){
+    showPosts();
+  }
+});
 
 function toggleMenu() {
   const navElement = document.querySelector(".nav");

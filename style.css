@@ -76,8 +76,8 @@ a {
 }
 
 .labels {
-    position: relative; 
-  }
+    position: relative;
+}
 
 .toast {
     position: absolute;
@@ -89,7 +89,7 @@ a {
     font-size: 16px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
     text-align: center;
-  }
+}
 
 .nav a:hover {
     cursor: pointer;
@@ -116,7 +116,7 @@ a {
     align-items: center;
 }
 
-.contact a{
+.contact a {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -203,33 +203,33 @@ button:hover {
 }
 
 .modal {
-    display: none; 
-    position: fixed; 
-    z-index: 1; 
+    display: none;
+    position: fixed;
+    z-index: 1;
     align-items: center;
     left: auto;
     top: auto;
-    width: 50%; 
-    height: 100%; 
-    overflow: auto; 
-    background-color: transparent; 
+    width: 50%;
+    height: 100%;
+    overflow: auto;
+    background-color: transparent;
     color: #000;
-    
-  }
-  
-  .modal-content {
+
+}
+
+.modal-content {
     background-color: #fefefe;
     margin: 15% auto;
     padding: 20px;
     border: 1px solid #888;
     width: 80%;
     text-align: center;
-  }
-  
-  button {
+}
+
+button {
     margin: 5px;
-  }
-  
+}
+
 
 .social {
     display: flex;
@@ -381,12 +381,12 @@ button:hover {
     flex-wrap: wrap;
     justify-content: center;
     margin: 100px auto;
-    max-width: 100%; 
+    max-width: 100%;
 }
 
 .blogsPage img {
     width: 470px;
-    height: 380px; 
+    height: 330px;
     margin: 0 40px;
 }
 
@@ -400,21 +400,21 @@ button:hover {
     display: block;
 }
 
-.read-more{
+.read-more {
     width: fit-content;
     padding: 10px;
     font-size: 16px;
     height: auto;
     margin: 0 0 60px 60px;
-}  
+}
 
-.read-more{
+.read-more {
     width: fit-content;
     padding: 10px;
     font-size: 16px;
     height: auto;
     margin: 0 0 60px 60px;
-}    
+}
 
 .right .blogs {
     display: flex;
@@ -596,7 +596,7 @@ ul li {
     border-radius: 15px;
 }
 
-.signin form{
+.signin form {
     display: flex;
     flex-direction: column;
 }
@@ -681,7 +681,7 @@ ul li {
     margin-right: 10px;
 }
 
-.signin  a {
+.signin a {
     text-decoration: none;
     color: #45a049;
 }
@@ -703,10 +703,11 @@ ul li {
     margin-top: 50px;
 }
 
-.left .line{
+.left .line {
     display: flex;
     flex-direction: row;
 }
+
 .right {
     position: relative;
     width: 80%;
@@ -827,9 +828,9 @@ ul li {
 
 .blogsHeader {
     display: flex;
-    justify-content: space-between; 
+    justify-content: space-between;
     align-items: center;
-    margin: 20px 0; 
+    margin: 20px 0;
     width: 100%;
 }
 
@@ -925,7 +926,7 @@ ul li {
     font-weight: 600;
 }
 
-.upload #uploadForm{
+.upload #uploadForm {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -933,7 +934,7 @@ ul li {
     width: 100%;
 }
 
-#updateForm{
+#updateForm {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -983,7 +984,7 @@ ul li {
 }
 
 .upload .labels input[type="date"] {
-    color: #fff; 
+    color: #fff;
 }
 
 
@@ -1055,6 +1056,41 @@ ul li {
     background-color: #45a049;
 }
 
+.post-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    margin: 50px auto;
+    width: 60%;
+}
+
+#post-image {
+    width: 80%;
+    height: auto;
+    margin: 0 auto;
+}
+
+.post-detail {
+    display: flex;
+    font-size: 18px;
+    margin: auto 140px;
+}
+
+#post-date {
+    color: #848889;
+    margin-left: 30px;
+}
+
+#post-title {
+    font-size: 36px;
+    margin: 20px 140px;
+}
+
+#post-description {
+    margin-top: 20px;
+    margin: 20px 140px;
+}
+
 footer {
     font-size: 20px;
     padding: 20px 0;
@@ -1064,50 +1100,50 @@ footer {
 
 @media only screen and (max-width: 1440px) {
     body {
-      font-size: 16px;
+        font-size: 16px;
     }
-  
+
     header {
-      height: 8vh;
-      padding: 0 4%;
+        height: 8vh;
+        padding: 0 4%;
     }
-  
+
     nav {
-      height: 8vh;
-      padding: 0 4%;
+        height: 8vh;
+        padding: 0 4%;
     }
-  
+
     .nav {
-      width: 80%;
+        width: 80%;
     }
-  
+
     .logo {
-      width: 60px;
-      height: 60px;
-      margin-right: 15px;
+        width: 60px;
+        height: 60px;
+        margin-right: 15px;
     }
-  
+
     .myDetails,
     .myDetails2,
     .signin,
     .left,
     .right {
-      width: 80%;
-      margin: 8px auto;
+        width: 80%;
+        margin: 8px auto;
     }
-  
+
     .education,
     .experience {
-      width: 80%;
-      margin: 8px auto;
+        width: 80%;
+        margin: 8px auto;
     }
-  
+
     footer {
-      font-size: 16px;
-      margin-top: 50px;
+        font-size: 16px;
+        margin-top: 50px;
     }
-  }
-  
+}
+
 @media only screen and (max-width: 1024px) {
     body {
         font-size: 14px;
@@ -1272,7 +1308,7 @@ footer {
     }
 
     .toggle-btn {
-        display: flex; 
+        display: flex;
     }
 
     .close-icon {
@@ -1284,7 +1320,7 @@ footer {
         font-size: 1.5em;
     }
 
-    .element{
+    .element {
         display: flex;
         flex-direction: column;
     }
@@ -1293,7 +1329,7 @@ footer {
         display: flex;
         flex-direction: column;
         position: absolute;
-        top: 5vh; 
+        top: 5vh;
         right: 2vh;
         background-color: #45a049;
         z-index: 1;
@@ -1409,7 +1445,7 @@ footer {
 
 @media only screen and (max-width: 425px) {
     body {
-        font-size: 12px; 
+        font-size: 12px;
     }
 
     .header {
@@ -1431,7 +1467,7 @@ footer {
         position: absolute;
         top: 10px;
         right: 20px;
-        font-size: 1.2em; 
+        font-size: 1.2em;
     }
 
     .element {
@@ -1449,8 +1485,8 @@ footer {
         z-index: 1;
         margin: 0 auto;
         align-items: center;
-        font-size: 16px; 
-        width: 80%; 
+        font-size: 16px;
+        width: 80%;
         border: none;
         cursor: pointer;
     }
@@ -1465,7 +1501,7 @@ footer {
     }
 
     .container {
-        padding: 10px 3%; 
+        padding: 10px 3%;
     }
 
     .myDetails,
@@ -1473,17 +1509,17 @@ footer {
     .myphoto {
         width: 100%;
         margin-left: 0;
-        margin-top: 20px; 
+        margin-top: 20px;
     }
 
     .myname {
-        font-size: 60px; 
-        margin-bottom: 20px; 
+        font-size: 60px;
+        margin-bottom: 20px;
     }
 
     .social {
-        width: 100%; 
-        margin-top: 30px; 
+        width: 100%;
+        margin-top: 30px;
     }
 
     .social a {
@@ -1491,7 +1527,7 @@ footer {
     }
 
     .icons img {
-        height: 40px; 
+        height: 40px;
         margin-right: 5px;
     }
 
@@ -1499,7 +1535,7 @@ footer {
     .resume,
     .right {
         width: 100%;
-        margin: 15px auto; 
+        margin: 15px auto;
     }
 
     .blogs {
@@ -1507,13 +1543,13 @@ footer {
     }
 
     .blogs img {
-        width: 15px; 
-        height: 15px; 
+        width: 15px;
+        height: 15px;
     }
 
     .blogsTitle {
         flex-direction: column;
-        margin: 15px 0; 
+        margin: 15px 0;
     }
 
     .right .blogsTitle .titleB,
@@ -1524,7 +1560,7 @@ footer {
 
     .right .gd,
     .right .upload {
-        margin: 15px 0; 
+        margin: 15px 0;
     }
 
     .right .gd .gdText {
@@ -1532,34 +1568,34 @@ footer {
     }
 
     .right .gd .gdButton button {
-        font-size: 12px; 
+        font-size: 12px;
     }
 
     .right .upload .uploadForm,
     .upload .labels {
-        width: 100%; 
+        width: 100%;
     }
 
     .rightIcon .notification,
     .rightIcon .vertical-line,
     .rightIcon img {
-        margin-right: 5px; 
+        margin-right: 5px;
     }
 
     .right .profile input,
     .upload .labels input,
     .upload .labels textarea {
-        width: 100%; 
+        width: 100%;
     }
 
     footer {
-        font-size: 12px; 
+        font-size: 12px;
     }
 }
 
 @media only screen and (max-width: 375px) {
     body {
-        font-size: 10px; 
+        font-size: 10px;
     }
 
     .header {
@@ -1581,7 +1617,7 @@ footer {
         position: absolute;
         top: 10px;
         right: 20px;
-        font-size: 1em; 
+        font-size: 1em;
     }
 
     .element {
@@ -1599,8 +1635,8 @@ footer {
         z-index: 1;
         margin: 0 auto;
         align-items: center;
-        font-size: 14px; 
-        width: 80%; 
+        font-size: 14px;
+        width: 80%;
         border: none;
         cursor: pointer;
     }
@@ -1615,7 +1651,7 @@ footer {
     }
 
     .container {
-        padding: 10px 3%; 
+        padding: 10px 3%;
     }
 
     .myDetails,
@@ -1623,17 +1659,17 @@ footer {
     .myphoto {
         width: 100%;
         margin-left: 0;
-        margin-top: 20px; 
+        margin-top: 20px;
     }
 
     .myname {
-        font-size: 50px; 
-        margin-bottom: 20px; 
+        font-size: 50px;
+        margin-bottom: 20px;
     }
 
     .social {
-        width: 100%; 
-        margin-top: 20px; 
+        width: 100%;
+        margin-top: 20px;
     }
 
     .social a {
@@ -1641,7 +1677,7 @@ footer {
     }
 
     .icons img {
-        height: 30px; 
+        height: 30px;
         margin-right: 5px;
     }
 
@@ -1649,7 +1685,7 @@ footer {
     .resume,
     .right {
         width: 100%;
-        margin: 10px auto; 
+        margin: 10px auto;
     }
 
     .blogs {
@@ -1657,13 +1693,13 @@ footer {
     }
 
     .blogs img {
-        width: 12px; 
-        height: 12px; 
+        width: 12px;
+        height: 12px;
     }
 
     .blogsTitle {
         flex-direction: column;
-        margin: 10px 0; 
+        margin: 10px 0;
     }
 
     .right .blogsTitle .titleB,
@@ -1674,7 +1710,7 @@ footer {
 
     .right .gd,
     .right .upload {
-        margin: 10px 0; 
+        margin: 10px 0;
     }
 
     .right .gd .gdText {
@@ -1682,34 +1718,34 @@ footer {
     }
 
     .right .gd .gdButton button {
-        font-size: 10px; 
+        font-size: 10px;
     }
 
     .right .upload .uploadForm,
     .upload .labels {
-        width: 100%; 
+        width: 100%;
     }
 
     .rightIcon .notification,
     .rightIcon .vertical-line,
     .rightIcon img {
-        margin-right: 5px; 
+        margin-right: 5px;
     }
 
     .right .profile input,
     .upload .labels input,
     .upload .labels textarea {
-        width: 100%; 
+        width: 100%;
     }
 
     footer {
-        font-size: 10px; 
+        font-size: 10px;
     }
 }
 
 @media only screen and (max-width: 320px) {
     body {
-        font-size: 9px; 
+        font-size: 9px;
     }
 
     .header {
@@ -1731,7 +1767,7 @@ footer {
         position: absolute;
         top: 10px;
         right: 15px;
-        font-size: 0.8em; 
+        font-size: 0.8em;
     }
 
     .element {
@@ -1749,8 +1785,8 @@ footer {
         z-index: 1;
         margin: 0 auto;
         align-items: center;
-        font-size: 12px; 
-        width: 80%; 
+        font-size: 12px;
+        width: 80%;
         border: none;
         cursor: pointer;
     }
@@ -1765,7 +1801,7 @@ footer {
     }
 
     .container {
-        padding: 10px 3%; 
+        padding: 10px 3%;
     }
 
     .myDetails,
@@ -1773,17 +1809,17 @@ footer {
     .myphoto {
         width: 100%;
         margin-left: 0;
-        margin-top: 15px; 
+        margin-top: 15px;
     }
 
     .myname {
-        font-size: 45px; 
-        margin-bottom: 15px; 
+        font-size: 45px;
+        margin-bottom: 15px;
     }
 
     .social {
-        width: 100%; 
-        margin-top: 15px; 
+        width: 100%;
+        margin-top: 15px;
     }
 
     .social a {
@@ -1791,7 +1827,7 @@ footer {
     }
 
     .icons img {
-        height: 25px; 
+        height: 25px;
         margin-right: 4px;
     }
 
@@ -1799,7 +1835,7 @@ footer {
     .resume,
     .right {
         width: 100%;
-        margin: 8px auto; 
+        margin: 8px auto;
     }
 
     .blogs {
@@ -1807,13 +1843,13 @@ footer {
     }
 
     .blogs img {
-        width: 10px; 
-        height: 10px; 
+        width: 10px;
+        height: 10px;
     }
 
     .blogsTitle {
         flex-direction: column;
-        margin: 8px 0; 
+        margin: 8px 0;
     }
 
     .right .blogsTitle .titleB,
@@ -1824,7 +1860,7 @@ footer {
 
     .right .gd,
     .right .upload {
-        margin: 8px 0; 
+        margin: 8px 0;
     }
 
     .right .gd .gdText {
@@ -1832,27 +1868,27 @@ footer {
     }
 
     .right .gd .gdButton button {
-        font-size: 9px; 
+        font-size: 9px;
     }
 
     .right .upload .uploadForm,
     .upload .labels {
-        width: 100%; 
+        width: 100%;
     }
 
     .rightIcon .notification,
     .rightIcon .vertical-line,
     .rightIcon img {
-        margin-right: 4px; 
+        margin-right: 4px;
     }
 
     .right .profile input,
     .upload .labels input,
     .upload .labels textarea {
-        width: 100%; 
+        width: 100%;
     }
 
     footer {
-        font-size: 9px; 
+        font-size: 9px;
     }
 }
