@@ -1,6 +1,7 @@
 let accounts = [];
 let blogPosts = [];
 let contactFormSubmissions = [];
+let nextIndex = 1;
 
 function showToast(message, inputId) {
   const toast = document.createElement("div");
@@ -32,10 +33,20 @@ function signUp(event) {
   const signupEmail = document.getElementById("email").value;
   const signupPassword = document.getElementById("password").value;
 
-  if (!signupFirstName || !signupLastName || !isValidEmail(signupEmail) || signupPassword.length < 8) {
+  if (
+    !signupFirstName ||
+    !signupLastName ||
+    !isValidEmail(signupEmail) ||
+    signupPassword.length < 8
+  ) {
     showToast("Please fill all fields correctly", "error");
   } else {
-    const accountData = { firstName: signupFirstName, lastName: signupLastName, email: signupEmail, password: signupPassword };
+    const accountData = {
+      firstName: signupFirstName,
+      lastName: signupLastName,
+      email: signupEmail,
+      password: signupPassword,
+    };
     let storedAccounts = JSON.parse(localStorage.getItem("accounts") || "[]");
     storedAccounts.push(accountData);
     localStorage.setItem("accounts", JSON.stringify(storedAccounts));
@@ -51,7 +62,9 @@ function signIn(event) {
   const signinEmail = document.getElementById("email").value;
   const signinPassword = document.getElementById("password").value;
   const storedAccounts = JSON.parse(localStorage.getItem("accounts") || "[]");
-  const loggedInAccount = storedAccounts.find(account => account.email === signinEmail);
+  const loggedInAccount = storedAccounts.find(
+    (account) => account.email === signinEmail
+  );
 
   if (loggedInAccount && loggedInAccount.password === signinPassword) {
     showToast(`Welcome back, ${loggedInAccount.lastName}`, "in");
@@ -87,8 +100,6 @@ function gd(sentence) {
   }
 }
 
-let nextIndex = 1;
-
 function uploadBlog(event) {
   event.preventDefault();
   const fileInput = document.getElementById("myFile");
@@ -112,15 +123,23 @@ function uploadBlog(event) {
       previewImage.style.height = "400px";
       displayFile.innerHTML = "";
       displayFile.onchange = () => {
-        displayFile.appendChild(previewImage)
-      }; 
-      const blogPost = { title: myTitle, author: myAuthor, date: myDate, description: myDescription, imageUrl: previewImage.src, index: nextIndex };
+        displayFile.appendChild(previewImage);
+      };
+      const blogPosts = JSON.parse(localStorage.getItem("blogPosts") || "[]");
+      const lastIndex = blogPosts.length > 0 ? blogPosts[blogPosts.length - 1].index : 0;
+      const blogPost = {
+        title: myTitle,
+        author: myAuthor,
+        date: myDate,
+        description: myDescription,
+        imageUrl: previewImage.src,
+        index: lastIndex + 1, 
+      };
       saveBlogPost(blogPost);
       showToast("Blog uploaded successfully", "success");
       setTimeout(() => {
         window.location.href = "./admin-dashboard-blogs.html";
       }, 3000);
-      nextIndex++;
       renderBlogPosts();
     };
     reader.onerror = function () {
@@ -169,7 +188,7 @@ function renderBlogPosts() {
   }
 
   const savedBlogPosts = JSON.parse(savedBlogPostsString);
-  savedBlogPosts.forEach(blogPost => {
+  savedBlogPosts.forEach((blogPost) => {
     const newBlogPostElement = createBlogPost(blogPost);
     gdContainer.appendChild(newBlogPostElement);
   });
@@ -190,7 +209,7 @@ function deleteBlog(index) {
 
   confirmDeleteBtn.onclick = function () {
     let blogPosts = JSON.parse(localStorage.getItem("blogPosts") || "[]");
-    const indexToDelete = blogPosts.findIndex(post => post.index === index);
+    const indexToDelete = blogPosts.findIndex((post) => post.index === index);
 
     if (indexToDelete !== -1) {
       blogPosts.splice(indexToDelete, 1);
@@ -216,7 +235,7 @@ function deleteAllBlogs() {
   confirmDeleteBtn.onclick = function () {
     localStorage.removeItem("blogPosts");
     blogPosts = [];
-    renderBlogPosts(); 
+    renderBlogPosts();
     showToast("All blogs deleted successfully", "success");
     confirmationModal.style.display = "none";
   };
@@ -228,7 +247,7 @@ function deleteAllBlogs() {
 
 function editBlog(index) {
   const blogPosts = JSON.parse(localStorage.getItem("blogPosts") || "[]");
-  const blogPost = blogPosts.find(post => post.index === parseInt(index));
+  const blogPost = blogPosts.find((post) => post.index === parseInt(index));
 
   if (blogPost) {
     window.location.href = `updateBlog.html?index=${index}`;
@@ -239,7 +258,7 @@ function editBlog(index) {
 
 function updateBlog(event) {
   event.preventDefault();
-  
+
   const queryString = window.location.search;
   const urlParams = new URLSearchParams(queryString);
 
@@ -247,7 +266,7 @@ function updateBlog(event) {
   const updatedAuthor = document.getElementById("author").value;
   const updatedDate = document.getElementById("date").value;
   const updatedDescription = document.getElementById("description").value;
-  
+
   const fileInput = document.getElementById("myFile");
   const file = fileInput.files[0];
 
@@ -261,7 +280,9 @@ function updateBlog(event) {
     const updatedImage = e.target.result;
 
     const blogPosts = JSON.parse(localStorage.getItem("blogPosts") || "[]");
-    const indexToUpdate = blogPosts.findIndex(post => post.index === parseInt(editIndex));
+    const indexToUpdate = blogPosts.findIndex(
+      (post) => post.index === parseInt(editIndex)
+    );
     if (indexToUpdate !== -1) {
       blogPosts[indexToUpdate] = {
         index: parseInt(editIndex),
@@ -269,7 +290,7 @@ function updateBlog(event) {
         author: updatedAuthor,
         date: updatedDate,
         description: updatedDescription,
-        imageUrl: updatedImage
+        imageUrl: updatedImage,
       };
       localStorage.setItem("blogPosts", JSON.stringify(blogPosts));
       showToast("Blog updated successfully", "success");
@@ -284,7 +305,6 @@ function updateBlog(event) {
 
   reader.readAsDataURL(file);
 }
-
 
 function saveBlogPost(blogPost) {
   let blogPosts = JSON.parse(localStorage.getItem("blogPosts") || "[]");
@@ -324,7 +344,7 @@ function renderBlogUpdatePosts() {
 
   blogsContainer.innerHTML = "";
 
-  blogPosts.forEach(blogPost => {
+  blogPosts.forEach((blogPost) => {
     const blogElement = createBlogElement(blogPost);
     blogsContainer.appendChild(blogElement);
   });
@@ -357,7 +377,6 @@ function createBlogElement(blogPost) {
 
   return blogDiv;
 }
-
 
 function toggleMenu() {
   const navElement = document.querySelector(".nav");
