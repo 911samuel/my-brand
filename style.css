@@ -378,22 +378,28 @@ button:hover {
 
 .blogs {
     display: flex;
-    justify-content: space-between;
-    margin: 120px 300px;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 0 auto;
+    max-width: 100%; 
 }
 
 .blogs img {
-    width: 380px;
+    width: 470px;
+    height: 280px; 
+    margin: 140px 0 40px 40px;
 }
 
 .blogs p {
     font-size: 20px;
-    width: 350px;
+    margin: 0 0 60px 60px;
 }
 
 .more {
     margin: 30px auto;
+    display: block;
 }
+
 
 .admin p {
     display: inline;

@@ -327,13 +327,15 @@ function save(form) {
   }
 }
 
+let blogIndex = 0;
+
 document.addEventListener("DOMContentLoaded", function () {
   if (window.location.pathname.includes("blog.html")) {
-    renderBlogUpdatePosts();
+    renderBlogUpdatePosts(blogIndex);
   }
 });
 
-function renderBlogUpdatePosts() {
+function renderBlogUpdatePosts(startIndex) {
   const blogsContainer = document.querySelector(".blogs");
   if (!blogsContainer) {
     console.error("Blogs container not found.");
@@ -342,12 +344,26 @@ function renderBlogUpdatePosts() {
 
   const blogPosts = JSON.parse(localStorage.getItem("blogPosts") || "[]");
 
-  blogsContainer.innerHTML = "";
+  if (startIndex === 0) {
+    blogsContainer.innerHTML = "";
+  }
 
-  blogPosts.forEach((blogPost) => {
-    const blogElement = createBlogElement(blogPost);
+  for (let i = startIndex; i < startIndex + 3 && i < blogPosts.length; i++) {
+    const blogElement = createBlogElement(blogPosts[i]);
     blogsContainer.appendChild(blogElement);
-  });
+  };
+
+  blogIndex = startIndex + 3;
+
+  if (blogIndex < blogPosts.length) {
+    document.querySelector(".more").style.display = "flex";
+  } else {
+    document.querySelector(".more").style.display = "none"; // Hide the "More" button if all blogs are loaded
+  }
+}
+
+function loadMoreBlogs() {
+  renderBlogUpdatePosts(blogIndex); 
 }
 
 function createBlogElement(blogPost) {
