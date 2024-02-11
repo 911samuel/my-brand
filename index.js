@@ -2,6 +2,7 @@ let accounts = [];
 let blogPosts = [];
 let contactFormSubmissions = [];
 let nextIndex = 1;
+let blogIndex = 0;
 
 function showToast(message, inputId) {
   const toast = document.createElement("div");
@@ -327,8 +328,6 @@ function save(form) {
   }
 }
 
-let blogIndex = 0;
-
 document.addEventListener("DOMContentLoaded", function () {
   if (window.location.pathname.includes("blog.html")) {
     renderBlogUpdatePosts(blogIndex);
@@ -336,7 +335,7 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 function renderBlogUpdatePosts(startIndex) {
-  const blogsContainer = document.querySelector(".blogs");
+  const blogsContainer = document.querySelector(".blogsPage");
   if (!blogsContainer) {
     console.error("Blogs container not found.");
     return;
@@ -358,7 +357,7 @@ function renderBlogUpdatePosts(startIndex) {
   if (blogIndex < blogPosts.length) {
     document.querySelector(".more").style.display = "flex";
   } else {
-    document.querySelector(".more").style.display = "none"; // Hide the "More" button if all blogs are loaded
+    document.querySelector(".more").style.display = "none"; 
   }
 }
 
@@ -384,12 +383,22 @@ function createBlogElement(blogPost) {
   const blogTitle = document.createElement("p");
   blogTitle.textContent = blogPost.title;
 
+  const readMoreButton = document.createElement("button");
+  readMoreButton.textContent = "Read More";
+  readMoreButton.classList.add("read-more");
+  readMoreButton.addEventListener("click", () => {
+    const description = document.createElement( "p" );
+    description.innerHTML= blogPost.description;
+    blogDiv.appendChild(description);
+  });
+
   adminInfo.appendChild(adminBy);
   adminInfo.appendChild(blogDate);
 
   blogDiv.appendChild(blogImage);
   blogDiv.appendChild(adminInfo);
   blogDiv.appendChild(blogTitle);
+  blogDiv.appendChild(readMoreButton);
 
   return blogDiv;
 }

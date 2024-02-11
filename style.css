@@ -376,23 +376,23 @@ button:hover {
     height: 284px;
 }
 
-.blogs {
+.blogsPage {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    margin: 0 auto;
+    margin: 100px auto;
     max-width: 100%; 
 }
 
-.blogs img {
+.blogsPage img {
     width: 470px;
-    height: 280px; 
-    margin: 140px 0 40px 40px;
+    height: 380px; 
+    margin: 0 40px;
 }
 
-.blogs p {
+.blogsPage p {
     font-size: 20px;
-    margin: 0 0 60px 60px;
+    margin: 10px 60px;
 }
 
 .more {
@@ -400,6 +400,41 @@ button:hover {
     display: block;
 }
 
+.read-more{
+    width: fit-content;
+    padding: 10px;
+    font-size: 16px;
+    height: auto;
+    margin: 0 0 60px 60px;
+}  
+
+.read-more{
+    width: fit-content;
+    padding: 10px;
+    font-size: 16px;
+    height: auto;
+    margin: 0 0 60px 60px;
+}    
+
+.right .blogs {
+    display: flex;
+    justify-content: space-between;
+    margin: 120px 300px;
+}
+
+.right .blogs img {
+    width: 350px;
+    height: 284px;
+}
+
+.right .blogs p {
+    font-size: 20px;
+    width: 350px;
+}
+
+.right .more {
+    margin: 30px auto;
+}
 
 .admin p {
     display: inline;
