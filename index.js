@@ -26,6 +26,7 @@ function showToast(message, messageType, inputId) {
   }
 
   toast.style.position = "absolute";
+  toast.style.animation = "fadeIn 0.5s ease-in-out";
   toast.style.top = `${inputElement.offsetTop + inputElement.offsetHeight}px`;
   toast.style.left = `${inputElement.offsetLeft}px`;
   inputElement.parentNode?.appendChild(toast);
@@ -45,6 +46,7 @@ function signUp(event) {
   const signupLastName = document.getElementById("lname").value;
   const signupEmail = document.getElementById("email").value;
   const signupPassword = document.getElementById("password").value;
+  toast.style.animation = "fadeIn 0.5s ease-in-out";
 
   if (
     !signupFirstName ||
@@ -211,6 +213,9 @@ function renderBlogPosts() {
 document.addEventListener("DOMContentLoaded", function () {
   if (window.location.pathname.includes("admin-dashboard-blogs.html")) {
     renderBlogPosts();
+
+    const blogContainer = document.getElementById("blogContent");
+    blogContainer.style.animation = "slideIn 0.5s ease-in-out";
   }
 });
 

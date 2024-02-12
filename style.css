@@ -19,6 +19,24 @@ body {
     box-sizing: border-box;
 }
 
+@keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  
+  @keyframes slideIn {
+    from {
+      transform: translateY(-50px);
+    }
+    to {
+      transform: translateY(0);
+    }
+  }  
+
 header {
     width: 100%;
     height: 10vh;
@@ -396,6 +414,7 @@ button {
     width: 470px;
     height: 330px;
     margin: 0 40px;
+    border-radius: 15px;
 }
 
 .blogsPage p {
@@ -831,7 +850,7 @@ ul li {
 .right .blogs img {
     width: 30px;
     height: 30px;
-
+    border-radius: 10px;
 }
 
 .blogsHeader {
@@ -1076,6 +1095,7 @@ ul li {
     width: 80%;
     height: auto;
     margin: 0 auto;
+    border-radius: 20px;
 }
 
 .post-detail {
