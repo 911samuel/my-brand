@@ -46,7 +46,6 @@ function signUp(event) {
   const signupLastName = document.getElementById("lname").value;
   const signupEmail = document.getElementById("email").value;
   const signupPassword = document.getElementById("password").value;
-  toast.style.animation = "fadeIn 0.5s ease-in-out";
 
   if (
     !signupFirstName ||
