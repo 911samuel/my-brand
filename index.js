@@ -97,6 +97,9 @@ function contact(event) {
   if (contactForm && contactForm.checkValidity()) {
     saveContactFormSubmission(new FormData(contactForm));
     showToast("Thank you for filling out the form!", "success", "success");
+    setTimeout(() => {
+      contactForm.reset();
+    }, 2000);
   } else {
     showToast("Please fill out the form before submitting.", "error", "success");
   }
@@ -337,7 +340,9 @@ function saveContactFormSubmission(formData) {
   for (const [key, value] of formData.entries()) {
     submissionData[key] = String(value);
   }
-  contactFormSubmissions.push(submissionData);
+  let storedSubmissions = JSON.parse(localStorage.getItem("contactFormSubmissions")) || [];
+  storedSubmissions.push(submissionData);
+  localStorage.setItem("contactFormSubmissions", JSON.stringify(storedSubmissions));
 }
 
 function save(form) {
