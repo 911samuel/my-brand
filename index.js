@@ -449,12 +449,14 @@ function showPosts() {
     const postDate = document.getElementById("post-date");
     const postTitle = document.getElementById("post-title");
     const postDescription = document.getElementById("post-description");
+    const comment = document.getElementById( "comment" );
 
     postImage.src = blogPost.imageUrl;
     postAuthor.textContent = `By: ${blogPost.author}`;
     postDate.textContent = blogPost.date;
     postTitle.textContent = blogPost.title;
     postDescription.textContent = blogPost.description;
+    comment.textContent = blogPost.comment ? blogPost.comment: 'No comments yet! Be the first to leave a comment.' ;
   } else {
     console.error(`Blog post with index ${postId} not found.`);
   }

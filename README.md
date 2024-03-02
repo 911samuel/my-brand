@@ -1,11 +1,20 @@
+<!-- ⚠️ This README has been generated from the file(s) "blueprint.md" ⚠️-->
 
-# Personal Website and Blog
+[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/colored.png)](#personal-website-and-blog)
 
-## Overview
+# ➤ Personal Website and Blog
+
+
+[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/colored.png)](#overview)
+
+## ➤ Overview
 
 In today's digital age, having a strong online presence is essential for professionals to showcase their skills, experience, and ideas. This personal website and blog serve as a platform for sharing insights, connecting with the audience, and exploring opportunities in the industry.
 
-## Features
+
+[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/colored.png)](#features)
+
+## ➤ Features
 
 ### Basic Information Display
 - Visitors can view essential details about the site owner, including profile picture, profession, skills, experience, physical address, and social media links.
@@ -26,13 +35,19 @@ In today's digital age, having a strong online presence is essential for profess
 ### User Authentication
 - The website includes a secure login system, enabling the site owner to access administrative functionalities and manage the content effectively.
 
-## Optional Features
+
+[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/colored.png)](#optional-features)
+
+## ➤ Optional Features
 
 ### Subscription Service
 - Guests can subscribe to the website to receive updates and notifications about new articles and developments.
 - Subscribed users receive email notifications whenever a new article is posted on the site, ensuring they stay informed and engaged.
 
-## Technologies Used
+
+[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/colored.png)](#technologies-used)
+
+## ➤ Technologies Used
 
 - Frontend: HTML, CSS, JavaScript
 - Backend: Node.js, Express.js
@@ -40,7 +55,10 @@ In today's digital age, having a strong online presence is essential for profess
 - Authentication: JWT (JSON Web Tokens)
 - Email Service: (Insert email service provider here)
 
-## Setup Instructions
+
+[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/colored.png)](#setup-instructions)
+
+## ➤ Setup Instructions
 
 1. Clone the repository to your local machine.
 2. Install dependencies using `npm install`.
@@ -49,10 +67,16 @@ In today's digital age, having a strong online presence is essential for profess
 5. Run the application using `npm start`.
 6. Access the website through the provided URL and explore its features.
 
-## Contributors
+
+[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/colored.png)](#contributors)
+
+## ➤ Contributors
 
 - [Your Name](https://github.com/yourusername) - Developer
 
-## License
+
+[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/colored.png)](#license)
+
+## ➤ License
 
 This project is licensed under the [MIT License](LICENSE).

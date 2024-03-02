@@ -422,6 +422,14 @@ button {
     margin: 10px 60px;
 }
 
+.comment {
+    margin-bottom: 10px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+  }
+
 .more {
     margin: 30px auto;
     display: block;
