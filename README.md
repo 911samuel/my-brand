@@ -72,7 +72,7 @@ In today's digital age, having a strong online presence is essential for profess
 
 ## ➤ Contributors
 
-- [Your Name](https://github.com/yourusername) - Developer
+- [ABAYIZERA Samuel]([https://github.com/yourusername](https://github.com/911samuel)) - Developer
 
 
 [![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/colored.png)](#license)
