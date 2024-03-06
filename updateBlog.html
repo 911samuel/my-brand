@@ -78,7 +78,7 @@
             </div>
 
             <div class="upload">
-                <p class="uploadTitle">Update</p>
+                <p class="uploadTitle" onload="getBlog()">Update</p>
                 <form id="updateForm" onsubmit="updateBlog(event)">
                     <div class="uploadForm">
                       <img src="./img/Upload.png" alt="upload">
@@ -86,18 +86,18 @@
                         <p>Drag & drop files</p>
                         <p>Supported formats: JPEG, PNG, GIF</p>
                         <div class="displayFile"></div>
-                        <input type="file" id="myFile" name="file" accept="image"/>
+                        <input type="file" id="myFile" name="imgUrl" accept="image"/>
                       </div>
                     </div>
                     <div class="labels">
                       <label for="title">Title</label>
-                      <input type="text" id="title" name="blog_title" placeholder="Enter title..." />
-                      <label for="author">Author</label>
-                      <input type="text" id="author" name="blog_author" placeholder="Enter author..." />
-                      <label for="date">Date</label>
-                      <input type="date" id="date" name="blog_date" placeholder="dd/mm/yyyy" />
-                      <label for="description">Description</label>
-                      <textarea rows="5" cols="30" id="description" name="blog_desc" placeholder="Write something about your blog..." ></textarea>
+                        <input type="text" id="title" name="title" placeholder="Enter title..." />
+                        <label for="author">Author</label>
+                        <input type="text" id="author" name="author" placeholder="Enter author..." />
+                        <label for="category">Category</label>
+                        <input type="text" id="category" name="category" placeholder="ex: fashion" />
+                        <label for="description">Description</label>
+                        <textarea rows="5" cols="30" id="description" name="description" placeholder="Write something about your blog..." ></textarea>
                       <input type="hidden" id="editIndex" name="editIndex" />
                       <button type="submit" id="success">Update</button>
                     </div>
@@ -113,32 +113,7 @@
     &copy; 2023. Designed by Sam. All rights reserved.
 </footer>
 
-<script>
-    function getUrlParameter(name) {
-      name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
-      const regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
-      const results = regex.exec(location.search);
-      return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
-    }
-
-    const editIndex = getUrlParameter('index');
-
-    if (editIndex) {
-      const blogPost = getBlogPostByIndex(editIndex);
-  
-      if (blogPost) {
-        document.getElementById("title").value = blogPost.title;
-        document.getElementById("author").value = blogPost.author;
-        document.getElementById("date").value = blogPost.date;
-        document.getElementById("description").value = blogPost.description;
-      }
-    }
-  
-    function getBlogPostByIndex(index) {
-      const blogPosts = JSON.parse(localStorage.getItem("blogPosts") || "[]");
-      return blogPosts.find(post => post.index === parseInt(index));
-    }
-  </script>
+<script src="index.js"></script>
   
 </body>
 </html>

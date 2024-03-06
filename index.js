@@ -1,15 +1,7 @@
-let accounts = [];
-let blogPosts = [];
-let contactFormSubmissions = [];
-let nextIndex = 1;
-let blogIndex = 0;
-let views = 0;
-
 function showToast(message, messageType, inputId) {
   const toast = document.createElement("div");
   const inputElement = document.getElementById(inputId);
   if (!inputElement) {
-    console.error(`Input element with id '${inputId}' not found.`);
     return;
   }
   toast.textContent = message;
@@ -35,78 +27,120 @@ function showToast(message, messageType, inputId) {
   }, 3000);
 }
 
-function isValidEmail(email) {
-  const regex = /^[^\s@]+@(gmail\.com|outlook\.com)$/;
-  return regex.test(email);
-}
-
 function signUp(event) {
   event.preventDefault();
+
   const signupFirstName = document.getElementById("fname").value;
   const signupLastName = document.getElementById("lname").value;
   const signupEmail = document.getElementById("email").value;
   const signupPassword = document.getElementById("password").value;
+  const username = document.getElementById("username").value;
 
-  if (
-    !signupFirstName ||
-    !signupLastName ||
-    !isValidEmail(signupEmail) ||
-    signupPassword.length < 8
-  ) {
-    showToast("All fields are required", "error", "success");
-  } else {
-    const accountData = {
-      firstName: signupFirstName,
-      lastName: signupLastName,
-      email: signupEmail,
-      password: signupPassword,
-    };
-    let storedAccounts = JSON.parse(localStorage.getItem("accounts") || "[]");
-    storedAccounts.push(accountData);
-    localStorage.setItem("accounts", JSON.stringify(storedAccounts));
-    showToast("Account created successfully!", "success", "success");
-    setTimeout(() => {
-      window.location.href = "signin.html";
-    }, 2000);
-  }
+  const register = {
+    firstname: signupFirstName,
+    lastname: signupLastName,
+    username: username,
+    email: signupEmail,
+    password: signupPassword,
+  };
+
+  fetch("http://localhost:3000/users/signUp", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(register),
+  })
+    .then(async (response) => {
+      const data = await response.json();
+
+      if (data.message === "Registration successful") {
+        showToast(data.message, "success", "success");
+        setTimeout(() => {
+          window.location.href = "signin.html";
+        }, 2000);
+      } else if (data.message === "Username is already taken") {
+        showToast(data.message, "error", "username");
+      } else if (data.message === "Email is already registered") {
+        showToast(data.message, "error", "email");
+      } else if (data.errorMessage) {
+        if (data.errorMessage === "First name is required") {
+          showToast(data.errorMessage, "error", "fname");
+        } else if (data.errorMessage === "Last name is required") {
+          showToast(data.errorMessage, "error", "lname");
+        } else if (data.errorMessage === "Username is required") {
+          showToast(data.errorMessage, "error", "username");
+        } else if (
+          data.errorMessage === "Invalid email format" ||
+          data.errorMessage === "Email is required"
+        ) {
+          showToast(data.errorMessage, "error", "email");
+        } else if (
+          data.errorMessage === "Password is required" ||
+          data.errorMessage === "Password cannot exceed 20 characters" ||
+          data.errorMessage === "Password must be at least 6 characters long"
+        ) {
+          showToast(data.errorMessage, "error", "password");
+        }
+      }
+    })
+    .catch((error) => {
+      showToast(error.message, "error", "success");
+    });
 }
 
 function signIn(event) {
   event.preventDefault();
   const signinEmail = document.getElementById("email").value;
   const signinPassword = document.getElementById("password").value;
-  const storedAccounts = JSON.parse(localStorage.getItem("accounts") || "[]");
-  const loggedInAccount = storedAccounts.find(
-    (account) => account.email === signinEmail
-  );
 
-  if (loggedInAccount && loggedInAccount.password === signinPassword) {
-    showToast(`Welcome back, ${loggedInAccount.lastName}`, "success", "success");
-    setTimeout(() => {
-      window.location.href = "admin-dashboard-blogs.html";
-    }, 2000);
-  } else {
-    showToast("Wrong Email or Password", "error", "password");
-  }
-}
+  const login = {
+    email: signinEmail,
+    password: signinPassword,
+  };
 
-function contact(event) {
-  event.preventDefault();
-  const contactForm = document.getElementById("contactForm");
-  if (contactForm && contactForm.checkValidity()) {
-    saveContactFormSubmission(new FormData(contactForm));
-    showToast("Thank you for filling out the form!", "success", "success");
-    setTimeout(() => {
-      contactForm.reset();
-    }, 2000);
-  } else {
-    showToast("Please fill out the form before submitting.", "error", "success");
-  }
+  fetch("http://localhost:3000/users/signIn", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(login),
+  })
+    .then(async (response) => {
+      const data = await response.json();
+      if (!response.ok) {
+        showToast(data.message, "error", "success");
+      }
+
+      if (data.message === "Login successful") {
+        showToast(
+          `Welcome back, ${data.userWithoutPassword.username}`,
+          "success",
+          "success"
+        );
+
+        if (data.userWithoutPassword.role === "admin") {
+          localStorage.setItem("adminToken", data.token);
+          setTimeout(() => {
+            window.location.href = "admin-dashboard-blogs.html";
+          }, 1500);
+        } else {
+          localStorage.setItem("userToken", data.token);
+          setTimeout(() => {
+            window.location.href = "index.html";
+          }, 1500);
+        }
+      } else {
+        showToast(data.message, "error", "success");
+      }
+    })
+    .catch((error) => {
+      showToast(error.message, "error", "success");
+    });
 }
 
 function gd(sentence) {
   if (typeof sentence !== "string") {
-    console.error("The 'sentence' parameter must be a string.");
     return null;
   }
   const words = sentence.split(" ");
@@ -119,126 +153,157 @@ function gd(sentence) {
 
 function uploadBlog(event) {
   event.preventDefault();
-  const fileInput = document.getElementById("myFile");
-  const displayFile = document.querySelector(".displayFile");
+
+  const fileInput = document.getElementById("myFile").files[0];
   const myTitle = document.getElementById("title").value;
   const myAuthor = document.getElementById("author").value;
-  const myDate = document.getElementById("date").value;
+  const myCategory = document.getElementById("category").value;
   const myDescription = document.getElementById("description").value;
-  const file = fileInput.files?.[0];
 
-  if (!file) {
+  if (!fileInput) {
     showToast("Please select an Image for your Blog!", "error", "myFile");
-  } else if (!myTitle.trim() || !myAuthor.trim() || !myDate.trim() || !myDescription.trim()) {
-    showToast("All fields are required", "error");
+    return;
+  }
+
+  const article = new FormData();
+  article.append("imgUrl", fileInput);
+  article.append("title", myTitle);
+  article.append("author", myAuthor);
+  article.append("category", myCategory);
+  article.append("description", myDescription);
+
+  const token = localStorage.getItem("adminToken");
+
+  fetch("http://localhost:3000/blogs/create", {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+    body: article,
+  })
+    .then(async (response) => {
+      const data = await response.json();
+
+      if (data.message === "The blog was added successfully") {
+        showToast(data.message, "success", "success");
+        setTimeout(() => {
+          window.location.href = "./admin-dashboard-blogs.html";
+        }, 2000);
+      } else if (data.errorMessage) {
+        if (data.errorMessage === "Title is required") {
+          showToast(data.errorMessage, "error", "title");
+        } else if (data.errorMessage === "Author is required") {
+          showToast(data.errorMessage, "error", "author");
+        } else if (data.errorMessage === "Category is required") {
+          showToast(data.errorMessage, "error", "category");
+        } else {
+          showToast(data.errorMessage, "error", "description");
+        }
+      }
+    })
+    .catch((error) => {
+      showToast("Error uploading blog", "error", "myFile");
+    });
+}
+
+function gd(sentence) {
+  if (typeof sentence !== "string") {
+    return null;
+  }
+  const words = sentence.split(" ");
+  if (words.length >= 2) {
+    return words[0][0].toUpperCase() + words[1][0].toUpperCase();
   } else {
-    const reader = new FileReader();
-    reader.onload = function (e) {
-      const previewImage = document.createElement("img");
-      previewImage.src = e.target?.result;
-      previewImage.style.width = "100%";
-      previewImage.style.height = "400px";
-      displayFile.innerHTML = "";
-      displayFile.onchange = () => {
-        displayFile.appendChild(previewImage);
-      };
-      const blogPosts = JSON.parse(localStorage.getItem("blogPosts") || "[]");
-      const lastIndex = blogPosts.length > 0 ? blogPosts[blogPosts.length - 1].index : 0;
-      const blogPost = {
-        title: myTitle,
-        author: myAuthor,
-        date: myDate,
-        description: myDescription,
-        imageUrl: previewImage.src,
-        index: lastIndex + 1, 
-        views: views,
-      };
-      saveBlogPost(blogPost);
-      showToast("Blog uploaded successfully", "success", "success");
-      setTimeout(() => {
-        window.location.href = "./admin-dashboard-blogs.html";
-      }, 3000);
-      renderBlogPosts();
-    };
-    reader.onerror = function () {
-      showToast("Failed to upload the blog. Please try again.", "error", "success");
-    };
-    reader.readAsDataURL(file);
+    return words[0].charAt(0).toUpperCase() + words[0].charAt(1).toLowerCase();
   }
 }
 
-function createBlogPost(blogPost) {
-  const newGD = document.createElement("div");
-  newGD.classList.add("gd");
-  newGD.innerHTML = `
-      <div class="circle">
-          <p>${gd(blogPost.title)}</p>  
-      </div>
-      <div class="gdText">
-          <p class="gdText1">${blogPost.title}</p>
-          <p class="gdText2">${blogPost.date}</p>  
-      </div>  
-      <div class="views">
-          <img src="./img/view.png" alt="view" />
-          <p>${blogPost.views}</p>  
-      </div>
-      <div class="gdButton">
-        <button onclick="editBlog(${blogPost.index})">Edit</button>
-        <button onclick="deleteBlog(${blogPost.index})">Delete</button>
-      </div>
-    `;
-  return newGD;
-}
+function createBlogPost() {
+  const token = localStorage.getItem("adminToken");
 
-function renderBlogPosts() {
-  const gdContainer = document.getElementById("blogContent");
-  if (!gdContainer) {
-    console.error("Blog content container not found.");
-    return;
-  }
+  fetch("http://localhost:3000/blogs/all", {
+    method: "GET",
+    headers: {
+      Authorization: `Bearer ${token}`,
+      "Content-Type": "application/json",
+    },
+  })
+    .then((res) => res.json())
+    .then((data) => {
+      const blogContent = document.getElementById("blogContent");
+      if (!blogContent) {
+        return;
+      }
 
-  gdContainer.innerHTML = "";
+      if (!data.blogs || !Array.isArray(data.blogs)) {
+        return;
+      }
 
-  const savedBlogPostsString = localStorage.getItem("blogPosts");
-  if (!savedBlogPostsString) {
-    console.error("No blog posts found in local storage.");
-    return;
-  }
-
-  const savedBlogPosts = JSON.parse(savedBlogPostsString);
-  savedBlogPosts.forEach((blogPost) => {
-    const newBlogPostElement = createBlogPost(blogPost);
-    gdContainer.appendChild(newBlogPostElement);
-  });
+      data.blogs.forEach((blog) => {
+        const newGD = document.createElement("div");
+        newGD.classList.add("gd");
+        newGD.innerHTML = `
+          <div class="circle">
+              <p>${gd(blog.title)}</p>  
+          </div>
+          <div class="gdText">
+              <p class="gdText1">${blog.title}</p>
+              <p class="gdText2">${blog.createdAt}</p>  
+          </div>  
+          <div class="views">
+              <img src="./img/view.png" alt="view" />
+              <p>${blog.views}</p>  
+          </div>
+          <div class="gdButton">
+            <button onclick="editBlog('${blog._id}')">Edit</button>
+            <button onclick="deleteBlog('${blog._id}')">Delete</button>
+          </div>
+        `;
+        blogContent.appendChild(newGD);
+      });
+    })
+    .catch((error) => console.error("Error:", error));
 }
 
 document.addEventListener("DOMContentLoaded", function () {
   if (window.location.pathname.includes("admin-dashboard-blogs.html")) {
-    renderBlogPosts();
-
-    const blogContainer = document.getElementById("blogContent");
-    blogContainer.style.animation = "slideIn 0.5s ease-in-out";
+    createBlogPost();
   }
 });
 
-function deleteBlog(index) {
+function deleteBlog(blogId) {
   const confirmationModal = document.getElementById("confirmationModal");
   const confirmDeleteBtn = document.getElementById("confirmDelete");
   const cancelDeleteBtn = document.getElementById("cancelDelete");
 
   confirmationModal.style.display = "block";
+  const token = localStorage.getItem("adminToken");
 
   confirmDeleteBtn.onclick = function () {
-    let blogPosts = JSON.parse(localStorage.getItem("blogPosts") || "[]");
-    const indexToDelete = blogPosts.findIndex((post) => post.index === index);
+    fetch(`http://localhost:3000/blogs/delete/${blogId}`, {
+      method: "DELETE",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Failed to delete blog");
+        }
 
-    if (indexToDelete !== -1) {
-      blogPosts.splice(indexToDelete, 1);
-      localStorage.setItem("blogPosts", JSON.stringify(blogPosts));
-      renderBlogPosts();
-      showToast("Blog deleted successfully", "success");
-    }
-    confirmationModal.style.display = "none";
+        return response.json();
+      })
+      .then((data) => {
+        showToast(data.message, "success", "success");
+        window.location.reload();
+      })
+      .catch((error) => {
+        console.error("Error deleting blog:", error);
+        showToast("Failed to delete blog", "error");
+      })
+      .finally(() => {
+        confirmationModal.style.display = "none";
+      });
   };
 
   cancelDeleteBtn.onclick = function () {
@@ -252,13 +317,33 @@ function deleteAllBlogs() {
   const cancelDeleteBtn = document.getElementById("cancelDelete");
 
   confirmationModal.style.display = "block";
+  const token = localStorage.getItem("adminToken");
 
   confirmDeleteBtn.onclick = function () {
-    localStorage.removeItem("blogPosts");
-    blogPosts = [];
-    renderBlogPosts();
-    showToast("All blogs deleted successfully", "success");
-    confirmationModal.style.display = "none";
+    fetch(`http://localhost:3000/blogs/deleteAll`, {
+      method: "DELETE",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Failed to delete blog");
+        }
+
+        return response.json();
+      })
+      .then((data) => {
+        showToast(data.message, "success", "success");
+        window.location.reload();
+      })
+      .catch((error) => {
+        console.error("Error deleting blog:", error);
+        showToast("Failed to delete blog", "error");
+      })
+      .finally(() => {
+        confirmationModal.style.display = "none";
+      });
   };
 
   cancelDeleteBtn.onclick = function () {
@@ -266,126 +351,172 @@ function deleteAllBlogs() {
   };
 }
 
-function editBlog(index) {
-  const blogPosts = JSON.parse(localStorage.getItem("blogPosts") || "[]");
-  const blogPost = blogPosts.find((post) => post.index === parseInt(index));
-
-  if (blogPost) {
-    window.location.href = `updateBlog.html?index=${index}`;
-  } else {
-    console.error(`Blog post with index ${index} not found.`);
-  }
+function editBlog(blogId) {
+  window.location.href = `updateBlog.html?blogId=${blogId}`;
 }
+
+document.addEventListener("DOMContentLoaded", function () {
+  if (window.location.pathname.includes("updateBlog.html")) {
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    const blogId = urlParams.get("blogId");
+    getBlog(blogId);
+  }
+});
+
+document.addEventListener("DOMContentLoaded", function () {
+  if (window.location.pathname.includes("updateBlog.html")) {
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    const blogId = urlParams.get("blogId");
+    updateBlog(blogId);
+  }
+});
 
 function updateBlog(event) {
   event.preventDefault();
 
   const queryString = window.location.search;
   const urlParams = new URLSearchParams(queryString);
+  const blogId = urlParams.get("blogId");
+  console.log(blogId);
+
+  const token = localStorage.getItem("adminToken");
 
   const updatedTitle = document.getElementById("title").value;
   const updatedAuthor = document.getElementById("author").value;
-  const updatedDate = document.getElementById("date").value;
+  const updatedCategory = document.getElementById("category").value;
   const updatedDescription = document.getElementById("description").value;
+  const updatedImageUrl = document.getElementById("myFile").files[0];
 
-  const fileInput = document.getElementById("myFile");
-  const file = fileInput.files[0];
-
-  if (!file) {
+  if (!updatedImageUrl) {
     showToast("Please select an Image for your Blog!", "error", "myFile");
     return;
   }
 
-  const reader = new FileReader();
-  reader.onload = function (e) {
-    const updatedImage = e.target.result;
+  const update = new FormData();
+  update.append("imgUrl", updatedImageUrl);
+  update.append("title", updatedTitle);
+  update.append("author", updatedAuthor);
+  update.append("category", updatedCategory);
+  update.append("description", updatedDescription);
 
-    const blogPosts = JSON.parse(localStorage.getItem("blogPosts") || "[]");
-    const indexToUpdate = blogPosts.findIndex(
-      (post) => post.index === parseInt(editIndex)
-    );
-    if (indexToUpdate !== -1) {
-      blogPosts[indexToUpdate] = {
-        index: parseInt(editIndex),
-        title: updatedTitle,
-        author: updatedAuthor,
-        date: updatedDate,
-        description: updatedDescription,
-        imageUrl: updatedImage,
-        views: views,
-      };
-      localStorage.setItem("blogPosts", JSON.stringify(blogPosts));
-      showToast("Blog uploaded successfully", "success", "success");
-    } else {
-      showToast("Failed to upload the blog. Please try again.", "error", "success");
-    }
-
-    setTimeout(() => {
-      window.location.href = "./admin-dashboard-blogs.html";
-    }, 3000);
-  };
-
-  reader.readAsDataURL(file);
+  fetch(`http://localhost:3000/blogs/update/${blogId}`, {
+    method: "PUT",
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+    body: update,
+  })
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error("Failed to update blog");
+      }
+      return response.json();
+    })
+    .then((data) => {
+      showToast("Blog updated successfully", "success", "success");
+      setTimeout(() => {
+        window.location.href = "./admin-dashboard-blogs.html";
+      }, 3000);
+    })
+    .catch((error) => {
+      console.error("Error updating blog:", error);
+      showToast("Failed to update blog. Please try again.", "error", "error");
+    });
 }
 
-function saveBlogPost(blogPost) {
-  let blogPosts = JSON.parse(localStorage.getItem("blogPosts") || "[]");
-  blogPosts.push(blogPost);
-  localStorage.setItem("blogPosts", JSON.stringify(blogPosts));
+
+function getBlog(blogId) {
+  const token = localStorage.getItem("adminToken");
+
+  fetch(`http://localhost:3000/blogs/single/${blogId}`, {
+    method: "GET",
+    headers: {
+      Authorization: `Bearer ${token}`,
+      "Content-Type": "application/json",
+    },
+  })
+    .then(async (response) => {
+      const data = await response.json();
+
+      document.getElementById("title").value = data.blog.title;
+      document.getElementById("author").value = data.blog.author;
+      document.getElementById("category").value = data.blog.category;
+      document.getElementById("description").value = data.blog.description;
+    })
+    .catch((err) => {
+      console.log(err);
+    });
 }
 
-function saveContactFormSubmission(formData) {
-  let submissionData = {};
-  for (const [key, value] of formData.entries()) {
-    submissionData[key] = String(value);
-  }
-  let storedSubmissions = JSON.parse(localStorage.getItem("contactFormSubmissions")) || [];
-  storedSubmissions.push(submissionData);
-  localStorage.setItem("contactFormSubmissions", JSON.stringify(storedSubmissions));
-}
-
-function save(form) {
-  const formData = new FormData(form);
-  for (const [key, value] of formData.entries()) {
-    localStorage.setItem(key, String(value));
-  }
-}
 
 document.addEventListener("DOMContentLoaded", function () {
   if (window.location.pathname.includes("blog.html")) {
-    renderBlogUpdatePosts(blogIndex);
+    // Initialize startIndex to 0 when the page is loaded
+    renderBlogUpdatePosts(0);
   }
 });
 
 function renderBlogUpdatePosts(startIndex) {
-  const blogsContainer = document.querySelector(".blogsPage");
-  if (!blogsContainer) {
-    console.error("Blogs container not found.");
-    return;
-  }
+  const token = localStorage.getItem("adminToken");
+  let loadedBlogIds = [];
 
-  const blogPosts = JSON.parse(localStorage.getItem("blogPosts") || "[]");
+  fetch(`http://localhost:3000/blogs/all?startIndex=${startIndex}&limit=3`, {
+    method: "GET",
+    headers: {
+      Authorization: `Bearer ${token}`,
+      "Content-Type": "application/json",
+    },
+  })
+    .then((res) => res.json())
+    .then((data) => {
+      const blogsContainer = document.querySelector(".blogsPage");
+      if (!blogsContainer) {
+        console.error("Blogs container not found.");
+        return;
+      }
 
-  if (startIndex === 0) {
-    blogsContainer.innerHTML = "";
-  }
+      if (!data || !data.blogs || !Array.isArray(data.blogs)) {
+        console.error("Invalid data format: blogs not found or not an array.");
+        return;
+      }
 
-  for (let i = startIndex; i < startIndex + 3 && i < blogPosts.length; i++) {
-    const blogElement = createBlogElement(blogPosts[i]);
-    blogsContainer.appendChild(blogElement);
-  };
+      // Clear blogsContainer before appending new blogs when startIndex is 0
+      if (startIndex === 0) {
+        blogsContainer.innerHTML = "";
+      }
 
-  blogIndex = startIndex + 3;
+      data.blogs.forEach((blog) => {
+        if (!loadedBlogIds.includes(blog._id)) {
+          const blogElement = createBlogElement(blog);
+          blogsContainer.appendChild(blogElement);
+          loadedBlogIds.push(blog._id);
+        }
+      });
 
-  if (blogIndex < blogPosts.length) {
-    document.querySelector(".more").style.display = "flex";
-  } else {
-    document.querySelector(".more").style.display = "none"; 
-  }
+      // Update startIndex for loading more blogs
+      startIndex += data.blogs.length;
+
+      const loadMoreButton = document.querySelector(".more");
+      if (startIndex >= data.totalCount) {
+        loadMoreButton.style.display = "none";
+      } else {
+        loadMoreButton.style.display = "block";
+      }
+
+      // Store the updated startIndex value for future use
+      loadMoreButton.dataset.startIndex = startIndex;
+    })
+    .catch((error) => {
+      console.error("Error fetching blogs:", error);
+    });
 }
 
 function loadMoreBlogs() {
-  renderBlogUpdatePosts(blogIndex); 
+  const loadMoreButton = document.querySelector(".more");
+  const startIndex = parseInt(loadMoreButton.dataset.startIndex) || 0;
+  renderBlogUpdatePosts(startIndex);
 }
 
 function createBlogElement(blogPost) {
@@ -401,7 +532,7 @@ function createBlogElement(blogPost) {
   const adminBy = document.createElement("p");
   adminBy.textContent = `By: ${blogPost.author}`;
   const blogDate = document.createElement("p");
-  blogDate.textContent = blogPost.date;
+  blogDate.textContent = blogPost.createdAt;
 
   const blogTitle = document.createElement("p");
   blogTitle.textContent = blogPost.title;
@@ -410,7 +541,7 @@ function createBlogElement(blogPost) {
   readMoreButton.textContent = "Read More";
   readMoreButton.classList.add("read-more");
   readMoreButton.addEventListener("click", () => {
-    increaseViews(blogPost.index)
+    increaseViews(blogPost.index);
     window.location.href = `singlepost.html?index=${blogPost.index}`;
   });
 
@@ -425,23 +556,13 @@ function createBlogElement(blogPost) {
   return blogDiv;
 }
 
-function increaseViews(index) {
-  let blogPosts = JSON.parse(localStorage.getItem("blogPosts") || "[]");
-  const blogIndex = blogPosts.findIndex(post => post.index === index);
-  if (blogIndex !== -1) {
-    blogPosts[blogIndex].views = (blogPosts[blogIndex].views || 0) + 1;
-    localStorage.setItem("blogPosts", JSON.stringify(blogPosts));
-  }
-}
-
 function showPosts() {
-  console.log("showing posts...");
   const urlParams = new URLSearchParams(window.location.search);
-  const postId = urlParams.get('index');
+  const postId = urlParams.get("index");
 
   const blogPosts = JSON.parse(localStorage.getItem("blogPosts") || "[]");
 
-  const blogPost = blogPosts.find(post => post.index === parseInt(postId));
+  const blogPost = blogPosts.find((post) => post.index === parseInt(postId));
 
   if (blogPost) {
     const postImage = document.getElementById("post-image");
@@ -449,21 +570,23 @@ function showPosts() {
     const postDate = document.getElementById("post-date");
     const postTitle = document.getElementById("post-title");
     const postDescription = document.getElementById("post-description");
-    const comment = document.getElementById( "comment" );
+    const comment = document.getElementById("comment");
 
     postImage.src = blogPost.imageUrl;
     postAuthor.textContent = `By: ${blogPost.author}`;
     postDate.textContent = blogPost.date;
     postTitle.textContent = blogPost.title;
     postDescription.textContent = blogPost.description;
-    comment.textContent = blogPost.comment ? blogPost.comment: 'No comments yet! Be the first to leave a comment.' ;
+    comment.textContent = blogPost.comment
+      ? blogPost.comment
+      : "No comments yet! Be the first to leave a comment.";
   } else {
     console.error(`Blog post with index ${postId} not found.`);
   }
 }
 
-document.addEventListener( 'DOMContentLoaded', function () {
-  if(window.location.href.includes("singlepost.html")){
+document.addEventListener("DOMContentLoaded", function () {
+  if (window.location.href.includes("singlepost.html")) {
     showPosts();
   }
 });
