@@ -44,7 +44,7 @@ function signUp(event) {
     password: signupPassword,
   };
 
-  fetch("http://localhost:3000/users/signUp", {
+  fetch("https://my-express-app-yzv8.onrender.com/users/signUp", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -99,7 +99,7 @@ function signIn(event) {
     password: signinPassword,
   };
 
-  fetch("http://localhost:3000/users/signIn", {
+  fetch("https://my-express-app-yzv8.onrender.com/users/signIn", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -174,7 +174,7 @@ function uploadBlog(event) {
 
   const token = localStorage.getItem("adminToken");
 
-  fetch("http://localhost:3000/blogs/create", {
+  fetch("https://my-express-app-yzv8.onrender.com/blogs/create", {
     method: "POST",
     headers: {
       Authorization: `Bearer ${token}`,
@@ -221,7 +221,7 @@ function gd(sentence) {
 function createBlogPost() {
   const token = localStorage.getItem("adminToken");
 
-  fetch("http://localhost:3000/blogs/all", {
+  fetch("https://my-express-app-yzv8.onrender.com/blogs/all", {
     method: "GET",
     headers: {
       Authorization: `Bearer ${token}`,
@@ -280,7 +280,7 @@ function deleteBlog(blogId) {
   const token = localStorage.getItem("adminToken");
 
   confirmDeleteBtn.onclick = function () {
-    fetch(`http://localhost:3000/blogs/delete/${blogId}`, {
+    fetch(`https://my-express-app-yzv8.onrender.com/blogs/delete/${blogId}`, {
       method: "DELETE",
       headers: {
         Authorization: `Bearer ${token}`,
@@ -320,7 +320,7 @@ function deleteAllBlogs() {
   const token = localStorage.getItem("adminToken");
 
   confirmDeleteBtn.onclick = function () {
-    fetch(`http://localhost:3000/blogs/deleteAll`, {
+    fetch("https://my-express-app-yzv8.onrender.com/blogs/deleteAll", {
       method: "DELETE",
       headers: {
         Authorization: `Bearer ${token}`,
@@ -401,13 +401,16 @@ function updateBlog(event) {
   update.append("category", updatedCategory);
   update.append("description", updatedDescription);
 
-  fetch(`http://localhost:3000/blogs/update/${blogId}`, {
-    method: "PUT",
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-    body: update,
-  })
+  fetch(
+    `https://my-express-app-yzv8.onrender.com/blogs/update/${blogId}`,
+    {
+      method: "PUT",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+      body: update,
+    }
+  )
     .then((response) => {
       if (!response.ok) {
         throw new Error("Failed to update blog");
@@ -430,13 +433,16 @@ function updateBlog(event) {
 function getBlog(blogId) {
   const token = localStorage.getItem("adminToken");
 
-  fetch(`http://localhost:3000/blogs/single/${blogId}`, {
-    method: "GET",
-    headers: {
-      Authorization: `Bearer ${token}`,
-      "Content-Type": "application/json",
-    },
-  })
+  fetch(
+    `https://my-express-app-yzv8.onrender.com/blogs/single/${blogId}`,
+    {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+    }
+  )
     .then(async (response) => {
       const data = await response.json();
 
@@ -462,13 +468,16 @@ function renderBlogUpdatePosts(startIndex) {
   const token = localStorage.getItem("adminToken");
   let loadedBlogIds = [];
 
-  fetch(`http://localhost:3000/blogs/all?startIndex=${startIndex}&limit=3`, {
-    method: "GET",
-    headers: {
-      Authorization: `Bearer ${token}`,
-      "Content-Type": "application/json",
-    },
-  })
+  fetch(
+    `https://my-express-app-yzv8.onrender.com/blogs/all?startIndex=${startIndex}&limit=3`,
+    {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+    }
+  )
     .then((res) => res.json())
     .then((data) => {
       const blogsContainer = document.querySelector(".blogsPage");
