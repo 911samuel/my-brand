@@ -536,12 +536,13 @@ function createBlogElement(blogPost) {
   const blogTitle = document.createElement("p");
   blogTitle.textContent = blogPost.title;
 
+
   const readMoreButton = document.createElement("button");
   readMoreButton.textContent = "Read More";
   readMoreButton.classList.add("read-more");
   readMoreButton.addEventListener("click", () => {
-    window.location.href = `singlepost.html?index=${blogPost.index}`;
-    showPosts(blogPost.index);
+    window.location.href = `singlepost.html?${blogPost._id}`;
+    showPosts(blogPost._id);
   });
 
   adminInfo.appendChild(adminBy);
@@ -555,12 +556,9 @@ function createBlogElement(blogPost) {
   return blogDiv;
 }
 
-function showPosts() {
-  const urlParams = new URLSearchParams(window.location.search);
-  const postId = urlParams.get("index");
+function showPosts(index) {
 
-  fetch(`http://localhost:3000/blogs/single/${postId}`,
-    {
+  fetch(`https://my-express-app-yzv8.onrender.com/blogs/single/${index}`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
