@@ -224,7 +224,6 @@ function createBlogPost() {
   fetch("https://my-express-app-yzv8.onrender.com/blogs/all", {
     method: "GET",
     headers: {
-      Authorization: `Bearer ${token}`,
       "Content-Type": "application/json",
     },
   })
@@ -438,7 +437,6 @@ function getBlog(blogId) {
     {
       method: "GET",
       headers: {
-        Authorization: `Bearer ${token}`,
         "Content-Type": "application/json",
       },
     }
@@ -459,7 +457,6 @@ function getBlog(blogId) {
 
 document.addEventListener("DOMContentLoaded", function () {
   if (window.location.pathname.includes("blog.html")) {
-    // Initialize startIndex to 0 when the page is loaded
     renderBlogUpdatePosts(0);
   }
 });
@@ -473,7 +470,6 @@ function renderBlogUpdatePosts(startIndex) {
     {
       method: "GET",
       headers: {
-        Authorization: `Bearer ${token}`,
         "Content-Type": "application/json",
       },
     }
@@ -491,7 +487,6 @@ function renderBlogUpdatePosts(startIndex) {
         return;
       }
 
-      // Clear blogsContainer before appending new blogs when startIndex is 0
       if (startIndex === 0) {
         blogsContainer.innerHTML = "";
       }
@@ -504,7 +499,6 @@ function renderBlogUpdatePosts(startIndex) {
         }
       });
 
-      // Update startIndex for loading more blogs
       startIndex += data.blogs.length;
 
       const loadMoreButton = document.querySelector(".more");
@@ -514,7 +508,6 @@ function renderBlogUpdatePosts(startIndex) {
         loadMoreButton.style.display = "block";
       }
 
-      // Store the updated startIndex value for future use
       loadMoreButton.dataset.startIndex = startIndex;
     })
     .catch((error) => {
@@ -550,7 +543,6 @@ function createBlogElement(blogPost) {
   readMoreButton.textContent = "Read More";
   readMoreButton.classList.add("read-more");
   readMoreButton.addEventListener("click", () => {
-    increaseViews(blogPost.index);
     window.location.href = `singlepost.html?index=${blogPost.index}`;
   });
 
@@ -569,30 +561,41 @@ function showPosts() {
   const urlParams = new URLSearchParams(window.location.search);
   const postId = urlParams.get("index");
 
-  const blogPosts = JSON.parse(localStorage.getItem("blogPosts") || "[]");
+  fetch(`http://localhost:3000/blogs/single/${postId}`,
+    {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  })
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error("Failed to fetch blog post");
+      }
+      return response.json();
+    })
+    .then((blogPost) => {
+      const postImage = document.getElementById("post-image");
+      const postAuthor = document.getElementById("post-author");
+      const postDate = document.getElementById("post-date");
+      const postTitle = document.getElementById("post-title");
+      const postDescription = document.getElementById("post-description");
+      const comment = document.getElementById("comment");
 
-  const blogPost = blogPosts.find((post) => post.index === parseInt(postId));
-
-  if (blogPost) {
-    const postImage = document.getElementById("post-image");
-    const postAuthor = document.getElementById("post-author");
-    const postDate = document.getElementById("post-date");
-    const postTitle = document.getElementById("post-title");
-    const postDescription = document.getElementById("post-description");
-    const comment = document.getElementById("comment");
-
-    postImage.src = blogPost.imageUrl;
-    postAuthor.textContent = `By: ${blogPost.author}`;
-    postDate.textContent = blogPost.date;
-    postTitle.textContent = blogPost.title;
-    postDescription.textContent = blogPost.description;
-    comment.textContent = blogPost.comment
-      ? blogPost.comment
-      : "No comments yet! Be the first to leave a comment.";
-  } else {
-    console.error(`Blog post with index ${postId} not found.`);
-  }
+      postImage.src = blogPost.imageUrl;
+      postAuthor.textContent = `By: ${blogPost.author}`;
+      postDate.textContent = blogPost.date;
+      postTitle.textContent = blogPost.title;
+      postDescription.textContent = blogPost.description;
+      comment.textContent = blogPost.comment
+        ? blogPost.comment
+        : "No comments yet! Be the first to leave a comment.";
+    })
+    .catch((error) => {
+      console.error("Error fetching blog post:", error);
+    });
 }
+
 
 document.addEventListener("DOMContentLoaded", function () {
   if (window.location.href.includes("singlepost.html")) {

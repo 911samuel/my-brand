@@ -1,74 +1,101 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta  charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>PORTIFOLIO</title>
-        <link rel="stylesheet" href="./style.css">
-    </head>
-    <body>
-        <header>
-            <nav>
-                <div class="myBusiness">
-                    <img src="./img/log.png" alt="logo" class="logo">
-                    <p class="sam"><strong class="samSpecial">S</strong>am</p>
-                </div>
-                <button class="toggle-btn" onclick="toggleMenu()">☰</button>
-                <div class="nav">
-                    <div class="close-icon" onclick="toggleMenu()">✕</div>
-                    <div>
-                        <a href="./index.html">HOME</a>
-                        <a href="./about.html">ABOUT</a>
-                        <a href="./skills.html">SKILLS</a>
-                        <a href="./portifolio.html">MY WORK</a>
-                        <a href="./blog.html">BLOG</a>
-                        <a href="./contact.html" class="gold">CONTACT</a>
-                        <a href="./resume.html">RESUME</a>
-                        <a href="./signin.html">SIGN IN</a>
-                        <a href="./signup.html">SIGN UP</a>
-                    </div>
-                    <div class="vertical-line"></div>
-                    <div class="contact">
-                        <a href="tel:+250784724228">
-                            <img src="./img/phone.png" alt="phone" class="phone">
-                            <p class="number">+250784724228</p>
-                        </a>
-                    </div>                    
-                </div>
-            </nav>
-        </header>
-        <div class="container">
-            <section class="header">
-                <div class="contactP">
-                    <h1>Just say Hello</h1>
-                    <form action="" id="contactForm" onsubmit="contact(event)" autocomplete="off">                       
-                        <input type="text" id="senderName" name="senderName" placeholder="Your Name" required>
-                        <input type="email" id="senderEmail" name="senderEmail" placeholder="Your Email" required>
-                        <input type="text" id="subject" name="subject" placeholder="Your Subject" required>
-                        <textarea id="message" name="message" rows="8" placeholder="Message" required></textarea>
-                        <button type="submit" id="success">Send Message</button>
-                    </form>
-                </div>
-                <div class="contactInfo">
-                    <p class="main">Contact Info</p>
-                    <P class="sub">Feel free to reach out to us using the following contact details:</P>
-                    <ul>
-                        <li>Email</li>
-                        <li class="adressInfo">abayizeraeaz@gmail.com</li>
-                        <li>Phone</li>
-                        <li class="adressInfo">+250 784724228 <br> +250 726993987</li>
-                        <li>Adress</li>
-                        <li class="adressInfo"> Rwanda, Kigali</li>
-                    </ul>
-                    <p class="descr">Visite my social profile and get connected</p>
-                </div>
-            </section>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PORTIFOLIO</title>
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <header>
+      <nav>
+        <div class="myBusiness">
+          <img src="./img/log.png" alt="logo" class="logo" />
+          <p class="sam"><strong class="samSpecial">S</strong>am</p>
         </div>
-                 <footer>
-            &copy; 2023. Designed by Sam. All right reserved.
-        </footer>
-        
-        <script src="index.js"></script>
-        
-    </body>
+        <button class="toggle-btn" onclick="toggleMenu()">☰</button>
+        <div class="nav">
+          <div class="close-icon" onclick="toggleMenu()">✕</div>
+          <div>
+            <a href="./index.html">HOME</a>
+            <a href="./about.html">ABOUT</a>
+            <a href="./skills.html">SKILLS</a>
+            <a href="./portifolio.html">MY WORK</a>
+            <a href="./blog.html">BLOG</a>
+            <a href="./contact.html" class="gold">CONTACT</a>
+            <a href="./resume.html">RESUME</a>
+            <a href="./signin.html">SIGN IN</a>
+            <a href="./signup.html">SIGN UP</a>
+          </div>
+          <div class="vertical-line"></div>
+          <div class="contact">
+            <a href="tel:+250784724228">
+              <img src="./img/phone.png" alt="phone" class="phone" />
+              <p class="number">+250784724228</p>
+            </a>
+          </div>
+        </div>
+      </nav>
+    </header>
+    <div class="container">
+      <section class="header">
+        <div class="contactP">
+          <h1>Just say Hello</h1>
+          <form
+            action=""
+            id="contactForm"
+            onsubmit="contact(event)"
+            autocomplete="off"
+          >
+            <input
+              type="text"
+              id="senderName"
+              name="senderName"
+              placeholder="Your Name"
+            />
+            <input
+              type="email"
+              id="senderEmail"
+              name="senderEmail"
+              placeholder="Your Email"
+            />
+            <input
+              type="text"
+              id="subject"
+              name="subject"
+              placeholder="Your Subject"
+            />
+            <textarea
+              id="message"
+              name="message"
+              rows="8"
+              placeholder="Message"
+            ></textarea>
+            <button type="submit" id="success">Send Message</button>
+          </form>
+        </div>
+        <div class="contactInfo">
+          <p class="main">Contact Info</p>
+          <p class="sub">
+            Feel free to reach out to us using the following contact details:
+          </p>
+          <ul>
+            <li>Email</li>
+            <li class="adressInfo">abayizeraeaz@gmail.com</li>
+            <li>Phone</li>
+            <li class="adressInfo">
+              +250 784724228 <br />
+              +250 726993987
+            </li>
+            <li>Adress</li>
+            <li class="adressInfo">Rwanda, Kigali</li>
+          </ul>
+          <p class="descr">Visite my social profile and get connected</p>
+        </div>
+      </section>
+    </div>
+    <footer>&copy; 2023. Designed by Sam. All right reserved.</footer>
+
+    <script src="index.js"></script>
+  </body>
 </html>
