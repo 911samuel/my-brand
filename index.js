@@ -219,7 +219,6 @@ function gd(sentence) {
 }
 
 function createBlogPost() {
-  const token = localStorage.getItem("adminToken");
 
   fetch("https://my-express-app-yzv8.onrender.com/blogs/all", {
     method: "GET",
@@ -378,7 +377,6 @@ function updateBlog(event) {
   const queryString = window.location.search;
   const urlParams = new URLSearchParams(queryString);
   const blogId = urlParams.get("blogId");
-  console.log(blogId);
 
   const token = localStorage.getItem("adminToken");
 
@@ -462,7 +460,6 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 function renderBlogUpdatePosts(startIndex) {
-  const token = localStorage.getItem("adminToken");
   let loadedBlogIds = [];
 
   fetch(
@@ -544,6 +541,7 @@ function createBlogElement(blogPost) {
   readMoreButton.classList.add("read-more");
   readMoreButton.addEventListener("click", () => {
     window.location.href = `singlepost.html?index=${blogPost.index}`;
+    showPosts(blogPost.index);
   });
 
   adminInfo.appendChild(adminBy);
