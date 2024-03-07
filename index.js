@@ -428,7 +428,6 @@ function updateBlog(event) {
 
 
 function getBlog(blogId) {
-  const token = localStorage.getItem("adminToken");
 
   fetch(
     `https://my-express-app-yzv8.onrender.com/blogs/single/${blogId}`,
@@ -523,8 +522,9 @@ function createBlogElement(blogPost) {
   blogDiv.classList.add("blog1");
 
   const blogImage = document.createElement("img");
-  blogImage.src = blogPost.imageUrl;
+  blogImage.src = `https://my-express-app-yzv8.onrender.com${blogPost.imgUrl}`;
   blogImage.alt = "blog image";
+  console.log(blogImage.src);
 
   const adminInfo = document.createElement("div");
   adminInfo.classList.add("admin");
@@ -537,13 +537,12 @@ function createBlogElement(blogPost) {
   blogTitle.textContent = blogPost.title;
 
 
-  const readMoreButton = document.createElement("button");
-  readMoreButton.textContent = "Read More";
-  readMoreButton.classList.add("read-more");
-  readMoreButton.addEventListener("click", () => {
-    window.location.href = `singlepost.html?${blogPost._id}`;
-    showPosts(blogPost._id);
-  });
+ const readMoreButton = document.createElement("button");
+ readMoreButton.textContent = "Read More";
+ readMoreButton.classList.add("read-more");
+ readMoreButton.addEventListener("click", (event) => {
+   window.location.href = `singlepost.html?id=${blogPost._id}`;
+ });
 
   adminInfo.appendChild(adminBy);
   adminInfo.appendChild(blogDate);
@@ -554,50 +553,8 @@ function createBlogElement(blogPost) {
   blogDiv.appendChild(readMoreButton);
 
   return blogDiv;
+
 }
-
-function showPosts(index) {
-
-  fetch(`https://my-express-app-yzv8.onrender.com/blogs/single/${index}`, {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-    },
-  })
-    .then((response) => {
-      if (!response.ok) {
-        throw new Error("Failed to fetch blog post");
-      }
-      return response.json();
-    })
-    .then((blogPost) => {
-      const postImage = document.getElementById("post-image");
-      const postAuthor = document.getElementById("post-author");
-      const postDate = document.getElementById("post-date");
-      const postTitle = document.getElementById("post-title");
-      const postDescription = document.getElementById("post-description");
-      const comment = document.getElementById("comment");
-
-      postImage.src = blogPost.imageUrl;
-      postAuthor.textContent = `By: ${blogPost.author}`;
-      postDate.textContent = blogPost.date;
-      postTitle.textContent = blogPost.title;
-      postDescription.textContent = blogPost.description;
-      comment.textContent = blogPost.comment
-        ? blogPost.comment
-        : "No comments yet! Be the first to leave a comment.";
-    })
-    .catch((error) => {
-      console.error("Error fetching blog post:", error);
-    });
-}
-
-
-document.addEventListener("DOMContentLoaded", function () {
-  if (window.location.href.includes("singlepost.html")) {
-    showPosts();
-  }
-});
 
 function toggleMenu() {
   const navElement = document.querySelector(".nav");
