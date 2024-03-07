@@ -564,8 +564,8 @@ function showPost(postId) {
       console.log(data)
       document.getElementById(
         "post-image"
-      ).src = `https://my-express-app-yzv8.onrender.com/uploads${data.blog.imgUrl}`;
-      console.log(`https://my-express-app-yzv8.onrender.com/uploads${data.blog.imgUrl}`)
+      ).src = `https://my-express-app-yzv8.onrender.com/${data.blog.imgUrl}`;
+      console.log(`https://my-express-app-yzv8.onrender.com/${data.blog.imgUrl}`)
       document.getElementById(
         "post-author"
       ).textContent = `By: ${data.blog.author}`;
