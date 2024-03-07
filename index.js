@@ -219,7 +219,6 @@ function gd(sentence) {
 }
 
 function createBlogPost() {
-
   fetch("https://my-express-app-yzv8.onrender.com/blogs/all", {
     method: "GET",
     headers: {
@@ -398,16 +397,13 @@ function updateBlog(event) {
   update.append("category", updatedCategory);
   update.append("description", updatedDescription);
 
-  fetch(
-    `https://my-express-app-yzv8.onrender.com/blogs/update/${blogId}`,
-    {
-      method: "PUT",
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-      body: update,
-    }
-  )
+  fetch(`https://my-express-app-yzv8.onrender.com/blogs/update/${blogId}`, {
+    method: "PUT",
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+    body: update,
+  })
     .then((response) => {
       if (!response.ok) {
         throw new Error("Failed to update blog");
@@ -426,18 +422,13 @@ function updateBlog(event) {
     });
 }
 
-
 function getBlog(blogId) {
-
-  fetch(
-    `https://my-express-app-yzv8.onrender.com/blogs/single/${blogId}`,
-    {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    }
-  )
+  fetch(`https://my-express-app-yzv8.onrender.com/blogs/single/${blogId}`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  })
     .then(async (response) => {
       const data = await response.json();
 
@@ -450,7 +441,6 @@ function getBlog(blogId) {
       console.log(err);
     });
 }
-
 
 document.addEventListener("DOMContentLoaded", function () {
   if (window.location.pathname.includes("blog.html")) {
@@ -524,7 +514,6 @@ function createBlogElement(blogPost) {
   const blogImage = document.createElement("img");
   blogImage.src = `https://my-express-app-yzv8.onrender.com${blogPost.imgUrl}`;
   blogImage.alt = "blog image";
-  console.log(blogImage.src);
 
   const adminInfo = document.createElement("div");
   adminInfo.classList.add("admin");
@@ -536,13 +525,13 @@ function createBlogElement(blogPost) {
   const blogTitle = document.createElement("p");
   blogTitle.textContent = blogPost.title;
 
-
- const readMoreButton = document.createElement("button");
- readMoreButton.textContent = "Read More";
- readMoreButton.classList.add("read-more");
- readMoreButton.addEventListener("click", (event) => {
-   window.location.href = `singlepost.html?id=${blogPost._id}`;
- });
+  const readMoreButton = document.createElement("button");
+  readMoreButton.textContent = "Read More";
+  readMoreButton.classList.add("read-more");
+  readMoreButton.addEventListener("click", () => {
+    const blogId = blogPost._id;
+    window.location.href = `singlepost.html?id=${blogId}`;
+  });
 
   adminInfo.appendChild(adminBy);
   adminInfo.appendChild(blogDate);
@@ -553,7 +542,76 @@ function createBlogElement(blogPost) {
   blogDiv.appendChild(readMoreButton);
 
   return blogDiv;
+}
 
+document.addEventListener("DOMContentLoaded", function () {
+  if (window.location.pathname.includes("singlepost.html")) {
+    const urlParams = new URLSearchParams(window.location.search);
+    const postId = urlParams.get("id");
+    showPost(postId);
+  }
+});
+
+function showPost(postId) {
+  fetch(`https://my-express-app-yzv8.onrender.com/blogs/single/${postId}`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  })
+    .then(async (response) => {
+      const data = await response.json();
+      console.log(data)
+      document.getElementById(
+        "post-image"
+      ).src = `https://my-express-app-yzv8.onrender.com/uploads${data.blog.imgUrl}`;
+      console.log(`https://my-express-app-yzv8.onrender.com/uploads${data.blog.imgUrl}`)
+      document.getElementById(
+        "post-author"
+      ).textContent = `By: ${data.blog.author}`;
+      document.getElementById("post-date").textContent = data.blog.date;
+      document.getElementById("post-title").textContent = data.blog.title;
+      document.getElementById("post-description").textContent =
+        data.blog.description;
+
+      fetch(`https://my-express-app-yzv8.onrender.com/comments/add/${postId}`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+        .then(async (commentResponse) => {
+          const comments = await commentResponse.json();
+          renderComments(comments);
+          console.log(comments);
+        })
+        .catch((error) => {
+          console.log("Error fetching comments:", error);
+        });
+    })
+    .catch((error) => {
+      console.log("Error fetching blog post:", error);
+    });
+}
+
+function renderComments(comments) {
+  const commentsContainer = document.getElementById("comments-container");
+  commentsContainer.innerHTML = "";
+
+  comments.forEach((comment) => {
+    const commentElement = document.createElement("div");
+    commentElement.classList.add("comment");
+
+    const commentAuthor = document.createElement("span");
+    commentAuthor.textContent = comment.author;
+    commentElement.appendChild(commentAuthor);
+
+    const commentText = document.createElement("p");
+    commentText.textContent = comment.text;
+    commentElement.appendChild(commentText);
+
+    commentsContainer.appendChild(commentElement);
+  });
 }
 
 function toggleMenu() {

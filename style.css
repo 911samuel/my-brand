@@ -21,21 +21,23 @@ body {
 
 @keyframes fadeIn {
     from {
-      opacity: 0;
+        opacity: 0;
     }
+
     to {
-      opacity: 1;
+        opacity: 1;
     }
-  }
-  
-  @keyframes slideIn {
+}
+
+@keyframes slideIn {
     from {
-      transform: translateY(-50px);
+        transform: translateY(-50px);
     }
+
     to {
-      transform: translateY(0);
+        transform: translateY(0);
     }
-  }  
+}
 
 header {
     width: 100%;
@@ -110,12 +112,12 @@ a {
 .toast.success {
     background-color: green;
     color: white;
-  }
-  
-  .toast.error {
+}
+
+.toast.error {
     background-color: red;
     color: white;
-  }
+}
 
 .nav a:hover {
     cursor: pointer;
@@ -428,7 +430,15 @@ button {
     border: 1px solid #ccc;
     border-radius: 5px;
     background-color: #f9f9f9;
-  }
+}
+
+#addComment {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    margin: 50px 150px;
+    width: 60%;
+}
 
 .more {
     margin: 30px auto;

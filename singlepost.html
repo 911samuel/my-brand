@@ -38,57 +38,20 @@
       </nav>
     </header>
     <div class="container">
-        <div class="post-container">
-            <img id="post-image" src="" alt="Blog Image">
-            <div id="post-details">
-                <div class="post-detail">
-                    <p id="post-author"></p>
-                    <p id="post-date"></p>
-                </div>
-                <h1 id="post-title"></h1>
-                <p id="post-description"></p>
-            </div>
+      <div class="post-container" onload="showPosts(event)">
+        <img id="post-image" src="" alt="Blog Image" />
+        <div id="post-details">
+          <div class="post-detail">
+            <p id="post-author"></p>
+            <p id="post-date"></p>
+          </div>
+          <h1 id="post-title"></h1>
+          <p id="post-description"></p>
         </div>
-    </div>  
+      </div>
+    </div>
     <footer>&copy; 2023. Designed by Sam. All right reserved.</footer>
 
-    <script src="index.js">
-      document.addEventListener("DOMContentLoaded", function () {
-            const queryString = window.location.search;
-            const urlParams = new URLSearchParams(queryString);
-            const postId = urlParams.get("id");
-            showPost(postId);
-            console.log(postId)
-        });
-
-        console.log(showPost());
-
-        function showPost(postId) {
-
-          console.log(postId)
-            fetch(`https://my-express-app-yzv8.onrender.com/blogs/single/${postId}`, {
-                method: "GET",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-            })
-            .then((response) => {
-                if (!response.ok) {
-                    throw new Error("Failed to fetch blog post");
-                }
-                return response.json();
-            })
-            .then((blogPost) => {
-                document.getElementById("post-image").textContent = blogPost.imageUrl;
-                document.getElementById("post-author").textContent = `By: ${blogPost.author}`;
-                document.getElementById("post-date").textContent = blogPost.date;
-                document.getElementById("post-title").textContent = blogPost.title;
-                document.getElementById("post-description").textContent = blogPost.description;
-            })
-            .catch((error) => {
-                console.log("Error fetching blog post:", error);
-            });
-        }
-    </script>
+    <script src="index.js"></script>
   </body>
 </html>
