@@ -248,7 +248,7 @@ function createBlogPost() {
               <p class="gdText2">${blog.createdAt}</p>  
           </div>  
           <div class="views">
-              <img src="./img/view.png" alt="view" />
+              <img src="../img/view.png" alt="view" />
               <p>${blog.views}</p>  
           </div>
           <div class="gdButton">
@@ -561,11 +561,13 @@ function showPost(postId) {
   })
     .then(async (response) => {
       const data = await response.json();
-      console.log(data)
+      console.log(data);
       document.getElementById(
         "post-image"
       ).src = `https://my-express-app-yzv8.onrender.com/${data.blog.imgUrl}`;
-      console.log(`https://my-express-app-yzv8.onrender.com/${data.blog.imgUrl}`)
+      console.log(
+        `https://my-express-app-yzv8.onrender.com/${data.blog.imgUrl}`
+      );
       document.getElementById(
         "post-author"
       ).textContent = `By: ${data.blog.author}`;
