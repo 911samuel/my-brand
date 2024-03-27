@@ -512,7 +512,7 @@ function createBlogElement(blogPost) {
   blogDiv.classList.add("blog1");
 
   const blogImage = document.createElement("img");
-  blogImage.src = `https://my-express-app-yzv8.onrender.com${blogPost.imgUrl}`;
+  blogImage.src = blogPost.imgUrl;
   blogImage.alt = "blog image";
 
   const adminInfo = document.createElement("div");
@@ -564,9 +564,9 @@ function showPost(postId) {
       console.log(data);
       document.getElementById(
         "post-image"
-      ).src = `https://my-express-app-yzv8.onrender.com/${data.blog.imgUrl}`;
+      ).src = data.blog.imgUrl;
       console.log(
-        `https://my-express-app-yzv8.onrender.com/${data.blog.imgUrl}`
+        data.blog.imgUrl
       );
       document.getElementById(
         "post-author"
